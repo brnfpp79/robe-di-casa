@@ -64,8 +64,7 @@ function Lista() {
 
   return (
     <div style={{ maxWidth: 480, margin: "0 auto", padding: 24, paddingBottom: 100 }}>
-      <h2 style={{ fontWeight: 400, color: "#999", marginBottom: 24 }}>Lista della spesa</h2>
-
+      
       <ul style={{ listStyle: "none", padding: 0 }}>
         {daComprare.map(a => (
           <li key={a.id} style={{ display: "flex", alignItems: "center", borderBottom: "1px solid #eee" }}>
@@ -142,8 +141,8 @@ function Lista() {
         <div style={{
           position: "fixed", bottom: 0, left: 0, right: 0,
           background: "white", borderTop: "1px solid #eee",
-          padding: 16, display: "flex", gap: 8,
-          boxShadow: "0 -4px 12px rgba(0,0,0,0.08)"
+          padding: 16, paddingBottom: 80, display: "flex", gap: 8,
+          boxShadow: "0 -4px 12px rgba(0,0,0,0.08)" , zIndex: 200
         }}>
           <input
             autoFocus
