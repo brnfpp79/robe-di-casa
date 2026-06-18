@@ -67,7 +67,7 @@ function Pannello({ titolo, spesa, onSalva, onChiudi }) {
       boxSizing: "border-box",
       background: "white",
       borderTop: "1px solid #eee",
-      padding: 16,
+      padding: 4,
       paddingBottom: 20,
       boxShadow: "0 -4px 12px rgba(0,0,0,0.08)", // ombra verso l'alto
       zIndex: 200             // sopra tutto il resto (la nav è a 100)
@@ -81,7 +81,7 @@ function Pannello({ titolo, spesa, onSalva, onChiudi }) {
         {CATEGORIE.map(c => (
           <button key={c.id} onClick={() => setCategoria(c.id)} style={{
             padding: "6px 12px",
-            borderRadius: 20,
+            borderRadius: 18,
             border: "1px solid",
             // Se questa categoria è quella selezionata, colore verde; altrimenti grigio
             borderColor: categoria === c.id ? "#2d7a4f" : "#eee",
