@@ -63,6 +63,7 @@ function Pannello({ titolo, spesa, onSalva, onChiudi }) {
       left: "50%",            // parte dal centro
       transform: "translateX(-50%)", // si sposta a sinistra di metà della sua larghezza → risultato: centrato
       width: 390,             // larghezza fissa uguale all'app
+      boxSizing: "border-box",
       background: "white",
       borderTop: "1px solid #eee",
       padding: 16,
