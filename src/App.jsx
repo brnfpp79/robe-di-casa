@@ -10,7 +10,7 @@ function Layout() {
   const isHome = location.pathname === "/"
 
   return (
-    <div style={{ maxWidth: 390, margin: "0 auto", paddingBottom: 70, minHeight: "100dvh", boxShadow: "0 0 40px rgba(0,0,0,0.08)" }}>
+    <div style={{ paddingBottom: 70, minHeight: "100dvh", boxShadow: "0 0 40px rgba(0,0,0,0.08)" }}>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/lista" element={<Lista />} />
