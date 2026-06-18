@@ -11,6 +11,7 @@ const CATEGORIE = [
   { id: "scuola", label: "Scuola", icon: "🎒" },
   { id: "richi", label: "Richi", icon: "👦" },
   { id: "varie", label: "Varie", icon: "🌀" },
+  { id: "mutuo", label: "Mutuo", icon: "🏦" },
 ]
 
 function nomeMese(data) {
@@ -33,10 +34,13 @@ function Pannello({ titolo, spesa, onSalva, onChiudi }) {
 
   return (
     <div style={{
-      position: "fixed", bottom: 0, left: 0, right: 0,
-      background: "white", borderTop: "1px solid #eee",
-      padding: 16, boxShadow: "0 -4px 12px rgba(0,0,0,0.08)", zIndex: 200
-    }}>
+  position: "fixed", bottom: 0,
+  left: "50%", transform: "translateX(-50%)",
+  width: "100%", maxWidth: 390,
+  background: "white", borderTop: "1px solid #eee",
+  padding: 16, paddingBottom: 80,
+  boxShadow: "0 -4px 12px rgba(0,0,0,0.08)", zIndex: 200
+}}>
       <div style={{ fontWeight: 500, marginBottom: 12, color: "#666" }}>{titolo}</div>
       <div style={{ display: "flex", gap: 8, marginBottom: 12, flexWrap: "wrap" }}>
         {CATEGORIE.map(c => (
@@ -149,8 +153,7 @@ useEffect(() => {
 
   return (
     <div style={{ maxWidth: 480, margin: "0 auto", padding: 24, paddingBottom: 100 }}>
-      <h2 style={{ fontWeight: 400, color: "#999", marginBottom: 24 }}>Spese</h2>
-
+      
       {mesiOrdinati.map(mese => (
         <div key={mese} style={{ marginBottom: 8, border: "1px solid #eee", borderRadius: 12, overflow: "hidden" }}>
           <div

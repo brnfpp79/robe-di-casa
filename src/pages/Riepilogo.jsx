@@ -11,6 +11,7 @@ const CATEGORIE = [
   { id: "scuola", label: "Scuola", icon: "🎒" },
   { id: "richi", label: "Richi", icon: "👦" },
   { id: "varie", label: "Varie", icon: "🌀" },
+  { id: "mutuo", label: "Mutuo", icon: "🏦" },
 ]
 
 function nomeMese(stringa) {

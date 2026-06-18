@@ -6,7 +6,7 @@ function Home() {
   return (
   <div onClick={() => navigate("/lista")} style={{
     width: "100vw",
-    height: "100vh",
+    height: "100dvh",
     cursor: "pointer",
     backgroundImage: "url('/famiglia.jpg')",
     backgroundSize: "cover",
