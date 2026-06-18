@@ -21,9 +21,7 @@ function Layout() {
 
       {!isHome && (
         <nav style={{
-          position: "fixed", bottom: 0, left: "50%",
-          transform: "translateX(-50%)",
-          width: "100%", maxWidth: 390,
+          position: "fixed", bottom: 0, left: 0, right: 0,
           background: "white", borderTop: "1px solid #eee",
           display: "flex", justifyContent: "space-around",
           padding: "8px 0", zIndex: 100
