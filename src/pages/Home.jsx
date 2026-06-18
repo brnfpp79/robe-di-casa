@@ -40,7 +40,7 @@ function Home() {
       textTransform: "uppercase",
       opacity: 0.8
     }}>
-      ver 0.001
+      ver 0.021
     </div>
 
   </div>

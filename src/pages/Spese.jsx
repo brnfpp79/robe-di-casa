@@ -58,20 +58,15 @@ function Pannello({ titolo, spesa, onSalva, onChiudi }) {
   return (
     // Div principale del pannello: fisso in basso, centrato, largo 390px
     <div style={{
-      position: "fixed",      // rimane fisso anche quando si scrolla
-      bottom: 0,              // attaccato al fondo dello schermo
-      left: "50%",            // parte dal centro
-      transform: "translateX(-50%)", // si sposta a sinistra di metà della sua larghezza → risultato: centrato
-      width: "100vw",
-      maxWidth: 390,             // larghezza fissa uguale all'app
-      boxSizing: "border-box",
-      background: "white",
-      borderTop: "1px solid #eee",
-      padding: 4,
-      paddingBottom: 20,
-      boxShadow: "0 -4px 12px rgba(0,0,0,0.08)", // ombra verso l'alto
-      zIndex: 200             // sopra tutto il resto (la nav è a 100)
-    }}>
+  position: "fixed",
+  bottom: 0,
+  left: "max(0px, calc(50vw - 195px))",
+  right: "max(0px, calc(50vw - 195px))",
+  boxSizing: "border-box",
+  background: "white", borderTop: "1px solid #eee",
+  padding: 16, paddingBottom: 20,
+  boxShadow: "0 -4px 12px rgba(0,0,0,0.08)", zIndex: 200
+}}>
 
       {/* Riga titolo + pulsante chiudi */}
       <div style={{ fontWeight: 500, marginBottom: 12, color: "#666" }}>{titolo}</div>
@@ -100,7 +95,7 @@ function Pannello({ titolo, spesa, onSalva, onChiudi }) {
         <input
           type="date" value={data}
           onChange={e => setData(e.target.value)}
-          style={{ padding: 10, fontSize: 15, border: "1px solid #ddd", borderRadius: 8, flex: 1 }}
+          style={{ padding: 8, fontSize: 15, border: "1px solid #ddd", borderRadius: 8, flex: 1 }}
         />
         <input
           autoFocus                    // il cursore va qui automaticamente quando si apre
@@ -110,7 +105,7 @@ function Pannello({ titolo, spesa, onSalva, onChiudi }) {
           value={importo}
           onChange={e => setImporto(e.target.value)}
           onKeyDown={e => e.key === "Enter" && salva()} // Enter = salva
-          style={{ padding: 10, fontSize: 15, border: "1px solid #ddd", borderRadius: 8, flex: 1 }}
+          style={{ padding: 8, fontSize: 15, border: "1px solid #ddd", borderRadius: 8, flex: 1 }}
         />
       </div>
 
