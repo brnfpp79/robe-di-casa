@@ -15,7 +15,22 @@ function Home() {
   }}>
     <div style={{
       position: "absolute",
-      bottom: 60,
+      bottom: 220,
+      left: 0,
+      right: 0,
+      textAlign: "center",
+      color: "white",
+      fontSize: 18,
+      letterSpacing: 2,
+      textTransform: "uppercase",
+      opacity: 0.8
+    }}>
+      tocca per entrare
+    </div>
+
+<div style={{
+      position: "absolute",
+      bottom: 20,
       left: 0,
       right: 0,
       textAlign: "center",
@@ -25,8 +40,9 @@ function Home() {
       textTransform: "uppercase",
       opacity: 0.8
     }}>
-      tocca per entrare
+      ver 0.001
     </div>
+
   </div>
 )
 }
