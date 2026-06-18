@@ -32,6 +32,12 @@ function nomeMese(data) {
   return `${nomi[parseInt(mese) - 1]} ${anno}`
 }
 
+function nomeGiorno(dataStr) {
+  const giorni = ["domenica","lunedì","martedì","mercoledì","giovedì","venerdì","sabato"]
+  const d = new Date(dataStr + "T12:00:00") // T12:00:00 evita problemi di fuso orario
+  return `${giorni[d.getDay()]} ${d.getDate()}`
+}
+
 // Componente Pannello: il cassetto che si apre dal basso per aggiungere o modificare una spesa.
 // Riceve:
 //   titolo = "Nuova spesa" o "Modifica spesa"
@@ -249,52 +255,45 @@ function Spese() {
               <ul style={{ listStyle: "none", padding: "0 16px", margin: 0 }}>
                 {spese.filter(s => s.data.startsWith(mese)).map(s => (
                   <li key={s.id} style={{
-                    display: "flex", alignItems: "center",
-                    borderBottom: "1px solid #eee", padding: "12px 0", gap: 12,
-                    position: "relative" // necessario per posizionare il menu ⋯ in modo assoluto
-                  }}>
-                    <span style={{ fontSize: 22 }}>{cat(s.categoria).icon}</span>
-                    <div style={{ flex: 1 }}>
-                      <div style={{ fontSize: 15, fontWeight: 500 }}>{cat(s.categoria).label}</div>
-                      <div style={{ fontSize: 12, color: "#999" }}>
-                        {/* Mostra la nota solo se esiste */}
-                        {s.data}{s.nota ? ` · ${s.nota}` : ""}
-                      </div>
-                    </div>
-                    <div style={{ fontSize: 16, fontWeight: 600, color: "#2d7a4f" }}>
-                      € {s.importo.toFixed(2)}
-                    </div>
-
-                    {/* Pulsante tre puntini ⋯ */}
-                    <span
-                      onClick={(e) => {
-                        e.stopPropagation() // evita che il click chiuda/apra l'accordion
-                        setMenuAperto(menuAperto === s.id ? null : s.id)
-                      }}
-                      style={{ padding: "4px 8px", cursor: "pointer", color: "#999", fontSize: 20 }}>
-                      ⋯
-                    </span>
-
-                    {/* Menu popup con Modifica ed Elimina, visibile solo per la spesa con menuAperto */}
-                    {menuAperto === s.id && (
-                      <div ref={menuRef} style={{
-                        position: "absolute", // posizionato rispetto al <li> padre (che ha position: relative)
-                        right: 0, top: 8,
-                        background: "white", border: "1px solid #eee",
-                        borderRadius: 8, boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
-                        zIndex: 10, overflow: "hidden"
-                      }}>
-                        <div onClick={() => { setModificando(s); setMenuAperto(null) }}
-                          style={{ padding: "12px 24px", cursor: "pointer", borderBottom: "1px solid #eee" }}>
-                          Modifica
-                        </div>
-                        <div onClick={() => elimina(s.id)}
-                          style={{ padding: "12px 24px", cursor: "pointer", color: "#e53e3e" }}>
-                          Elimina
-                        </div>
-                      </div>
-                    )}
-                  </li>
+  display: "flex", alignItems: "center",
+  borderBottom: "1px solid #8b8b8b", padding: "5px 0", gap: 12,
+  position: "relative"
+}}>
+  <span style={{ fontSize: 22 }}>{cat(s.categoria).icon}</span>
+{s.nota && <span style={{ fontSize: 18, color: "#444" }}>{s.nota}</span>}
+<div style={{ flex: 1 }}>
+  <div style={{ fontSize: 13, color: "#999", textAlign: "right" }}>
+  {s.nota ? nomeGiorno(s.data) : `${cat(s.categoria).label}  ·  ${nomeGiorno(s.data)}`}
+  </div>
+</div>
+  <div style={{ fontSize: 16, fontWeight: 600, color: "#2d7a4f" }}>
+    € {s.importo.toFixed(2)}
+  </div>
+  <span onClick={(e) => {
+    e.stopPropagation()
+    setMenuAperto(menuAperto === s.id ? null : s.id)
+  }}
+    style={{ padding: "4px 8px", cursor: "pointer", color: "#999", fontSize: 20 }}>
+    ⋯
+  </span>
+  {menuAperto === s.id && (
+    <div ref={menuRef} style={{
+      position: "absolute", right: 0, top: 8,
+      background: "white", border: "1px solid #eee",
+      borderRadius: 8, boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
+      zIndex: 10, overflow: "hidden"
+    }}>
+      <div onClick={() => { setModificando(s); setMenuAperto(null) }}
+        style={{ padding: "12px 24px", cursor: "pointer", borderBottom: "1px solid #eee" }}>
+        Modifica
+      </div>
+      <div onClick={() => elimina(s.id)}
+        style={{ padding: "12px 24px", cursor: "pointer", color: "#e53e3e" }}>
+        Elimina
+      </div>
+    </div>
+  )}
+</li>
                 ))}
               </ul>
             </div>
