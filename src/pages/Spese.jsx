@@ -36,11 +36,12 @@ function Pannello({ titolo, spesa, onSalva, onChiudi }) {
     <div style={{
   position: "fixed", bottom: 0,
   left: "50%", transform: "translateX(-50%)",
-  width: "100%", maxWidth: 390,
+  width: 390,
   background: "white", borderTop: "1px solid #eee",
-  padding: 16, paddingBottom: 80,
+  padding: 16, paddingBottom: 20,
   boxShadow: "0 -4px 12px rgba(0,0,0,0.08)", zIndex: 200
-}}>
+}}>        {/* questo è lo stile del pannello Nuova spesa */}
+
       <div style={{ fontWeight: 500, marginBottom: 12, color: "#666" }}>{titolo}</div>
       <div style={{ display: "flex", gap: 8, marginBottom: 12, flexWrap: "wrap" }}>
         {CATEGORIE.map(c => (
@@ -97,6 +98,7 @@ function Spese() {
   const [pannelloAperto, setPannelloAperto] = useState(false)
   const [modificando, setModificando] = useState(null)
   const [menuAperto, setMenuAperto] = useState(null)
+  const [mesiAperti, setMesiAperti] = useState([])
   const menuRef = useRef(null)
 
   useEffect(() => {
@@ -137,8 +139,7 @@ function Spese() {
   const cat = (id) => CATEGORIE.find(c => c.id === id) || CATEGORIE[0]
 
   const mesiOrdinati = [...new Set(spese.map(s => s.data.slice(0, 7)))].sort((a, b) => b.localeCompare(a))
-  const [mesiAperti, setMesiAperti] = useState([])
-
+  
 useEffect(() => {
   if (mesiOrdinati.length > 0 && mesiAperti.length === 0) {
     setMesiAperti([mesiOrdinati[0]])
@@ -238,6 +239,7 @@ useEffect(() => {
         boxShadow: "0 4px 12px rgba(0,0,0,0.2)",
         display: "flex", alignItems: "center", justifyContent: "center"
       }}>
+    {/* questo è lo stile del bottone verde + */}
         +
       </button>
     </div>
