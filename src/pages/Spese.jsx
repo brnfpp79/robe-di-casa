@@ -33,9 +33,8 @@ function nomeMese(data) {
 }
 
 function nomeGiorno(dataStr) {
-  const giorni = ["domenica","lunedì","martedì","mercoledì","giovedì","venerdì","sabato"]
-  const d = new Date(dataStr + "T12:00:00") // T12:00:00 evita problemi di fuso orario
-  return `${giorni[d.getDay()]} ${d.getDate()}`
+  const [anno, mese, giorno] = dataStr.split("-")
+  return `${giorno}/${mese}`
 }
 
 // Componente Pannello: il cassetto che si apre dal basso per aggiungere o modificare una spesa.
@@ -260,7 +259,7 @@ function Spese() {
   position: "relative"
 }}>
   <span style={{ fontSize: 22 }}>{cat(s.categoria).icon}</span>
-{s.nota && <span style={{ fontSize: 18, color: "#444" }}>{s.nota}</span>}
+{s.nota && <span style={{ fontSize: 16, color: "#444" }}>{s.nota}</span>}
 <div style={{ flex: 1 }}>
   <div style={{ fontSize: 13, color: "#999", textAlign: "right" }}>
   {s.nota ? nomeGiorno(s.data) : `${cat(s.categoria).label}  ·  ${nomeGiorno(s.data)}`}
