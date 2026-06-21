@@ -79,7 +79,7 @@ function Lista() {
               />
             ) : (
               <span onClick={() => toggleComprato(a)} style={{ flex: 1, padding: "14px 8px", cursor: "pointer", fontSize: 18 }}>
-                {a.nome}
+                {a.nome.charAt(0).toUpperCase() + a.nome.slice(1)}
               </span>
             )}
             <span onClick={() => setMenuAperto(menuAperto === a.id ? null : a.id)}
@@ -105,12 +105,12 @@ function Lista() {
         ))}
 
         {comprati.length > 0 && (
-          <>
-            <li style={{ padding: "12px 8px", fontSize: 12, color: "#999" }}>— nel carrello —</li>
+          <><br></br>
+            <li style={{ padding: "12px 8px", fontSize: 16, color: "#999" }}>— 🛒  nel carrello —</li>
             {comprati.map(a => (
               <li key={a.id} style={{ display: "flex", alignItems: "center", borderBottom: "1px solid #eee", opacity: 0.4 }}>
-                <span onClick={() => toggleComprato(a)} style={{ flex: 1, padding: "14px 8px", cursor: "pointer", fontSize: 18, textDecoration: "line-through" }}>
-                  {a.nome}
+                <span onClick={() => toggleComprato(a)} style={{ flex: 1, padding: "14px 8px", cursor: "pointer", fontSize: 18 }}>
+                  {a.nome.charAt(0).toUpperCase() + a.nome.slice(1)}
                 </span>
                 <span onClick={() => setMenuAperto(menuAperto === a.id ? null : a.id)}
                   style={{ padding: "14px 12px", cursor: "pointer", fontSize: 20 }}>
