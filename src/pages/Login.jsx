@@ -1,22 +1,15 @@
-import { signInWithRedirect, getRedirectResult } from "firebase/auth"
+import { signInWithPopup, signInWithRedirect } from "firebase/auth"
 import { auth, googleProvider } from "../firebase"
-import { useEffect } from "react"
 
 function Login() {
-  useEffect(() => {
-    async function controllaRedirect() {
-      try {
-        await getRedirectResult(auth)
-      } catch (error) {
-        console.error("Errore redirect:", error)
-      }
-    }
-    controllaRedirect()
-  }, [])
-
   async function accediConGoogle() {
+    const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent)
     try {
-      await signInWithRedirect(auth, googleProvider)
+      if (isSafari) {
+        await signInWithRedirect(auth, googleProvider)
+      } else {
+        await signInWithPopup(auth, googleProvider)
+      }
     } catch (error) {
       console.error("Errore login:", error)
     }
@@ -28,7 +21,7 @@ function Login() {
       backgroundImage: "url('/famiglia.jpg')",
       backgroundSize: "cover", backgroundPosition: "center top",
       display: "flex", alignItems: "flex-end", justifyContent: "center",
-      paddingBottom: 80
+      paddingBottom: 60
     }}>
       <button onClick={accediConGoogle} style={{
         display: "flex", alignItems: "center", gap: 12,
@@ -38,11 +31,9 @@ function Login() {
         boxShadow: "0 4px 20px rgba(0,0,0,0.3)"
       }}>
         <img src="https://www.google.com/favicon.ico" width={20} height={20} />
-        Accedi con Google
+        Accedi con Google v1
       </button>
     </div>
-
-    
   )
 }
 
