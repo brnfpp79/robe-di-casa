@@ -1,3 +1,4 @@
+import Intestazione from "../components/Intestazione"
 import { useState, useEffect, useRef } from "react"
 import { db } from "../firebase"
 import { collection, addDoc, getDocs, updateDoc, deleteDoc, doc } from "firebase/firestore"
@@ -64,7 +65,7 @@ function Lista() {
 
   return (
     <div style={{ maxWidth: 480, margin: "0 auto", padding: 24, paddingBottom: 100 }}>
-      
+  <Intestazione />
       <ul style={{ listStyle: "none", padding: 0 }}>
         {daComprare.map(a => (
           <li key={a.id} style={{ display: "flex", alignItems: "center", borderBottom: "1px solid #eee" }}>

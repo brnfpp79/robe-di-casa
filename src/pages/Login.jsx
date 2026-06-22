@@ -1,15 +1,10 @@
-import { signInWithPopup, signInWithRedirect } from "firebase/auth"
+import { signInWithPopup } from "firebase/auth"
 import { auth, googleProvider } from "../firebase"
 
 function Login() {
   async function accediConGoogle() {
-    const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent)
     try {
-      if (isSafari) {
-        await signInWithRedirect(auth, googleProvider)
-      } else {
-        await signInWithPopup(auth, googleProvider)
-      }
+      await signInWithPopup(auth, googleProvider)
     } catch (error) {
       console.error("Errore login:", error)
     }
@@ -31,7 +26,7 @@ function Login() {
         boxShadow: "0 4px 20px rgba(0,0,0,0.3)"
       }}>
         <img src="https://www.google.com/favicon.ico" width={20} height={20} />
-        Accedi con Google v1
+        Accedi con Google v03 
       </button>
     </div>
   )

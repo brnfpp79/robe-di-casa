@@ -1,3 +1,4 @@
+import Intestazione from "../components/Intestazione"
 import { useState, useEffect } from "react"
 import { db } from "../firebase"
 import { collection, getDocs, orderBy, query } from "firebase/firestore"
@@ -35,6 +36,7 @@ function TotaliMese({ spese }) {
           display: "flex", alignItems: "center",
           padding: "10px 8px", borderBottom: "1px solid #f0f0f0"
         }}>
+
           <span style={{ fontSize: 20, marginRight: 12 }}>{cat.icon}</span>
           <span style={{ flex: 1, fontSize: 15 }}>{cat.label}</span>
           <span style={{ fontSize: 15, fontWeight: 500, color: "#2d7a4f" }}>
@@ -81,7 +83,7 @@ function Riepilogo() {
 
   return (
     <div style={{ maxWidth: 480, margin: "0 auto", padding: 24, paddingBottom: 100 }}>
-      <h2 style={{ fontWeight: 400, color: "#999", marginBottom: 24 }}>Riepilogo</h2>
+    <Intestazione titolo="Riepilogo" />
 
       <div style={{
         background: "#f8fdf9", borderRadius: 12,

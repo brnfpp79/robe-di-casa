@@ -1,3 +1,4 @@
+import Intestazione from "../components/Intestazione"
 import { useNavigate } from "react-router-dom"
 
 function Home() {
@@ -27,9 +28,6 @@ function Home() {
     }}>
       tocca per entrare
     </div>
-
-
-
   </div>
 )
 }
