@@ -28,20 +28,7 @@ function Home() {
       tocca per entrare
     </div>
 
-<div style={{
-      position: "absolute",
-      bottom: 20,
-      left: 0,
-      right: 0,
-      textAlign: "center",
-      color: "white",
-      fontSize: 14,
-      letterSpacing: 2,
-      textTransform: "uppercase",
-      opacity: 0.8
-    }}>
-      ver 0.025
-    </div>
+
 
   </div>
 )

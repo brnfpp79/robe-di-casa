@@ -28,7 +28,7 @@ function Login() {
       backgroundImage: "url('/famiglia.jpg')",
       backgroundSize: "cover", backgroundPosition: "center top",
       display: "flex", alignItems: "flex-end", justifyContent: "center",
-      paddingBottom: 60
+      paddingBottom: 80
     }}>
       <button onClick={accediConGoogle} style={{
         display: "flex", alignItems: "center", gap: 12,
@@ -41,6 +41,8 @@ function Login() {
         Accedi con Google
       </button>
     </div>
+
+    
   )
 }
 

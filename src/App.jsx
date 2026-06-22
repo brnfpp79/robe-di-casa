@@ -14,6 +14,10 @@ function Layout() {
   const [utente, setUtente] = useState(undefined)
 
 useEffect(() => {
+  return onAuthStateChanged(auth, (u) => setUtente(u))
+}, [])
+
+useEffect(() => {
   async function controllaRedirect() {
     try {
       await getRedirectResult(auth)
@@ -22,10 +26,6 @@ useEffect(() => {
     }
   }
   controllaRedirect()
-}, [])
-
-useEffect(() => {
-  return onAuthStateChanged(auth, (u) => setUtente(u))
 }, [])
 
 if (utente === undefined) return null
