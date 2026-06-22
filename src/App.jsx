@@ -1,3 +1,7 @@
+import { useState, useEffect } from "react"
+import { auth } from "./firebase"
+import { onAuthStateChanged } from "firebase/auth"
+import Login from "./pages/Login"
 import { BrowserRouter, Routes, Route, NavLink, useLocation } from "react-router-dom"
 import Home from "./pages/Home"
 import Lista from "./pages/Lista"
@@ -6,6 +10,14 @@ import Riepilogo from "./pages/Riepilogo"
 import Grafici from "./pages/Grafici"
 
 function Layout() {
+  const [utente, setUtente] = useState(undefined)
+
+useEffect(() => {
+  return onAuthStateChanged(auth, (u) => setUtente(u))
+}, [])
+
+if (utente === undefined) return null
+if (!utente) return <Login />
   const location = useLocation()
   const isHome = location.pathname === "/"
 
