@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
 import { auth } from "./firebase"
-import { onAuthStateChanged } from "firebase/auth"
+import { onAuthStateChanged, getRedirectResult } from "firebase/auth"
 import Login from "./pages/Login"
 import { BrowserRouter, Routes, Route, NavLink, useLocation } from "react-router-dom"
 import Home from "./pages/Home"
@@ -9,8 +9,20 @@ import Spese from "./pages/Spese"
 import Riepilogo from "./pages/Riepilogo"
 import Grafici from "./pages/Grafici"
 
+
 function Layout() {
   const [utente, setUtente] = useState(undefined)
+
+useEffect(() => {
+  async function controllaRedirect() {
+    try {
+      await getRedirectResult(auth)
+    } catch (error) {
+      console.error("Errore redirect:", error)
+    }
+  }
+  controllaRedirect()
+}, [])
 
 useEffect(() => {
   return onAuthStateChanged(auth, (u) => setUtente(u))
