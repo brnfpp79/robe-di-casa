@@ -41,13 +41,14 @@ function Dashboard() {
     { path: "/riepilogo", icon: "📊", label: "Riepilogo", valore: "" },
     { path: "/grafici", icon: "📈", label: "Grafici", valore: "" },
     { path: "/todo", icon: "✅", label: "To Do", valore: todoInSospeso > 0 ? `${todoInSospeso} in sospeso` : "tutto fatto" },
+    { path: "/ricette", icon: "👨‍🍳", label: "Ricette", valore: "" },
   ]
 
   return (
     <div style={{
-      width: "100vw", height: "100dvh",
+      width: "100%", height: "100dvh",
       backgroundImage: "url('/famiglia.jpg')",
-      backgroundSize: "cover", backgroundPosition: "center top",
+      backgroundSize: "cover", backgroundPosition: "center center",
       position: "relative"
     }}>
       {/* Sfondo sfocato */}
@@ -62,7 +63,8 @@ function Dashboard() {
         position: "relative", zIndex: 1,
         maxWidth: 700, margin: "0 auto",
         padding: 24, paddingTop: 60,
-        display: "flex", flexDirection: "column", gap: 24
+        display: "flex", flexDirection: "column", gap: 24,
+        minHeight: "100dvh", boxSizing: "border-box"
       }}>
 
         {/* Intestazione */}
@@ -70,6 +72,7 @@ function Dashboard() {
           <div style={{ color: "white", fontSize: 22, fontWeight: 600 }}>
             Robe di casa
           </div>
+
           <button onClick={() => signOut(auth)} style={{
             background: "rgba(255,255,255,0.2)", border: "none",
             color: "white", padding: "6px 14px", borderRadius: 20,
@@ -115,6 +118,12 @@ function Dashboard() {
           <div style={{ fontWeight: 600, fontSize: 15, marginBottom: 8 }}>Avvisi</div>
           <div style={{ fontSize: 13, color: "#999" }}>Nessun avviso per oggi</div>
         </div>
+
+{/* Versione dell'App */}
+          <div style={{ color:"#adadad" , fontSize: 12, fontWeight: 600 }}>
+            (ver 0.36)
+          </div>
+
       </div>
     </div>
   )

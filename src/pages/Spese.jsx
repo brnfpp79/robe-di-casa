@@ -51,6 +51,7 @@ function Pannello({ titolo, spesa, onSalva, onChiudi }) {
   const [importo, setImporto] = useState(spesa?.importo?.toString() || "")
   const [data, setData] = useState(spesa?.data || new Date().toISOString().split("T")[0])
   const [nota, setNota] = useState(spesa?.nota || "")
+  const [pagatoDa, setPagatoDa] = useState(spesa?.pagatoDa || "cointestato")
 
   // Funzione chiamata quando si clicca Aggiungi/Salva
   function salva() {
@@ -58,7 +59,7 @@ function Pannello({ titolo, spesa, onSalva, onChiudi }) {
     if (!importo || isNaN(parseFloat(importo))) return
     // Chiama la funzione esterna passando i dati del form
     // replace(",", ".") permette di scrivere sia 1,50 che 1.50
-    onSalva({ categoria, importo: parseFloat(importo.replace(",", ".")), data, nota: nota.trim() })
+    onSalva({ categoria, importo: parseFloat(importo.replace(",", ".")), data, nota: nota.trim(), pagatoDa })
   }
 
   return (
@@ -95,6 +96,22 @@ function Pannello({ titolo, spesa, onSalva, onChiudi }) {
           </button>
         ))}
       </div>
+
+<div style={{ display: "flex", gap: 8, marginBottom: 12 }}>
+  {["cointestato", "Fil", "Vale"].map(p => (
+    <button key={p} onClick={() => setPagatoDa(p)} style={{
+      flex: 1, padding: "8px 12px", borderRadius: 20, border: "1px solid",
+      borderColor: pagatoDa === p ? "#2d7a4f" : "#eee",
+      background: pagatoDa === p ? "#e8f5ee" : "white",
+      color: pagatoDa === p ? "#2d7a4f" : "#666",
+      cursor: "pointer", fontSize: 13
+    }}>
+      {p === "cointestato" ? "💶 Cointestato" : p === "Fil" ? "🙎‍♂️ Fil" : "🧜‍♀️ Vale"}
+    </button>
+  ))}
+</div>
+
+
 
       {/* Riga data + importo affiancati */}
       <div style={{ display: "flex", gap: 8, marginBottom: 8 }}>

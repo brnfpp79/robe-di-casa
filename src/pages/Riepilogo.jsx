@@ -2,6 +2,7 @@ import Intestazione from "../components/Intestazione"
 import { useState, useEffect } from "react"
 import { db } from "../firebase"
 import { collection, getDocs, orderBy, query } from "firebase/firestore"
+import { calcolaSaldo } from "../utils/calcolaSaldo"
 
 const CATEGORIE = [
   { id: "spesa", label: "Spesa", icon: "🛒" },
@@ -84,6 +85,31 @@ function Riepilogo() {
   return (
     <div style={{ maxWidth: 480, margin: "0 auto", padding: 24, paddingBottom: 100 }}>
     <Intestazione titolo="Riepilogo" />
+
+{(() => {
+  const saldo = calcolaSaldo(spese)
+  return (
+    <div style={{
+      background: saldo ? "#fff8f0" : "#f8fdf9",
+      border: `1px solid ${saldo ? "#e07b2a" : "#d4ead9"}`,
+      borderRadius: 12, padding: 16, marginBottom: 24,
+      display: "flex", alignItems: "center", gap: 12
+    }}>
+      <span style={{ fontSize: 24 }}>{saldo ? "💸" : "✅"}</span>
+      <div>
+        <div style={{ fontWeight: 600, fontSize: 15 }}>
+          {saldo ? `${saldo.debitore} deve a ${saldo.creditore}` : "Siete pari!"}
+        </div>
+        {saldo && (
+          <div style={{ fontSize: 20, fontWeight: 700, color: "#e07b2a" }}>
+            € {saldo.importo.toFixed(2)}
+          </div>
+        )}
+      </div>
+    </div>
+  )
+})()}
+
 
       <div style={{
         background: "#f8fdf9", borderRadius: 12,

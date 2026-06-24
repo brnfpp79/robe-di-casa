@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 import { useState, useEffect } from "react"
 import { auth } from "./firebase"
-import { onAuthStateChanged, getRedirectResult } from "firebase/auth"
+import { onAuthStateChanged, getRedirectResult, signOut } from "firebase/auth"
 import Login from "./pages/Login"
 import Dashboard from "./pages/Dashboard"
 import Lista from "./pages/Lista"
@@ -9,13 +9,27 @@ import Spese from "./pages/Spese"
 import Riepilogo from "./pages/Riepilogo"
 import Grafici from "./pages/Grafici"
 import ToDo from "./pages/ToDo"
+import Ricette from "./pages/Ricette"
+
 
 function Layout() {
   const [utente, setUtente] = useState(undefined)
+  const EMAIL_AUTORIZZATE = ["brnfpp@gmail.com", "shangdiai@gmail.com"]
+ 
+ 
+  {/* controlle email */}
+useEffect(() => {
+  return onAuthStateChanged(auth, (u) => {
+    if (u && !EMAIL_AUTORIZZATE.includes(u.email)) {
+      signOut(auth)
+      setUtente(null)
+    } else {
+      setUtente(u)
+    }
+  })
+}, [])
 
-  useEffect(() => {
-    return onAuthStateChanged(auth, (u) => setUtente(u))
-  }, [])
+
 
   useEffect(() => {
     async function controllaRedirect() {
@@ -40,6 +54,8 @@ function Layout() {
       <Route path="/riepilogo" element={<Riepilogo />} />
       <Route path="/grafici" element={<Grafici />} />
       <Route path="/todo" element={<ToDo />} />
+      <Route path="/ricette" element={<Ricette />} />
+      <Route path="/ricette/:id" element={<Ricette />} />
     </Routes>
   </div>
 )
