@@ -4,6 +4,7 @@ import { db, auth } from "../firebase"
 import { collection, getDocs, query, orderBy } from "firebase/firestore"
 import { signOut } from "firebase/auth"
 import { useWindowSize } from "../hooks/useWindowSize"
+import { useTimer } from "../context/TimerContext"
 
 function Dashboard() {
   const navigate = useNavigate()
@@ -11,6 +12,16 @@ function Dashboard() {
   const [articoliDaComprare, setArticoliDaComprare] = useState(0)
   const [totaleSpeseMese, setTotaleSpeseMese] = useState(0)
   const [todoInSospeso, setTodoInSospeso] = useState(0)
+const { timers } = useTimer()
+
+function formatTimer(s) {
+  const m = Math.floor(s / 60)
+  const sec = s % 60
+  return `${m}:${sec.toString().padStart(2, "0")}`
+}
+
+const timersVisibili = Object.entries(timers).filter(([, t]) => t.attivo || t.finito)
+
 
   useEffect(() => {
     async function caricaDati() {
@@ -41,7 +52,7 @@ function Dashboard() {
     { path: "/riepilogo", icon: "📊", label: "Riepilogo", valore: "" },
     { path: "/grafici", icon: "📈", label: "Grafici", valore: "" },
     { path: "/todo", icon: "✅", label: "To Do", valore: todoInSospeso > 0 ? `${todoInSospeso} in sospeso` : "tutto fatto" },
-    { path: "/ricette", icon: "👨‍🍳", label: "Ricette", valore: "" },
+    { path: "/ricette", icon: "👨‍🍳", label: "Ricette", valore: timersVisibili.length > 0 ? `⏱ ${timersVisibili.length} timer attivi` : ""  },
   ]
 
   return (
@@ -111,17 +122,36 @@ function Dashboard() {
 
         {/* Sezione avvisi — per ora vuota, pronta per To Do e Calendario */}
         <div style={{
-          background: "rgba(255,255,255,0.85)",
-          borderRadius: 16, padding: 20,
-          backdropFilter: "blur(4px)"
-        }}>
-          <div style={{ fontWeight: 600, fontSize: 15, marginBottom: 8 }}>Avvisi</div>
-          <div style={{ fontSize: 13, color: "#999" }}>Nessun avviso per oggi</div>
+  background: "rgba(255,255,255,0.85)",
+  borderRadius: 16, padding: 20,
+  backdropFilter: "blur(4px)"
+}}>
+  <div style={{ fontWeight: 600, fontSize: 15, marginBottom: 8 }}>Avvisi</div>
+  {timersVisibili.length === 0 ? (
+    <div style={{ fontSize: 13, color: "#999" }}>Nessun avviso per oggi</div>
+  ) : (
+    timersVisibili.map(([key, t]) => (
+      <div key={key} style={{
+        display: "flex", justifyContent: "space-between", alignItems: "center",
+        padding: "8px 0", borderBottom: "1px solid #f0f0f0"
+      }}>
+        <div>
+          <span style={{ fontWeight: 500 }}>{t.ricettaNome}</span>
+          <span style={{ color: "#999", fontSize: 13 }}> · {t.passoLabel}</span>
         </div>
+        {t.finito ? (
+          <span style={{ color: "#e53e3e", fontWeight: 600, fontSize: 13 }}>⏰ Scaduto!</span>
+        ) : (
+          <span style={{ color: "#e07b2a", fontWeight: 600 }}>{formatTimer(t.secondi)}</span>
+        )}
+      </div>
+    ))
+  )}
+</div>
 
 {/* Versione dell'App */}
           <div style={{ color:"#adadad" , fontSize: 12, fontWeight: 600 }}>
-            (ver 0.36)
+            (ver 0.37)
           </div>
 
       </div>

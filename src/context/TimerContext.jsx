@@ -4,6 +4,7 @@ const TimerContext = createContext()
 
 export function TimerProvider({ children }) {
   const [timers, setTimers] = useState({})
+  const [passiAttivi, setPassiAttivi] = useState({})
   const intervalli = useRef({})
 
   function startTimer(key, secondi, ricettaNome, passoIndex, passoLabel) {
@@ -22,6 +23,14 @@ export function TimerProvider({ children }) {
       delete nuovi[key]
       return nuovi
     })
+  }
+
+  function setPassoAttivo(ricettaId, passo) {
+    setPassiAttivi(prev => ({ ...prev, [ricettaId]: passo }))
+  }
+
+  function getPassoAttivo(ricettaId) {
+    return passiAttivi[ricettaId] || 0
   }
 
   useEffect(() => {
@@ -47,7 +56,7 @@ export function TimerProvider({ children }) {
   const timersAttivi = Object.values(timers).filter(t => t.attivo || t.finito)
 
   return (
-    <TimerContext.Provider value={{ timers, startTimer, resetTimer, timersAttivi }}>
+    <TimerContext.Provider value={{ timers, startTimer, resetTimer, timersAttivi, setPassoAttivo, getPassoAttivo }}>
       {children}
     </TimerContext.Provider>
   )

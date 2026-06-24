@@ -5,6 +5,7 @@ import Intestazione from "../components/Intestazione"
 import { useWindowSize } from "../hooks/useWindowSize"
 import { TimerProvider } from "../context/TimerContext"
 import { useTimer } from "../context/TimerContext"
+import { useNavigate } from "react-router-dom"
 
 const UNITA = ["g", "kg", "ml", "l", "cucchiaio", "cucchiaino", "tazza", "n°"]
 
@@ -139,10 +140,58 @@ function Ricette() {
 
 // ── LISTA RICETTE ─────────────────────────────────────────────
 function ListaRicette({ ricette, selezionata, onSeleziona, onNuova, mostraIntestazione }) {
+  const navigate = useNavigate()
+  const { timers, resetTimer } = useTimer()
+
+  function formatTimer(s) {
+    const m = Math.floor(s / 60)
+    const sec = s % 60
+    return `${m}:${sec.toString().padStart(2, "0")}`
+  }
+
+  const timersVisibili = Object.entries(timers).filter(([, t]) => t.attivo || t.finito)
+
   return (
     <div style={{ padding: 24, paddingBottom: 100 }}>
-      {mostraIntestazione && <Intestazione />}
-      <div style={{ fontWeight: 400, color: "#999", marginBottom: 24, fontSize: 20 }}>Ricette</div>
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 24 }}>
+        <div style={{ fontWeight: 400, color: "#999", fontSize: 20 }}>Ricette</div>
+        <button onClick={() => navigate("/")} style={{
+          background: "none", border: "none",
+          cursor: "pointer", fontSize: 22,
+          color: "#2d7a4f", padding: "4px 8px", borderRadius: 8
+        }}>⌂</button>
+      </div>
+
+      {timersVisibili.length > 0 && (
+        <div style={{
+          background: "#fff9e6", border: "1px solid #e07b2a",
+          borderRadius: 12, padding: 16, marginBottom: 24
+        }}>
+          <div style={{ fontWeight: 600, fontSize: 14, color: "#e07b2a", marginBottom: 10 }}>⏱ In corso</div>
+          {timersVisibili.map(([key, t]) => (
+            <div key={key} style={{
+              display: "flex", justifyContent: "space-between", alignItems: "center",
+              padding: "6px 0", borderBottom: "1px solid #f0e0c0"
+            }}>
+              <div>
+                <span style={{ fontWeight: 500 }}>{t.ricettaNome}</span>
+                <span style={{ color: "#999", fontSize: 13 }}> · {t.passoLabel}</span>
+              </div>
+              <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                {t.finito ? (
+                  <span style={{ color: "#e53e3e", fontWeight: 600, fontSize: 13 }}>⏰ Scaduto!</span>
+                ) : (
+                  <span style={{ color: "#e07b2a", fontWeight: 600 }}>{formatTimer(t.secondi)}</span>
+                )}
+                <button onClick={() => resetTimer(key)} style={{
+                  background: "none", border: "none", color: "#ccc", cursor: "pointer", fontSize: 16
+                }}>×</button>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+
       {ricette.length === 0 && (
         <div style={{ color: "#ccc", fontSize: 14 }}>Nessuna ricetta ancora</div>
       )}
@@ -170,13 +219,16 @@ function ListaRicette({ ricette, selezionata, onSeleziona, onNuova, mostraIntest
         display: "flex", alignItems: "center", justifyContent: "center"
       }}>+</button>
     </div>
+
+
+
   )
 }
 
 // ── DETTAGLIO RICETTA ─────────────────────────────────────────
 function DettaglioRicetta({ ricetta, onModifica, onElimina, onTorna }) {
-  const { timers, startTimer, resetTimer } = useTimer()
-  const [passoAttivo, setPassoAttivo] = useState(0)
+  const { timers, startTimer, resetTimer, setPassoAttivo, getPassoAttivo } = useTimer()
+  const passoAttivo = getPassoAttivo(ricetta.id)
 
   function formatTimer(s) {
     const m = Math.floor(s / 60)
@@ -186,11 +238,11 @@ function DettaglioRicetta({ ricetta, onModifica, onElimina, onTorna }) {
 
   return (
     <div style={{ maxWidth: 600, margin: "0 auto", padding: 24, paddingBottom: 100 }}>
-      {onTorna && <Intestazione />}
+      <Intestazione onTorna={onTorna} to="/ricette" />
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 24 }}>
         <div>
           <h2 style={{ margin: 0, fontWeight: 600 }}>{ricetta.nome}</h2>
-          <div style={{ fontSize: 13, color: "#999", marginTop: 4 }}>{ricetta.porzioni} porzioni</div>
+          <div style={{ fontSize: 13, color: "#9b9999", marginTop: 4 }}>{ricetta.porzioni} porzioni</div>
         </div>
         <div style={{ display: "flex", gap: 8 }}>
           <button onClick={onModifica} style={{
@@ -204,10 +256,10 @@ function DettaglioRicetta({ ricetta, onModifica, onElimina, onTorna }) {
         </div>
       </div>
 
-      <ul style={{ listStyle: "none", padding: 0, marginBottom: 32 }}>
+      <ul style={{ listStyle: "none", padding: 0, marginBottom: 22 }}>
         {ricetta.ingredienti?.map((ing, i) => (
-          <li key={i} style={{ padding: "8px 0", borderBottom: "1px solid #f0f0f0", fontSize: 15, display: "flex" }}>
-            <span style={{ width: 80, flexShrink: 0, color: "#bdbcbc" }}>{ing.quantita} {ing.unita}</span>
+          <li key={i} style={{ padding: "6px 0", borderBottom: "1px solid #f0f0f0", fontSize: 15, display: "flex" }}>
+            <span style={{ width: 70, flexShrink: 0, color: "#d6d5d5" }}>{ing.quantita} {ing.unita}</span>
             <span>{ing.nome}</span>
           </li>
         ))}
@@ -216,7 +268,7 @@ function DettaglioRicetta({ ricetta, onModifica, onElimina, onTorna }) {
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 12 }}>
         <div style={{ fontWeight: 600 }}>Procedimento</div>
         {passoAttivo > 0 && (
-          <button onClick={() => setPassoAttivo(0)} style={{
+          <button onClick={() => setPassoAttivo(ricetta.id, 0)} style={{
             padding: "6px 14px", borderRadius: 20, border: "none",
             background: "#f0f0f0", color: "#666", cursor: "pointer", fontSize: 13
           }}>↺ Ricomincia</button>
@@ -228,7 +280,7 @@ function DettaglioRicetta({ ricetta, onModifica, onElimina, onTorna }) {
         const t = timers[key]
 
         return (
-          <div key={i} onClick={() => i === passoAttivo && setPassoAttivo(i + 1)} style={{
+          <div key={i} onClick={() => i === passoAttivo && setPassoAttivo(ricetta.id, i + 1)} style={{
             marginBottom: 16, padding: 16,
             background: i < passoAttivo ? "#969494" : i === passoAttivo ? "#fff9e6" : "#fafafa",
             border: `2px solid ${i < passoAttivo ? "#2d7a4f" : i === passoAttivo ? "#ce7126" : "#eee"}`,
