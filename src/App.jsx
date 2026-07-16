@@ -13,6 +13,7 @@ import Ricette from "./pages/Ricette"
 import { useUserProfile } from "./hooks/useUserProfile";
 import Home from "./pages/Home"
 import Placeholder from "./pages/Placeholder"
+import Giochi from "./pages/Giochi"
 
 
 function Layout() {
@@ -53,7 +54,6 @@ useEffect(() => {
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/dashboard" element={<Dashboard />} />
-      <Route path="/giochi" element={<Placeholder nome="Giochi" />} />
       <Route path="/compiti" element={<Placeholder nome="Compiti" />} />
       <Route path="/risparmi" element={<Placeholder nome="Risparmi" />} />
       <Route path="/lista" element={<Lista />} />
@@ -63,6 +63,7 @@ useEffect(() => {
       <Route path="/todo" element={<ToDo />} />
       <Route path="/ricette" element={<Ricette />} />
       <Route path="/ricette/:id" element={<Ricette />} />
+      <Route path="/giochi" element={<Giochi />} />
     </Routes>
   </div>
 )
