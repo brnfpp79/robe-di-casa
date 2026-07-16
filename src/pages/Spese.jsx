@@ -240,7 +240,7 @@ function Spese() {
 
   return (
     <div style={{ maxWidth: 480, margin: "0 auto", padding: 24, paddingBottom: 100 }}>
-<Intestazione />
+<Intestazione to="/dashboard"/>
       {/* Per ogni mese presente nelle spese, mostra un accordion */}
       {mesiOrdinati.map(mese => (
         <div key={mese} style={{ marginBottom: 8, border: "1px solid #eee", borderRadius: 12, overflow: "hidden" }}>

@@ -84,7 +84,7 @@ function Riepilogo() {
 
   return (
     <div style={{ maxWidth: 480, margin: "0 auto", padding: 24, paddingBottom: 100 }}>
-    <Intestazione titolo="Riepilogo" />
+    <Intestazione to="/dashboard" titolo="Riepilogo" />
 
 {(() => {
   const saldo = calcolaSaldo(spese)

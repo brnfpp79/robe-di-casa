@@ -52,7 +52,7 @@ function ToDo() {
 
   return (
     <div style={{ maxWidth: 480, margin: "0 auto", padding: 24, paddingBottom: 100 }}>
-      <Intestazione titolo="To Do" />
+      <Intestazione to="/dashboard" titolo="To Do" />
 
       <ul style={{ listStyle: "none", padding: 0 }}>
         {daFare.map(t => (

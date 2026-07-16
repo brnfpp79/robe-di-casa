@@ -5,6 +5,7 @@ import { collection, getDocs, query, orderBy } from "firebase/firestore"
 import { signOut } from "firebase/auth"
 import { useWindowSize } from "../hooks/useWindowSize"
 import { useTimer } from "../context/TimerContext"
+import Intestazione from "../components/Intestazione"
 
 function Dashboard() {
   const navigate = useNavigate()
@@ -62,7 +63,7 @@ const timersVisibili = Object.entries(timers).filter(([, t]) => t.attivo || t.fi
       backgroundSize: "cover", backgroundPosition: "center center",
       position: "relative"
     }}>
-      {/* Sfondo sfocato */}
+         {/* Sfondo sfocato */}
       <div style={{
         position: "absolute", inset: 0,
         backdropFilter: "blur(8px)",
@@ -80,10 +81,11 @@ const timersVisibili = Object.entries(timers).filter(([, t]) => t.attivo || t.fi
 
         {/* Intestazione */}
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+          <Intestazione to="/"/>
           <div style={{ color: "white", fontSize: 22, fontWeight: 600 }}>
             Robe di casa
           </div>
-
+  
           <button onClick={() => signOut(auth)} style={{
             background: "rgba(255,255,255,0.2)", border: "none",
             color: "white", padding: "6px 14px", borderRadius: 20,

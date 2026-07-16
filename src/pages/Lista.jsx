@@ -90,7 +90,7 @@ function Lista() {
 
   return (
     <div style={{ maxWidth: 480, margin: "0 auto", padding: 24, paddingBottom: 100 }}>
-  <Intestazione />
+  <Intestazione to="/dashboard"/>
       <ul style={{ listStyle: "none", padding: 0 }}>
         {daComprare.map(a => (
           <li key={a.id} style={{ display: "flex", alignItems: "center", borderBottom: "1px solid #eee", position: "relative" }}>

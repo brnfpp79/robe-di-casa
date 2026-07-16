@@ -10,11 +10,14 @@ import Riepilogo from "./pages/Riepilogo"
 import Grafici from "./pages/Grafici"
 import ToDo from "./pages/ToDo"
 import Ricette from "./pages/Ricette"
+import { useUserProfile } from "./hooks/useUserProfile";
+import Home from "./pages/Home"
+import Placeholder from "./pages/Placeholder"
 
 
 function Layout() {
   const [utente, setUtente] = useState(undefined)
-  const EMAIL_AUTORIZZATE = ["brnfpp@gmail.com", "shangdiai@gmail.com"]
+  const EMAIL_AUTORIZZATE = ["brnfpp@gmail.com", "shangdiai@gmail.com", "fg.brancato@gmail.com", "riccardogionathan.brancato@gmail.com"]
  
  
   {/* controlle email */}
@@ -48,7 +51,11 @@ useEffect(() => {
   return (
   <div style={{ minHeight: "100dvh" }}>
     <Routes>
-      <Route path="/" element={<Dashboard />} />
+      <Route path="/" element={<Home />} />
+      <Route path="/dashboard" element={<Dashboard />} />
+      <Route path="/giochi" element={<Placeholder nome="Giochi" />} />
+      <Route path="/compiti" element={<Placeholder nome="Compiti" />} />
+      <Route path="/risparmi" element={<Placeholder nome="Risparmi" />} />
       <Route path="/lista" element={<Lista />} />
       <Route path="/spese" element={<Spese />} />
       <Route path="/riepilogo" element={<Riepilogo />} />
