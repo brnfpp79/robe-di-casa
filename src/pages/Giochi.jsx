@@ -4,36 +4,45 @@ import { useUserProfile } from "../hooks/useUserProfile";
 import { GIOCHI, giocoById } from "../giochi";
 import { salvaPunteggio, leggiPunteggi } from "../giochi/scores";
 
-/* Nomi di default dal profilo (modificabili in fase di salvataggio). */
 const NOMI = { family: "Famiglia", fil: "Fil", vale: "Vale", richi: "Riccardo" };
+// Le tre persone mostrate nelle classifiche (una colonna ciascuna).
+const PERSONE = [
+  { id: "fil", nome: "Fil" },
+  { id: "vale", nome: "Vale" },
+  { id: "richi", nome: "Riccardo" },
+];
 
 export default function Giochi() {
   const navigate = useNavigate();
-  const { profileId } = useUserProfile();
+  const { profileId, loading } = useUserProfile();
   const player = profileId || "guest";
   const nomeDefault = NOMI[profileId] || "Ospite";
 
-  const [giocoId, setGiocoId] = useState(null);   // gioco in corso
-  const [istanza, setIstanza] = useState(0);      // per "gioca ancora" (rimonta)
-  const [risultato, setRisultato] = useState(null); // { value } a fine partita
+  const [giocoId, setGiocoId] = useState(null);
+  const [variante, setVariante] = useState(null);
+  const [istanza, setIstanza] = useState(0);
+  const [risultato, setRisultato] = useState(null);
   const [nome, setNome] = useState(nomeDefault);
   const [salvato, setSalvato] = useState(false);
   const [vistaClassifiche, setVistaClassifiche] = useState(false);
 
+  useEffect(() => { setNome(NOMI[profileId] || "Ospite"); }, [profileId]);
+  if (loading) return null;
+
   const gioco = giocoId ? giocoById(giocoId) : null;
 
   const avvia = (id) => {
-    setGiocoId(id); setIstanza((n) => n + 1);
-    setRisultato(null); setSalvato(false); setNome(nomeDefault);
+    setGiocoId(id); setVariante(null);
+    setRisultato(null); setSalvato(false); setIstanza((n) => n + 1);
   };
-  const tornaAiGiochi = () => {
-    setGiocoId(null); setRisultato(null); setSalvato(false);
-  };
+  const scegliVariante = (v) => { setVariante(v); setIstanza((n) => n + 1); };
+  const rigioca = () => { setIstanza((n) => n + 1); setRisultato(null); setSalvato(false); };
+  const tornaAiGiochi = () => { setGiocoId(null); setVariante(null); setRisultato(null); setSalvato(false); };
   const finePartita = (value) => setRisultato({ value });
 
   const salva = async () => {
     try {
-      await salvaPunteggio({ game: giocoId, player, name: (nome || nomeDefault).trim(), value: risultato.value });
+      await salvaPunteggio({ game: giocoId, variant: variante?.id, player, name: (nome || nomeDefault).trim(), value: risultato.value });
       setSalvato(true);
     } catch (e) {
       console.error("Salvataggio punteggio fallito:", e);
@@ -41,19 +50,36 @@ export default function Giochi() {
     }
   };
 
-  // --- Schermata: classifiche ---
-  if (vistaClassifiche) {
-    return <Classifiche onIndietro={() => setVistaClassifiche(false)} />;
+  if (vistaClassifiche) return <Classifiche onIndietro={() => setVistaClassifiche(false)} />;
+
+  if (gioco && gioco.varianti && !variante) {
+    return (
+      <Sfondo>
+        <div style={S.top}>
+          <button onClick={tornaAiGiochi} style={S.back}>←</button>
+          <span style={{ width: 46 }} />
+        </div>
+        <h1 style={S.titolo}>{gioco.nome}</h1>
+        <p style={{ color: "rgba(255,255,255,0.85)", marginBottom: 18 }}>Scegli la difficoltà</p>
+        <div style={S.listaDiff}>
+          {gioco.varianti.map((v) => (
+            <button key={v.id} onClick={() => scegliVariante(v)} style={S.diff}>
+              <span style={S.diffLabel}>{v.label}</span>
+              <span style={S.diffInfo}>{v.coppie ? `${v.coppie} coppie` : ""}</span>
+            </button>
+          ))}
+        </div>
+      </Sfondo>
+    );
   }
 
-  // --- Schermata: gioco in corso ---
   if (gioco) {
     const Componente = gioco.componente;
     return (
       <div style={S.bg}>
         <div style={S.blur} />
         <div style={S.fg}>
-          <Componente key={istanza} onFine={finePartita} onEsci={tornaAiGiochi} />
+          <Componente key={istanza} variante={variante} onFine={finePartita} onEsci={tornaAiGiochi} />
         </div>
 
         {risultato && (
@@ -62,25 +88,19 @@ export default function Giochi() {
               <div style={S.mascotte}>🦊🎉</div>
               <h2 style={S.bravo}>Bravo!</h2>
               <p style={S.sub}>
-                {gioco.nome}: <b>{risultato.value}</b> {gioco.unit}
+                {gioco.nome}{variante ? ` · ${variante.label}` : ""}: <b>{risultato.value}</b> {gioco.unit}
               </p>
-
               {!salvato ? (
                 <>
                   <label style={S.label}>Salvo con che nome?</label>
-                  <input
-                    value={nome}
-                    onChange={(e) => setNome(e.target.value)}
-                    maxLength={14}
-                    style={S.input}
-                  />
+                  <input value={nome} onChange={(e) => setNome(e.target.value)} maxLength={14} style={S.input} />
                   <button onClick={salva} style={S.primario}>Salva punteggio</button>
-                  <button onClick={() => avvia(giocoId)} style={S.secondario}>Non salvare, rigioca</button>
+                  <button onClick={rigioca} style={S.secondario}>Non salvare, rigioca</button>
                 </>
               ) : (
                 <>
                   <p style={S.salvato}>Punteggio salvato! 🏆</p>
-                  <button onClick={() => avvia(giocoId)} style={S.primario}>Gioca ancora</button>
+                  <button onClick={rigioca} style={S.primario}>Gioca ancora</button>
                   <button onClick={tornaAiGiochi} style={S.secondario}>Torna ai giochi</button>
                 </>
               )}
@@ -91,35 +111,31 @@ export default function Giochi() {
     );
   }
 
-  // --- Schermata: griglia giochi ---
   return (
-    <div style={S.bg}>
-      <div style={S.blur} />
-      <div style={S.fg}>
-        <div style={S.top}>
-          <button onClick={() => navigate("/")} style={S.back}>←</button>
-          <button onClick={() => setVistaClassifiche(true)} style={S.trofeo}>🏆 Classifiche</button>
-        </div>
-        <h1 style={S.titolo}>Giochi</h1>
-        <div style={S.griglia}>
-          {GIOCHI.map((g) => (
-            <button key={g.id} onClick={() => avvia(g.id)} style={S.tile}>
-              <span style={S.emoji}>{g.emoji}</span>
-              <span style={S.nomeGioco}>{g.nome}</span>
-            </button>
-          ))}
-        </div>
+    <Sfondo>
+      <div style={S.top}>
+        <button onClick={() => navigate("/")} style={S.back}>←</button>
+        <button onClick={() => setVistaClassifiche(true)} style={S.trofeo}>🏆 Punteggi</button>
       </div>
-    </div>
+      <h1 style={S.titolo}>Giochi</h1>
+      <div style={S.griglia}>
+        {GIOCHI.map((g) => (
+          <button key={g.id} onClick={() => avvia(g.id)} style={S.tile}>
+            <span style={S.emoji}>{g.emoji}</span>
+            <span style={S.nomeGioco}>{g.nome}</span>
+          </button>
+        ))}
+      </div>
+    </Sfondo>
   );
 }
 
-/* =========================================================================
-   CLASSIFICHE — per gioco + generale (a punti-classifica)
-   ========================================================================= */
+/* ===================== PUNTEGGI (non competitivi) =====================
+   Tre colonne affiancate — una persona ciascuna — con i suoi 10 migliori.
+   Nessun confronto tra persone: ognuno vede la propria crescita.          */
 function Classifiche({ onIndietro }) {
   const [tutti, setTutti] = useState(null);
-  const [tab, setTab] = useState("generale");
+  const [gTab, setGTab] = useState(GIOCHI[0].id);
 
   useEffect(() => {
     leggiPunteggi().then(setTutti).catch((e) => { console.error(e); setTutti([]); });
@@ -131,90 +147,58 @@ function Classifiche({ onIndietro }) {
     <Sfondo>
       <div style={S.top}>
         <button onClick={onIndietro} style={S.back}>←</button>
-        <span style={{ color: "#fff", fontWeight: 700, fontSize: 18 }}>Classifiche</span>
+        <span style={{ color: "#fff", fontWeight: 700, fontSize: 18 }}>Punteggi</span>
         <span style={{ width: 46 }} />
       </div>
-
       <div style={S.tabs}>
-        <button onClick={() => setTab("generale")} style={tabStyle(tab === "generale")}>Generale</button>
         {GIOCHI.map((g) => (
-          <button key={g.id} onClick={() => setTab(g.id)} style={tabStyle(tab === g.id)}>{g.nome}</button>
+          <button key={g.id} onClick={() => setGTab(g.id)} style={tabStyle(gTab === g.id)}>{g.nome}</button>
         ))}
       </div>
-
-      {tab === "generale"
-        ? <ListaGenerale tutti={tutti} />
-        : <ListaGioco tutti={tutti} gioco={giocoById(tab)} />}
+      <Colonne gioco={giocoById(gTab)} tutti={tutti} />
     </Sfondo>
   );
 }
 
-// Classifica di un singolo gioco: top 8 nel verso giusto.
-function ListaGioco({ tutti, gioco }) {
-  const righe = tutti
-    .filter((s) => s.game === gioco.id)
-    .sort((a, b) => (gioco.higherIsBetter ? b.value - a.value : a.value - b.value))
-    .slice(0, 8);
+function Colonne({ gioco, tutti }) {
+  const varianti = gioco.varianti || [{ id: null, label: gioco.nome }];
+  const [vId, setVId] = useState(varianti[0].id);
 
-  if (righe.length === 0) return <Vuoto testo="Ancora nessun punteggio. Gioca tu il primo!" />;
+  const top = (playerId) =>
+    tutti
+      .filter((s) => s.game === gioco.id && (vId === null || s.variant === vId) && s.player === playerId)
+      .sort((a, b) => (gioco.higherIsBetter ? b.value - a.value : a.value - b.value))
+      .slice(0, 10);
+
   return (
-    <div style={S.lista}>
-      {righe.map((r, i) => (
-        <div key={r.id} style={S.riga}>
-          <span style={S.pos}>{i + 1}</span>
-          <span style={S.nome}>{r.name}</span>
-          <span style={S.val}>{r.value} {gioco.unit}</span>
+    <>
+      {gioco.varianti && (
+        <div style={S.tabs}>
+          {varianti.map((v) => (
+            <button key={v.id} onClick={() => setVId(v.id)} style={tabStyle(vId === v.id)}>{v.label}</button>
+          ))}
         </div>
-      ))}
-    </div>
+      )}
+      <div style={S.colonne}>
+        {PERSONE.map((p) => {
+          const righe = top(p.id);
+          return (
+            <div key={p.id} style={S.colonna}>
+              <div style={S.colTesta}>{p.nome}</div>
+              {righe.length === 0
+                ? <div style={S.colVuoto}>—</div>
+                : righe.map((r, i) => (
+                    <div key={r.id} style={{ ...S.colCella, ...(i === 0 ? S.colTop : {}) }}>{r.value}</div>
+                  ))}
+            </div>
+          );
+        })}
+      </div>
+      <p style={S.unitNota}>i 10 migliori · in {gioco.unit}</p>
+    </>
   );
 }
 
-// Generale: per ogni gioco assegno punti-classifica al miglior risultato di
-// ciascun giocatore, poi sommo. 1°=10, 2°=6, 3°=4, 4°=3.
-function ListaGenerale({ tutti }) {
-  const PUNTI = [10, 6, 4, 3];
-  const totali = {}; // player -> { name, punti }
-
-  for (const gioco of GIOCHI) {
-    const perGioco = tutti.filter((s) => s.game === gioco.id);
-    // miglior punteggio per giocatore
-    const best = {};
-    for (const s of perGioco) {
-      const c = best[s.player];
-      const meglio = !c || (gioco.higherIsBetter ? s.value > c.value : s.value < c.value);
-      if (meglio) best[s.player] = s;
-    }
-    // ordino i migliori e assegno i punti
-    const ordinati = Object.values(best).sort((a, b) =>
-      gioco.higherIsBetter ? b.value - a.value : a.value - b.value
-    );
-    ordinati.forEach((s, i) => {
-      const p = PUNTI[i] || 1;
-      if (!totali[s.player]) totali[s.player] = { name: s.name, punti: 0 };
-      totali[s.player].punti += p;
-      totali[s.player].name = s.name;
-    });
-  }
-
-  const righe = Object.values(totali).sort((a, b) => b.punti - a.punti);
-  if (righe.length === 0) return <Vuoto testo="Nessun punteggio ancora. La sfida comincia con la prima partita!" />;
-  return (
-    <div style={S.lista}>
-      {righe.map((r, i) => (
-        <div key={i} style={S.riga}>
-          <span style={S.pos}>{i + 1}</span>
-          <span style={S.nome}>{r.name}</span>
-          <span style={S.val}>{r.punti} pt</span>
-        </div>
-      ))}
-    </div>
-  );
-}
-
-function Vuoto({ testo }) {
-  return <p style={{ color: "rgba(255,255,255,0.85)", textAlign: "center", marginTop: 30 }}>{testo}</p>;
-}
 function Sfondo({ children }) {
   return (
     <div style={S.bg}>
@@ -235,11 +219,15 @@ const S = {
   top: { display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 16 },
   back: { background: "rgba(255,255,255,0.9)", border: "none", borderRadius: 12, fontSize: 26, width: 46, height: 46, cursor: "pointer", color: "#8A5A16" },
   trofeo: { background: "rgba(255,255,255,0.9)", border: "none", borderRadius: 20, padding: "10px 16px", fontSize: 14, fontWeight: 700, cursor: "pointer", color: "#8A5A16" },
-  titolo: { color: "#fff", fontSize: 30, fontWeight: 700, margin: "4px 0 18px" },
-  griglia: { display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 14 },
+  titolo: { color: "#fff", fontSize: 30, fontWeight: 700, margin: "4px 0 6px" },
+  griglia: { display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 14, marginTop: 12 },
   tile: { border: "none", cursor: "pointer", borderRadius: 22, padding: "26px 16px", display: "flex", flexDirection: "column", alignItems: "center", gap: 10, background: "linear-gradient(145deg,#FBEFD8,#F6D79A)", boxShadow: "0 6px 14px -6px rgba(0,0,0,.4)" },
   emoji: { fontSize: 46 },
   nomeGioco: { fontSize: 18, fontWeight: 700, color: "#8A5A16" },
+  listaDiff: { display: "flex", flexDirection: "column", gap: 12 },
+  diff: { border: "none", cursor: "pointer", borderRadius: 18, padding: "18px 20px", display: "flex", justifyContent: "space-between", alignItems: "center", background: "linear-gradient(145deg,#FBEFD8,#F6D79A)", boxShadow: "0 4px 12px -6px rgba(0,0,0,.4)" },
+  diffLabel: { fontSize: 20, fontWeight: 700, color: "#8A5A16" },
+  diffInfo: { fontSize: 14, color: "#B08A4E" },
   overlay: { position: "fixed", inset: 0, background: "rgba(0,0,0,0.55)", display: "grid", placeItems: "center", zIndex: 10, padding: 24 },
   card: { background: "#fff", borderRadius: 28, padding: "30px 26px", textAlign: "center", maxWidth: 340, width: "100%", boxShadow: "0 20px 50px -12px rgba(0,0,0,.5)" },
   mascotte: { fontSize: 54, marginBottom: 6 },
@@ -251,9 +239,11 @@ const S = {
   secondario: { width: "100%", background: "none", color: "#9a917f", border: "none", padding: "8px", fontSize: 14, cursor: "pointer" },
   salvato: { color: "#2E7D32", fontWeight: 700, margin: "0 0 16px" },
   tabs: { display: "flex", gap: 8, flexWrap: "wrap", marginBottom: 16, justifyContent: "center" },
-  lista: { display: "flex", flexDirection: "column", gap: 8 },
-  riga: { display: "flex", alignItems: "center", gap: 12, background: "rgba(255,255,255,0.92)", borderRadius: 12, padding: "12px 16px" },
-  pos: { fontWeight: 800, color: "#E8A13C", width: 24, fontSize: 17 },
-  nome: { flex: 1, fontWeight: 600, color: "#3B352A" },
-  val: { fontWeight: 700, color: "#8A5A16" },
+  colonne: { display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 10 },
+  colonna: { background: "rgba(255,255,255,0.9)", borderRadius: 14, padding: "10px 8px", display: "flex", flexDirection: "column", gap: 6 },
+  colTesta: { fontWeight: 800, color: "#8A5A16", textAlign: "center", fontSize: 15, paddingBottom: 6, borderBottom: "2px solid #F0E4C8" },
+  colCella: { textAlign: "center", fontWeight: 600, color: "#3B352A", fontSize: 15, padding: "3px 0" },
+  colTop: { color: "#B8860B", fontWeight: 800 },
+  colVuoto: { textAlign: "center", color: "#c9bfac", padding: "10px 0" },
+  unitNota: { textAlign: "center", color: "rgba(255,255,255,0.8)", fontSize: 13, marginTop: 14 },
 };

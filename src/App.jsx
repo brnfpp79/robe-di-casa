@@ -14,6 +14,7 @@ import { useUserProfile } from "./hooks/useUserProfile";
 import Home from "./pages/Home"
 import Placeholder from "./pages/Placeholder"
 import Giochi from "./pages/Giochi"
+import Compiti from "./pages/Compiti"
 
 
 function Layout() {
@@ -54,7 +55,6 @@ useEffect(() => {
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/dashboard" element={<Dashboard />} />
-      <Route path="/compiti" element={<Placeholder nome="Compiti" />} />
       <Route path="/risparmi" element={<Placeholder nome="Risparmi" />} />
       <Route path="/lista" element={<Lista />} />
       <Route path="/spese" element={<Spese />} />
@@ -64,6 +64,7 @@ useEffect(() => {
       <Route path="/ricette" element={<Ricette />} />
       <Route path="/ricette/:id" element={<Ricette />} />
       <Route path="/giochi" element={<Giochi />} />
+      <Route path="/compiti" element={<Compiti />} />
     </Routes>
   </div>
 )

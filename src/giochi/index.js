@@ -1,17 +1,19 @@
 import Memory from "./Memory";
+import Tetris from "./Tetris";
 
 /* =========================================================================
    REGISTRO GIOCHI
    -------------------------------------------------------------------------
-   Per aggiungere un gioco in futuro:
-     1. crei giochi/NuovoGioco.jsx  (props: onFine(value), onEsci)
-     2. aggiungi una riga qui sotto
-   NIENT'ALTRO. Né rotte, né modifiche a App.jsx.
+   Aggiungere un gioco = un file + una riga qui. Niente rotte, niente App.jsx.
 
-   Campi:
-     unit          → come si chiama il punteggio ("mosse", "punti"…)
-     higherIsBetter→ true se un numero più alto è migliore (Snake); false se
-                     è migliore più basso (Memory: meno mosse = meglio).
+   Campi gioco:
+     unit           → "mosse", "punti"…
+     higherIsBetter → true se numero alto è meglio; false se basso è meglio
+     varianti       → livelli di difficoltà (opzionale). Ogni variante porta:
+                        · id, label
+                        · moltiplicatore → peso nella classifica generale
+                        · + parametri specifici del gioco
+                          (Memory: coppie | Tetris: velocita in ms)
    ========================================================================= */
 export const GIOCHI = [
   {
@@ -21,9 +23,25 @@ export const GIOCHI = [
     unit: "mosse",
     higherIsBetter: false,
     componente: Memory,
+    varianti: [
+      { id: "facile",    label: "Facile",    coppie: 6,  moltiplicatore: 1 },
+      { id: "medio",     label: "Medio",     coppie: 8,  moltiplicatore: 1.5 },
+      { id: "difficile", label: "Difficile", coppie: 12, moltiplicatore: 2 },
+    ],
   },
-  // Esempio futuro:
-  // { id: "snake", nome: "Snake", emoji: "🐍", unit: "punti", higherIsBetter: true, componente: Snake },
+  {
+    id: "tetris",
+    nome: "Tetris",
+    emoji: "🟦",
+    unit: "punti",
+    higherIsBetter: true,
+    componente: Tetris,
+    varianti: [
+      { id: "facile",    label: "Facile",    velocita: 750, moltiplicatore: 1 },
+      { id: "medio",     label: "Medio",     velocita: 500, moltiplicatore: 1.5 },
+      { id: "difficile", label: "Difficile", velocita: 320, moltiplicatore: 2 },
+    ],
+  },
 ];
 
 export const giocoById = (id) => GIOCHI.find((g) => g.id === id);
