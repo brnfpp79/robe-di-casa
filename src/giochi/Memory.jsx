@@ -88,7 +88,7 @@ export default function Memory({ variante, onFine, onEsci }) {
                 cursor: su ? "default" : "pointer",
               }}
             >
-              <span style={{ fontSize: 34, visibility: su ? "visible" : "hidden" }}>{c.simbolo}</span>
+              <span style={{ fontSize: 50, visibility: su ? "visible" : "hidden" }}>{c.simbolo}</span>
               {!su && <span style={S.retro}>?</span>}
             </button>
           );
@@ -99,11 +99,11 @@ export default function Memory({ variante, onFine, onEsci }) {
 }
 
 const S = {
-  wrap: { maxWidth: 460, margin: "0 auto", padding: "20px 16px" },
+  wrap: { maxWidth: 560, margin: "0 auto", padding: "20px 16px" },
   top: { display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 18 },
   back: { background: "rgba(255,255,255,0.9)", border: "none", borderRadius: 12, fontSize: 26, width: 46, height: 46, cursor: "pointer", color: "#8A5A16" },
   mosse: { color: "#fff", fontSize: 18, fontWeight: 700, background: "rgba(0,0,0,0.3)", padding: "8px 16px", borderRadius: 20 },
-  grid: { display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 10 },
+  grid: { display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 14 },
   carta: { aspectRatio: "1", border: "none", borderRadius: 16, display: "grid", placeItems: "center", position: "relative", boxShadow: "0 4px 10px -4px rgba(0,0,0,.4)", transition: "opacity .3s, background .2s" },
   retro: { position: "absolute", fontSize: 30, color: "rgba(255,255,255,0.85)", fontWeight: 800 },
 };

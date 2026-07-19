@@ -19,5 +19,5 @@ export const ui = {
 const S = {
   bg: { minHeight: "100dvh", backgroundImage: "url('/famiglia.jpg')", backgroundSize: "cover", backgroundPosition: "center", position: "relative", fontFamily: "'Segoe UI', system-ui, sans-serif" },
   blur: { position: "absolute", inset: 0, backdropFilter: "blur(8px)", backgroundColor: "rgba(0,0,0,0.35)" },
-  fg: { position: "relative", zIndex: 1, maxWidth: 460, margin: "0 auto", padding: "20px 16px" },
+  fg: { position: "relative", zIndex: 1, maxWidth: 560, margin: "0 auto", padding: "20px 16px" },
 };

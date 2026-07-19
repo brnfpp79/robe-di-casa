@@ -87,12 +87,12 @@ export default function Tetris({ variante, onFine, onEsci }) {
     window.addEventListener("resize", on);
     return () => window.removeEventListener("resize", on);
   }, []);
-  const grande = vw >= 640;
-  const boardW = grande ? 360 : 250;
-  const prevCell = grande ? 20 : 14;
+  const grande = vw >= 560;
+  const boardW = grande ? 400 : 250;
+  const prevCell = grande ? 22 : 14;
   const ctrlH = grande ? 84 : 64;
   const ctrlF = grande ? 32 : 26;
-  const wrapMax = grande ? 540 : 420;
+  const wrapMax = grande ? 560 : 420;
 
   const commit = (next) => {
     st.current = next;
