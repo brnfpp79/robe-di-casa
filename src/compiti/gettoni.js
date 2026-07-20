@@ -1,9 +1,7 @@
 import { db } from "../firebase";
 import { doc, getDoc, setDoc, increment } from "firebase/firestore";
 
-/* Stato compiti: gettoni/{player} = { count, livello, livelloMax }
-   - livello    → livello di lavoro (sale/scende, guida la difficoltà, nascosto)
-   - livelloMax → massimo mai raggiunto (mostrato, non scende mai)             */
+/* Stato compiti: gettoni/{player} = { count, livello, livelloMax } */
 
 const LIVELLO_DEFAULT = 2;
 
@@ -25,4 +23,11 @@ export async function salvaLivello(player, livello) {
 
 export async function salvaLivelloMax(player, livelloMax) {
   await setDoc(doc(db, "gettoni", player), { livelloMax }, { merge: true });
+}
+
+/* Azzera SOLO i livelli della matematica. I gettoni guadagnati restano:
+   sono lavoro fatto, non un punteggio da resettare. */
+export async function azzeraMatematica(player) {
+  await setDoc(doc(db, "gettoni", player),
+    { livello: LIVELLO_DEFAULT, livelloMax: LIVELLO_DEFAULT }, { merge: true });
 }

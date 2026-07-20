@@ -15,6 +15,7 @@ import Home from "./pages/Home"
 import Placeholder from "./pages/Placeholder"
 import Giochi from "./pages/Giochi"
 import Compiti from "./pages/Compiti"
+import Risparmi from "./pages/Risparmi"
 
 
 function Layout() {
@@ -55,7 +56,7 @@ useEffect(() => {
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/dashboard" element={<Dashboard />} />
-      <Route path="/risparmi" element={<Placeholder nome="Risparmi" />} />
+      <Route path="/risparmi" element={<Risparmi />} />
       <Route path="/lista" element={<Lista />} />
       <Route path="/spese" element={<Spese />} />
       <Route path="/riepilogo" element={<Riepilogo />} />

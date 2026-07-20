@@ -1,85 +1,153 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useUserProfile } from "../hooks/useUserProfile";
-import { leggiLivelliSeq, salvaLivelloSeq, salvaLivelloSeqMax } from "./livelliSeq";
+import { leggiLivelliSeq, salvaLivelloSeq, salvaLivelloSeqMax, salvaDiagSeq } from "./livelliSeq";
 import Sfondo, { ui } from "./Sfondo";
 
 /* =========================================================================
    COSA VIENE DOPO? — sequenze e pattern (logica, niente aritmetica).
-   Generatore procedurale: i pattern non sono scritti a mano, si creano da
-   pool di elementi → varietà infinita nel tempo.
+   Generatori procedurali ARRICCHITI: ogni livello ha più tipi di pattern e
+   parametri variabili, così c'è profondità da esplorare prima di scalare.
 
    Livelli:
-     1 ciclico 2 elementi      A-B-A-B-?
-     2 ciclico 3 elementi      A-B-C-A-B-C-?
-     3 ciclico 2 variabili     forma E colore cambiano insieme
-     4 seriazione              piccolo-medio-grande (crescente/decrescente)
-     5 sequenze numeriche      2-4-6-?  (+2, +3, +5, +10)
+     1 ciclico 2 elementi   (lunghezza variabile, pool diversi)
+     2 ciclico 3 elementi   (+ variante A-A-B-A-A-B)
+     3 DUE VARIABILI vere   (forma periodo 2 × colore periodo 3)
+     4 seriazione           (dimensione crescente/decrescente | quantità)
+     5 numeriche            (passo vario, cresc/decr, raddoppio, +1 crescente)
 
-   Autocorrezione: la scelta giusta si aggancia; quella sbagliata tremola e
-   torna al suo posto. Nessun "sbagliato", nessun suono negativo, nessun
-   punteggio, nessun timer. Contatore neutro delle sequenze completate.
+   Diagnostica nascosta: conta i tentativi per pattern e li aggrega per
+   livello su Firestore. Il bambino non vede nulla di tutto ciò.
    ========================================================================= */
 
 const LIV_MIN = 1, LIV_MAX = 5;
 const scegli = (a) => a[Math.floor(Math.random() * a.length)];
 const mescola = (arr) => { const a = arr.slice(); for (let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];} return a; };
+const intFra = (min, max) => min + Math.floor(Math.random() * (max - min + 1));
 
 /* --- Pool di elementi --- */
 const CERCHI  = ["🔴","🟠","🟡","🟢","🔵","🟣"];
 const QUADRI  = ["🟥","🟧","🟨","🟩","🟦","🟪"];
 const CUORI   = ["❤️","🧡","💛","💚","💙","💜"];
-const OGGETTI = ["🍎","🍌","🍇","🌸","🌟","🐱","🐶","🐸","🚗","⚽","🌙","☀️"];
+const LUNE    = ["🌑","🌓","🌕","🌗"];
+const FRUTTA  = ["🍎","🍌","🍇","🍓","🍐","🍊"];
+const ANIMALI = ["🐱","🐶","🐸","🐦","🐢","🐝"];
+const COSE    = ["🚗","⚽","🌟","🌸","🎈","🚀"];
+const POOLS   = [CERCHI, QUADRI, CUORI, FRUTTA, ANIMALI, COSE, LUNE];
 
-/* Un "elemento" = { key, emoji, scala }  — scala serve alla seriazione. */
-const el = (emoji, scala = 1) => ({ key: `${emoji}-${scala}`, emoji, scala });
+/* Forme × colori per il livello 3: stesso indice colore in famiglie diverse */
+const FAMIGLIE = [CERCHI, QUADRI, CUORI];
 
-/* --- Generatori per livello --- */
-function genCiclico(nDiversi) {
-  const pool = mescola(scegli([CERCHI, QUADRI, OGGETTI, CUORI])).slice(0, nDiversi);
-  const base = pool.map((e) => el(e));
-  const lung = nDiversi === 2 ? 6 : 6;                  // 6 posizioni + incognita
-  const seq = Array.from({ length: lung }, (_, i) => base[i % nDiversi]);
-  const giusta = base[lung % nDiversi];
-  const distr = base.filter((b) => b.key !== giusta.key);
+const el = (emoji, scala = 1, tag = "") => ({ key: `${emoji}|${scala}|${tag}`, emoji, scala });
+
+/* ---------- Livello 1: ciclico a 2 elementi ---------- */
+function genCiclico2() {
+  const pool = mescola(scegli(POOLS));
+  const base = [el(pool[0]), el(pool[1])];
+  const lung = intFra(4, 7);
+  const seq = Array.from({ length: lung }, (_, i) => base[i % 2]);
+  const giusta = base[lung % 2];
+  const distr = [base[(lung + 1) % 2], el(pool[2]), el(pool[3])];
   return { seq, giusta, distr };
 }
 
+/* ---------- Livello 2: ciclico a 3 elementi (+ variante AAB) ---------- */
+function genCiclico3() {
+  const pool = mescola(scegli(POOLS));
+  if (Math.random() < 0.35) {                     // variante A-A-B
+    const A = el(pool[0]), B = el(pool[1]);
+    const motivo = [A, A, B];
+    const lung = intFra(5, 8);
+    const seq = Array.from({ length: lung }, (_, i) => motivo[i % 3]);
+    const giusta = motivo[lung % 3];
+    const distr = [giusta.key === A.key ? B : A, el(pool[2]), el(pool[3])];
+    return { seq, giusta, distr };
+  }
+  const base = [el(pool[0]), el(pool[1]), el(pool[2])];
+  const lung = intFra(5, 8);
+  const seq = Array.from({ length: lung }, (_, i) => base[i % 3]);
+  const giusta = base[lung % 3];
+  const distr = base.filter((b) => b.key !== giusta.key).concat(el(pool[3]));
+  return { seq, giusta, distr };
+}
+
+/* ---------- Livello 3: due variabili indipendenti ----------
+   forma cicla ogni 2, colore cicla ogni 3 → combinazione si ripete ogni 6. */
 function genDueVariabili() {
-  // forma E colore cambiano insieme: alterno due famiglie mantenendo l'indice
-  const A = mescola(CERCHI).slice(0, 3);
-  const B = mescola(QUADRI).slice(0, 3);
-  const base = [el(A[0]), el(B[1]), el(A[2])];          // ciclo di 3 misti
-  const seq = Array.from({ length: 6 }, (_, i) => base[i % 3]);
-  const giusta = base[6 % 3];
-  const distr = [el(B[0]), el(A[1]), el(B[2])].filter((d) => d.key !== giusta.key);
+  const fam = mescola(FAMIGLIE).slice(0, 2);      // 2 forme
+  const col = mescola([0,1,2,3,4,5]).slice(0, 3); // 3 colori
+  const cella = (i) => el(fam[i % 2][col[i % 3]], 1, `${i % 2}-${i % 3}`);
+  const lung = intFra(5, 7);
+  const seq = Array.from({ length: lung }, (_, i) => cella(i));
+  const giusta = cella(lung);
+  const fGiusta = lung % 2, cGiusta = lung % 3;
+  const distr = [
+    el(fam[(fGiusta + 1) % 2][col[cGiusta]], 1, "forma-sbagliata"),
+    el(fam[fGiusta][col[(cGiusta + 1) % 3]], 1, "colore-sbagliato"),
+    el(fam[(fGiusta + 1) % 2][col[(cGiusta + 2) % 3]], 1, "entrambi"),
+  ];
   return { seq, giusta, distr };
 }
 
+/* ---------- Livello 4: seriazione (dimensione | quantità) ---------- */
 function genSeriazione() {
-  const e = scegli(OGGETTI);
-  const scale = [0.55, 0.8, 1.05, 1.3, 1.55];
+  const e = scegli(scegli(POOLS));
+  if (Math.random() < 0.4) {                       // per quantità: 🍎, 🍎🍎, …
+    const cresc = Math.random() < 0.5;
+    const n = intFra(3, 4);
+    const conteggi = cresc ? [1,2,3,4,5] : [5,4,3,2,1];
+    const seq = conteggi.slice(0, n).map((c) => el(e.repeat(c), 1, `q${c}`));
+    const attesa = conteggi[n];
+    const giusta = el(e.repeat(attesa), 1, `q${attesa}`);
+    const distr = [conteggi[n-1], attesa + (cresc ? 1 : -1), conteggi[0]]
+      .filter((c) => c > 0 && c !== attesa)
+      .map((c) => el(e.repeat(c), 1, `q${c}`));
+    return { seq, giusta, distr };
+  }
+  const scale = [0.5, 0.75, 1.0, 1.25, 1.5, 1.75];
   const cresc = Math.random() < 0.5;
   const ordine = cresc ? scale : scale.slice().reverse();
-  const seq = ordine.slice(0, 4).map((s) => el(e, s));
-  const giusta = el(e, ordine[4]);
-  const distr = [el(e, ordine[0]), el(e, ordine[2]), el(e, cresc ? 0.4 : 1.7)]
-    .filter((d) => d.key !== giusta.key);
+  const n = intFra(3, 4);
+  const seq = ordine.slice(0, n).map((s) => el(e, s, `s${s}`));
+  const giusta = el(e, ordine[n], `s${ordine[n]}`);
+  const distr = [ordine[n-1], ordine[0], ordine[Math.min(n+1, 5)]]
+    .filter((s) => s !== ordine[n])
+    .map((s) => el(e, s, `s${s}`));
   return { seq, giusta, distr };
 }
 
+/* ---------- Livello 5: numeriche (passo, direzione, raddoppio) ---------- */
 function genNumerica() {
-  const passo = scegli([2, 3, 5, 10]);
-  const start = passo * (1 + Math.floor(Math.random() * 3));
-  const seq = [0,1,2,3].map((i) => el(String(start + i * passo)));
-  const attesa = start + 4 * passo;
-  const giusta = el(String(attesa));
-  const distr = [el(String(attesa + passo)), el(String(attesa - 1)), el(String(attesa + 1))];
-  return { seq, giusta, distr };
+  const tipo = Math.random();
+  let seq = [], attesa = 0;
+
+  if (tipo < 0.15) {                               // raddoppio
+    const start = scegli([1, 2, 3]);
+    const vals = [0,1,2,3].map((i) => start * 2 ** i);
+    attesa = start * 2 ** 4;
+    seq = vals.map((v) => el(String(v)));
+  } else if (tipo < 0.5) {                         // decrescente
+    const passo = scegli([2, 3, 4, 5, 10]);
+    const start = passo * intFra(5, 9);
+    const vals = [0,1,2,3].map((i) => start - i * passo);
+    attesa = start - 4 * passo;
+    seq = vals.map((v) => el(String(v)));
+  } else {                                         // crescente
+    const passo = scegli([2, 3, 4, 5, 10]);
+    const start = intFra(1, 9);
+    const vals = [0,1,2,3].map((i) => start + i * passo);
+    attesa = start + 4 * passo;
+    seq = vals.map((v) => el(String(v)));
+  }
+
+  const cand = new Set();
+  [attesa + 1, attesa - 1, attesa + 2, attesa - 2].forEach((v) => { if (v > 0 && v !== attesa) cand.add(v); });
+  const distr = mescola([...cand]).slice(0, 3).map((v) => el(String(v)));
+  return { seq, giusta: el(String(attesa)), distr };
 }
 
 function generaPattern(livello) {
-  if (livello <= 1) return genCiclico(2);
-  if (livello === 2) return genCiclico(3);
+  if (livello <= 1) return genCiclico2();
+  if (livello === 2) return genCiclico3();
   if (livello === 3) return genDueVariabili();
   if (livello === 4) return genSeriazione();
   return genNumerica();
@@ -87,8 +155,9 @@ function generaPattern(livello) {
 
 function nuovoEsercizio(livello) {
   const { seq, giusta, distr } = generaPattern(livello);
-  const opzioni = mescola([giusta, ...distr.slice(0, 3)]);
-  return { seq, giusta, opzioni };
+  const unici = [];
+  for (const d of distr) if (d.key !== giusta.key && !unici.some((u) => u.key === d.key)) unici.push(d);
+  return { seq, giusta, opzioni: mescola([giusta, ...unici.slice(0, 3)]) };
 }
 
 export default function Sequenze({ onEsci }) {
@@ -97,13 +166,29 @@ export default function Sequenze({ onEsci }) {
 
   const [corrente, setCorrente] = useState(null);
   const [livelloMax, setLivelloMax] = useState(null);
+  const diagRef = useRef({});
+  const daSalvare = useRef(0);
 
   useEffect(() => {
     if (loading) return;
     leggiLivelliSeq(player)
-      .then(({ livello, livelloMax }) => { setCorrente(livello); setLivelloMax(livelloMax); })
+      .then(({ livello, livelloMax, diag }) => { setCorrente(livello); setLivelloMax(livelloMax); diagRef.current = diag || {}; })
       .catch((e) => { console.error(e); setCorrente(1); setLivelloMax(1); });
   }, [loading, player]);
+
+  // Diagnostica nascosta: aggrega per livello, salva ogni 5 pattern risolti.
+  const registraTentativi = (livello, tentativi) => {
+    const k = String(livello);
+    const d = diagRef.current[k] || { risolti: 0, primoColpo: 0, tentativi: 0 };
+    d.risolti += 1;
+    d.tentativi += tentativi;
+    if (tentativi === 1) d.primoColpo += 1;
+    diagRef.current = { ...diagRef.current, [k]: d };
+    if (++daSalvare.current >= 5) {
+      daSalvare.current = 0;
+      salvaDiagSeq(player, diagRef.current).catch((e) => console.error("Diagnostica non salvata:", e));
+    }
+  };
 
   const onCorrente = (liv) => {
     setCorrente(liv);
@@ -127,13 +212,13 @@ export default function Sequenze({ onEsci }) {
       </div>
       <h1 style={ui.title}>Cosa viene dopo?</h1>
       {pronto
-        ? <Esercizio livello={corrente} livelloMax={livelloMax} onCorrente={onCorrente} onNuovoMax={onNuovoMax} />
+        ? <Esercizio livello={corrente} livelloMax={livelloMax} onCorrente={onCorrente} onNuovoMax={onNuovoMax} onTentativi={registraTentativi} />
         : <p style={{ color: "rgba(255,255,255,0.85)", textAlign: "center" }}>Un attimo…</p>}
     </Sfondo>
   );
 }
 
-function Esercizio({ livello, livelloMax, onCorrente, onNuovoMax }) {
+function Esercizio({ livello, livelloMax, onCorrente, onNuovoMax, onTentativi }) {
   const [ex, setEx] = useState(() => nuovoEsercizio(livello));
   const [risolto, setRisolto] = useState(false);
   const [shakeKey, setShakeKey] = useState(null);
@@ -141,24 +226,30 @@ function Esercizio({ livello, livelloMax, onCorrente, onNuovoMax }) {
   const [mancate, setMancate] = useState(0);
   const [celebra, setCelebra] = useState(null);
   const [fatte, setFatte] = useState(0);
+  const tentativi = useRef(0);          // tentativi sul pattern corrente
+
+  const nuovo = (liv) => { tentativi.current = 0; setEx(nuovoEsercizio(liv)); setRisolto(false); };
 
   const scegliOpzione = (o) => {
     if (risolto) return;
+    tentativi.current += 1;
+
     if (o.key === ex.giusta.key) {
+      onTentativi?.(livello, tentativi.current);     // diagnostica nascosta
       setRisolto(true);
       setFatte((f) => f + 1);
       setMancate(0);
       const g = giuste + 1;
       setTimeout(() => {
         if (g >= 10) {
-          const nuovo = Math.min(LIV_MAX, livello + 1);
+          const nuovoLiv = Math.min(LIV_MAX, livello + 1);
           setGiuste(0);
-          if (nuovo > livelloMax) { onNuovoMax(nuovo); setCelebra(nuovo); return; }
-          if (nuovo !== livello) onCorrente(nuovo);
-          setEx(nuovoEsercizio(nuovo)); setRisolto(false);
+          if (nuovoLiv > livelloMax) { onNuovoMax(nuovoLiv); setCelebra(nuovoLiv); return; }
+          if (nuovoLiv !== livello) onCorrente(nuovoLiv);
+          nuovo(nuovoLiv);
         } else {
           setGiuste(g);
-          setEx(nuovoEsercizio(livello)); setRisolto(false);
+          nuovo(livello);
         }
       }, 1100);
     } else {
@@ -166,19 +257,15 @@ function Esercizio({ livello, livelloMax, onCorrente, onNuovoMax }) {
       setTimeout(() => setShakeKey(null), 450);
       const m = mancate + 1;
       setGiuste(0);
-      if (m >= 10) {                                   // discesa silenziosa
-        const nuovo = Math.max(LIV_MIN, livello - 1);
+      if (m >= 10) {
+        const nuovoLiv = Math.max(LIV_MIN, livello - 1);
         setMancate(0);
-        if (nuovo !== livello) { onCorrente(nuovo); setEx(nuovoEsercizio(nuovo)); }
+        if (nuovoLiv !== livello) { onCorrente(nuovoLiv); nuovo(nuovoLiv); }
       } else setMancate(m);
     }
   };
 
-  const continua = () => {
-    setCelebra(null);
-    setEx(nuovoEsercizio(livello));
-    setRisolto(false);
-  };
+  const continua = () => { setCelebra(null); nuovo(livello); };
 
   if (celebra !== null) {
     return (

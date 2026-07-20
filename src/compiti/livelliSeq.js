@@ -1,19 +1,16 @@
 import { db } from "../firebase";
 import { doc, getDoc, setDoc } from "firebase/firestore";
 
-/* Livelli dell'esercizio Sequenze, nello stesso doc gettoni/{player} ma su
-   campi PROPRI: non interferiscono con quelli della matematica.
-     livelloSeq    → livello di lavoro (può scendere, invisibile)
-     livelloSeqMax → massimo mai raggiunto (mostrato, non scende mai)        */
+/* Livelli + diagnostica Sequenze, nel doc gettoni/{player} su campi propri. */
 
 const DEFAULT = 1;
 
 export async function leggiLivelliSeq(player) {
   const snap = await getDoc(doc(db, "gettoni", player));
-  if (!snap.exists()) return { livello: DEFAULT, livelloMax: DEFAULT };
+  if (!snap.exists()) return { livello: DEFAULT, livelloMax: DEFAULT, diag: {} };
   const d = snap.data();
   const livello = d.livelloSeq || DEFAULT;
-  return { livello, livelloMax: d.livelloSeqMax || livello };
+  return { livello, livelloMax: d.livelloSeqMax || livello, diag: d.diagSeq || {} };
 }
 
 export async function salvaLivelloSeq(player, livelloSeq) {
@@ -22,4 +19,14 @@ export async function salvaLivelloSeq(player, livelloSeq) {
 
 export async function salvaLivelloSeqMax(player, livelloSeqMax) {
   await setDoc(doc(db, "gettoni", player), { livelloSeqMax }, { merge: true });
+}
+
+export async function salvaDiagSeq(player, diagSeq) {
+  await setDoc(doc(db, "gettoni", player), { diagSeq }, { merge: true });
+}
+
+/* Azzera livelli E diagnostica: riparte da zero, contro-test pulito. */
+export async function azzeraSequenze(player) {
+  await setDoc(doc(db, "gettoni", player),
+    { livelloSeq: DEFAULT, livelloSeqMax: DEFAULT, diagSeq: {} }, { merge: true });
 }
