@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { useUserProfile } from "../hooks/useUserProfile";
+import { useCronometro } from "../hooks/useCronometro";
 import Fondo from "../risparmi/Fondo";
 import Contanti from "../risparmi/Contanti";
 
@@ -20,6 +21,7 @@ const BLUR = { position: "absolute", inset: 0, backdropFilter: "blur(8px)", back
 const FG   = { position: "relative", zIndex: 1, maxWidth: 560, margin: "0 auto", padding: "20px 16px" };
 
 export default function Risparmi() {
+  useCronometro("risparmi");
   const navigate = useNavigate();
   const [params] = useSearchParams();
   const { profileId, loading } = useUserProfile();
@@ -80,6 +82,7 @@ export default function Risparmi() {
           scope={profileId}
           titolo={profileId === "fil" ? "I miei risparmi" : "Risparmi di Vale"}
           mostraScadenza={false}
+          mostraBtc={profileId === "fil"}
           onEsci={home}
         />
       </Guscio>

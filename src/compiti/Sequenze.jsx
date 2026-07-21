@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { useUserProfile } from "../hooks/useUserProfile";
 import { leggiLivelliSeq, salvaLivelloSeq, salvaLivelloSeqMax, salvaDiagSeq } from "./livelliSeq";
 import Sfondo, { ui } from "./Sfondo";
+import { useCronometro } from "../hooks/useCronometro";
 
 /* =========================================================================
    COSA VIENE DOPO? — sequenze e pattern (logica, niente aritmetica).
@@ -161,6 +162,7 @@ function nuovoEsercizio(livello) {
 }
 
 export default function Sequenze({ onEsci }) {
+  useCronometro("sequenze");
   const { profileId, loading } = useUserProfile();
   const player = profileId || "guest";
 

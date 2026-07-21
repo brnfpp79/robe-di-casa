@@ -1,8 +1,10 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { useUserProfile } from "../hooks/useUserProfile";
 import { GIOCHI, giocoById } from "../giochi";
 import { salvaPunteggio, leggiPunteggi } from "../giochi/scores";
+import { leggiSecondiOggi, aggiungiSecondi, mmss } from "../giochi/tempoGioco";
+import { useCronometro } from "../hooks/useCronometro";
 
 const NOMI = { family: "Famiglia", fil: "Fil", vale: "Vale", richi: "Riccardo" };
 // Le tre persone mostrate nelle classifiche (una colonna ciascuna).
@@ -14,6 +16,7 @@ const PERSONE = [
 
 export default function Giochi() {
   const navigate = useNavigate();
+  useCronometro("giochi");
   const { profileId, loading } = useUserProfile();
   const player = profileId || "guest";
   const nomeDefault = NOMI[profileId] || "Ospite";
@@ -25,20 +28,49 @@ export default function Giochi() {
   const [nome, setNome] = useState(nomeDefault);
   const [salvato, setSalvato] = useState(false);
   const [vistaClassifiche, setVistaClassifiche] = useState(false);
+  const [tempi, setTempi] = useState({});          // secondi giocati oggi, per gioco
+  const [bloccato, setBloccato] = useState(null);  // gioco con tempo esaurito
+  const inizioPartita = useRef(null);
 
   useEffect(() => { setNome(NOMI[profileId] || "Ospite"); }, [profileId]);
+
+  // Tempo già consumato oggi sui giochi che hanno un limite
+  useEffect(() => {
+    if (loading) return;
+    GIOCHI.filter((g) => g.limiteGiornaliero).forEach((g) => {
+      leggiSecondiOggi(player, g.id).then((s) => setTempi((t) => ({ ...t, [g.id]: s })));
+    });
+  }, [loading, player]);
+
+  // Registra il tempo della partita appena conclusa/abbandonata
+  const chiudiCronometro = () => {
+    const g = giocoById(giocoId);
+    if (!g || !g.limiteGiornaliero || !inizioPartita.current) return;
+    const sec = (Date.now() - inizioPartita.current) / 1000;
+    inizioPartita.current = null;
+    setTempi((t) => ({ ...t, [g.id]: (t[g.id] || 0) + sec }));
+    aggiungiSecondi(player, g.id, sec).catch((e) => console.error("Tempo non salvato:", e));
+  };
   if (loading) return null;
 
   const gioco = giocoId ? giocoById(giocoId) : null;
 
   const avvia = (id) => {
+    const g = giocoById(id);
+    if (g.limiteGiornaliero && (tempi[id] || 0) >= g.limiteGiornaliero) { setBloccato(g); return; }
     setGiocoId(id); setVariante(null);
     setRisultato(null); setSalvato(false); setIstanza((n) => n + 1);
   };
-  const scegliVariante = (v) => { setVariante(v); setIstanza((n) => n + 1); };
-  const rigioca = () => { setIstanza((n) => n + 1); setRisultato(null); setSalvato(false); };
-  const tornaAiGiochi = () => { setGiocoId(null); setVariante(null); setRisultato(null); setSalvato(false); };
-  const finePartita = (value) => setRisultato({ value });
+  const scegliVariante = (v) => { setVariante(v); setIstanza((n) => n + 1); inizioPartita.current = Date.now(); };
+  const rigioca = () => {
+    chiudiCronometro();
+    const g = giocoById(giocoId);
+    if (g.limiteGiornaliero && (tempi[g.id] || 0) >= g.limiteGiornaliero) { setGiocoId(null); setVariante(null); setBloccato(g); return; }
+    inizioPartita.current = Date.now();
+    setIstanza((n) => n + 1); setRisultato(null); setSalvato(false);
+  };
+  const tornaAiGiochi = () => { chiudiCronometro(); setGiocoId(null); setVariante(null); setRisultato(null); setSalvato(false); };
+  const finePartita = (value) => { chiudiCronometro(); setRisultato({ value }); };
 
   const salva = async () => {
     try {
@@ -118,13 +150,28 @@ export default function Giochi() {
         <button onClick={() => setVistaClassifiche(true)} style={S.trofeo}>🏆 Punteggi</button>
       </div>
       <h1 style={S.titolo}>Giochi</h1>
+      {bloccato && (
+        <div style={S.overlay}>
+          <div style={S.card}>
+            <div style={S.mascotte}>😊</div>
+            <h2 style={S.bravo}>Per oggi basta!</h2>
+            <p style={S.sub}>Hai già giocato i tuoi <b>{Math.round(bloccato.limiteGiornaliero / 60)} minuti</b> a {bloccato.nome}. Domani si ricomincia!</p>
+            <button onClick={() => setBloccato(null)} style={S.primario}>Va bene</button>
+          </div>
+        </div>
+      )}
+
       <div style={S.griglia}>
-        {GIOCHI.map((g) => (
-          <button key={g.id} onClick={() => avvia(g.id)} style={S.tile}>
-            <span style={S.emoji}>{g.emoji}</span>
-            <span style={S.nomeGioco}>{g.nome}</span>
-          </button>
-        ))}
+        {GIOCHI.map((g) => {
+          const res = g.limiteGiornaliero ? Math.max(0, g.limiteGiornaliero - (tempi[g.id] || 0)) : null;
+          return (
+            <button key={g.id} onClick={() => avvia(g.id)} style={{ ...S.tile, opacity: res === 0 ? 0.5 : 1 }}>
+              <span style={S.emoji}>{g.emoji}</span>
+              <span style={S.nomeGioco}>{g.nome}</span>
+              {res !== null && <span style={S.tempo}>{res === 0 ? "per oggi basta 😊" : `⏱ ${mmss(res)} oggi`}</span>}
+            </button>
+          );
+        })}
       </div>
     </Sfondo>
   );
@@ -215,7 +262,7 @@ const tabStyle = (attivo) => ({
 const S = {
   bg: { minHeight: "100dvh", backgroundImage: "url('/famiglia.jpg')", backgroundSize: "cover", backgroundPosition: "center", position: "relative", fontFamily: "'Segoe UI', system-ui, sans-serif" },
   blur: { position: "absolute", inset: 0, backdropFilter: "blur(8px)", backgroundColor: "rgba(0,0,0,0.35)" },
-  fg: { position: "relative", zIndex: 1, maxWidth: 560, margin: "0 auto", padding: "20px 16px" },
+  fg: { position: "relative", zIndex: 1, maxWidth: 460, margin: "0 auto", padding: "20px 16px" },
   top: { display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 16 },
   back: { background: "rgba(255,255,255,0.9)", border: "none", borderRadius: 12, fontSize: 26, width: 46, height: 46, cursor: "pointer", color: "#8A5A16" },
   trofeo: { background: "rgba(255,255,255,0.9)", border: "none", borderRadius: 20, padding: "10px 16px", fontSize: 14, fontWeight: 700, cursor: "pointer", color: "#8A5A16" },
@@ -224,6 +271,7 @@ const S = {
   tile: { border: "none", cursor: "pointer", borderRadius: 22, padding: "26px 16px", display: "flex", flexDirection: "column", alignItems: "center", gap: 10, background: "linear-gradient(145deg,#FBEFD8,#F6D79A)", boxShadow: "0 6px 14px -6px rgba(0,0,0,.4)" },
   emoji: { fontSize: 46 },
   nomeGioco: { fontSize: 18, fontWeight: 700, color: "#8A5A16" },
+  tempo: { fontSize: 12, fontWeight: 700, color: "#B08A4E" },
   listaDiff: { display: "flex", flexDirection: "column", gap: 12 },
   diff: { border: "none", cursor: "pointer", borderRadius: 18, padding: "18px 20px", display: "flex", justifyContent: "space-between", alignItems: "center", background: "linear-gradient(145deg,#FBEFD8,#F6D79A)", boxShadow: "0 4px 12px -6px rgba(0,0,0,.4)" },
   diffLabel: { fontSize: 20, fontWeight: 700, color: "#8A5A16" },

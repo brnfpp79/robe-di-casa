@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Sfondo, { ui } from "./Sfondo";
+import { useCronometro } from "../hooks/useCronometro";
 
 /* =========================================================================
    COSTRUISCI LA PAROLA — metodo fonetico sillabico.
@@ -38,6 +39,7 @@ function costruisciTessere(sillabe) {
 const prossima = (cur) => { const alt = PAROLE.filter((p) => p.parola !== cur?.parola); return alt[Math.floor(Math.random()*alt.length)]; };
 
 export default function CostruisciParola({ onEsci }) {
+  useCronometro("parola");
   const [parola, setParola] = useState(() => PAROLE[Math.floor(Math.random()*PAROLE.length)]);
   const [posizioni, setPosizioni] = useState(() => Array(parola.sillabe.length).fill(null));
   const [tessere, setTessere] = useState(() => costruisciTessere(parola.sillabe));
@@ -55,7 +57,8 @@ export default function CostruisciParola({ onEsci }) {
 
   const tapTessera = (t) => {
     if (completata) return;
-    if (t.usata) { suona(t.sill); return; }
+    suona(t.sill);                 // ogni tocco pronuncia la sillaba
+    if (t.usata) return;
     const idx = posizioni.findIndex((p) => p === null);
     if (idx === -1) return;
 
@@ -64,17 +67,13 @@ export default function CostruisciParola({ onEsci }) {
       setPosizioni(nuovePos);
       setTessere(tessere.map((x) => (x.id === t.id ? { ...x, usata: true } : x)));
       if (nuovePos.every((p) => p !== null)) {
-        // Parola completa: NON suono il tocco singolo, rileggo tutta la parola.
         setCompletata(true);
         setFatte((f) => f + 1);
-        parola.sillabe.forEach((s, i) => setTimeout(() => suona(s), 250 + i * 600));
-      } else {
-        suona(t.sill);                             // aggancio intermedio: suona il tocco
+        parola.sillabe.forEach((s, i) => setTimeout(() => suona(s), 400 + i * 650));
       }
-    } else {
-      suona(t.sill);                               // sbagliata: sente comunque la sillaba
+    } else {                                       // sbagliata: non si aggancia
       setShakeId(t.id);
-      setTimeout(() => setShakeId(null), 350);
+      setTimeout(() => setShakeId(null), 450);
     }
   };
 
@@ -149,12 +148,12 @@ export default function CostruisciParola({ onEsci }) {
 
 const S = {
   badge: { display: "flex", alignItems: "center", background: "rgba(255,255,255,0.9)", borderRadius: 20, padding: "8px 16px", fontSize: 14, fontWeight: 700, color: "#8A5A16" },
-  card: { background: "#fff", borderRadius: 26, padding: "28px 20px", maxWidth: 500, margin: "0 auto", textAlign: "center", boxShadow: "0 12px 34px -14px rgba(0,0,0,.5)" },
-  emoji: { fontSize: 130, lineHeight: 1, marginBottom: 20 },
+  card: { background: "#fff", borderRadius: 26, padding: "28px 20px", maxWidth: 380, margin: "0 auto", textAlign: "center", boxShadow: "0 12px 34px -14px rgba(0,0,0,.5)" },
+  emoji: { fontSize: 96, lineHeight: 1, marginBottom: 20 },
   slots: { display: "flex", justifyContent: "center", gap: 10, marginBottom: 24 },
-  slot: { width: 92, height: 92, border: "3px solid", borderRadius: 16, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 38, fontWeight: 800, color: "#8A5A16" },
+  slot: { width: 76, height: 76, border: "3px solid", borderRadius: 16, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 32, fontWeight: 800, color: "#8A5A16" },
   tessere: { display: "flex", flexWrap: "wrap", justifyContent: "center", gap: 12 },
-  tessera: { minWidth: 80, height: 80, padding: "0 14px", borderRadius: 16, border: "none", cursor: "pointer", fontSize: 34, fontWeight: 800, color: "#3B352A", background: "linear-gradient(145deg,#FBEFD8,#F6D79A)", boxShadow: "0 4px 0 #E4C97F" },
+  tessera: { minWidth: 64, height: 64, padding: "0 14px", borderRadius: 16, border: "none", cursor: "pointer", fontSize: 28, fontWeight: 800, color: "#3B352A", background: "linear-gradient(145deg,#FBEFD8,#F6D79A)", boxShadow: "0 4px 0 #E4C97F" },
   successo: { display: "flex", flexDirection: "column", alignItems: "center", gap: 14 },
   primario: { background: "linear-gradient(145deg,#7ED09A,#5BBE7A)", color: "#fff", border: "none", borderRadius: 14, padding: "13px 28px", fontSize: 18, fontWeight: 700, cursor: "pointer" },
 };

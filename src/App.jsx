@@ -16,6 +16,7 @@ import Placeholder from "./pages/Placeholder"
 import Giochi from "./pages/Giochi"
 import Compiti from "./pages/Compiti"
 import Risparmi from "./pages/Risparmi"
+import Attivita from "./pages/Attivita"
 
 
 function Layout() {
@@ -66,6 +67,7 @@ useEffect(() => {
       <Route path="/ricette/:id" element={<Ricette />} />
       <Route path="/giochi" element={<Giochi />} />
       <Route path="/compiti" element={<Compiti />} />
+      <Route path="/attivita" element={<Attivita />} />
     </Routes>
   </div>
 )

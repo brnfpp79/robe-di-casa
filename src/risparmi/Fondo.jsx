@@ -1,30 +1,59 @@
 import { useState, useEffect } from "react";
-import { leggiMovimenti, aggiungiMovimento, eliminaMovimento, euro, oggi, dataIt } from "./movimenti";
+import { leggiMovimenti, aggiungiMovimento, eliminaMovimento, leggiLiquidita, salvaLiquidita, leggiBtc, salvaBtc, euro, eurDec, oggi, dataIt } from "./movimenti";
+import { prezzoBtcEur } from "./btc";
 
 /* =========================================================================
-   FONDO — vista adulti per un cassetto di risparmio (università, famiglia,
-   fil, vale). Lista unica di movimenti + totali separati per categoria.
-
-   Due totali che NON mentono:
-     Versato finora     → somma di tutti gli importi (dato certo)
-     Valore atteso 2038 → somma dei valori a scadenza dei soli buoni Posta,
-                          dichiarati a mano. Il sistema non proietta nulla.
+   FONDO — vista adulti di un cassetto di risparmio.
+   Totali onesti: "Versato finora" (certo) e "Valore atteso 2038" (solo buoni
+   postali, dichiarato a mano). Il sistema non proietta nulla.
+   Conto deposito: si annotano anche banca e tasso di interesse.
    ========================================================================= */
 
 export const CATEGORIE = [
-  { id: "posta",    nome: "Posta",         emoji: "📮", scadenza: true },
-  { id: "etf",      nome: "ETF",           emoji: "📈" },
-  { id: "deposito", nome: "Conto deposito", emoji: "🏦" },
-  { id: "oro",      nome: "Oro",           emoji: "🪙" },
+  { id: "posta",    nome: "Posta",          emoji: "📮", scadenza: true },
+  { id: "etf",      nome: "ETF",            emoji: "📈" },
+  { id: "deposito", nome: "Conto deposito", emoji: "🏦", banca: true },
+  { id: "oro",      nome: "Oro",            emoji: "🪙" },
 ];
 const catById = (id) => CATEGORIE.find((c) => c.id === id) || CATEGORIE[0];
 
-export default function Fondo({ scope, titolo, mostraScadenza, onEsci }) {
+const BANCHE = [
+  { id: "bbva",     nome: "BBVA" },
+  { id: "revolut",  nome: "Revolut" },
+];
+const bancaNome = (id) => (BANCHE.find((b) => b.id === id) || {}).nome || "";
+
+export default function Fondo({ scope, titolo, mostraScadenza, mostraBtc, onEsci }) {
   const [movs, setMovs] = useState(null);
   const [form, setForm] = useState(false);
+  const [liquidita, setLiquidita] = useState(null);
+  const [editLiq, setEditLiq] = useState(false);
+  const [btc, setBtc] = useState(null);
+  const [editBtc, setEditBtc] = useState(false);
+  const [prezzoBtc, setPrezzoBtc] = useState(null);   // null = non ancora, 0 = errore
 
-  const carica = () => leggiMovimenti(scope).then(setMovs).catch((e) => { console.error(e); setMovs([]); });
+  const carica = () => {
+    leggiMovimenti(scope).then(setMovs).catch((e) => { console.error(e); setMovs([]); });
+    leggiLiquidita(scope).then(setLiquidita).catch((e) => { console.error(e); setLiquidita(0); });
+    if (mostraBtc) {
+      leggiBtc(scope).then(setBtc).catch((e) => { console.error(e); setBtc(0); });
+      caricaPrezzo();
+    }
+  };
+  const caricaPrezzo = () => {
+    setPrezzoBtc(null);
+    prezzoBtcEur().then(setPrezzoBtc).catch((e) => { console.error("Prezzo BTC:", e); setPrezzoBtc(0); });
+  };
   useEffect(() => { carica(); /* eslint-disable-next-line */ }, [scope]);
+
+  const aggiornaLiquidita = async (v) => {
+    setLiquidita(v); setEditLiq(false);
+    try { await salvaLiquidita(scope, v); } catch (e) { console.error("Liquidità non salvata:", e); }
+  };
+  const aggiornaBtc = async (v) => {
+    setBtc(v); setEditBtc(false);
+    try { await salvaBtc(scope, v); } catch (e) { console.error("BTC non salvato:", e); }
+  };
 
   const versato = (movs || []).reduce((s, m) => s + (m.importo || 0), 0);
   const atteso  = (movs || []).reduce((s, m) => s + (m.valoreScadenza || 0), 0);
@@ -51,6 +80,26 @@ export default function Fondo({ scope, titolo, mostraScadenza, onEsci }) {
           <span style={S.totLbl}>Versato finora</span>
           <span style={S.totVal}>{euro(versato)}</span>
         </div>
+
+        <div style={{ ...S.totBox, ...S.totClic }} onClick={() => setEditLiq(true)}>
+          <span style={S.totLbl}>Liquidità attuale ✎</span>
+          <span style={{ ...S.totVal, color: "#8A5A16" }}>{liquidita === null ? "…" : euro(liquidita)}</span>
+          <span style={S.totNota}>aggiornala a mano</span>
+        </div>
+
+        {mostraBtc && (
+          <div style={{ ...S.totBox, ...S.totBtc }}>
+            <span style={S.totLbl} onClick={() => setEditBtc(true)}>Bitcoin ✎</span>
+            <span style={{ ...S.totVal, color: "#E08A1E" }} onClick={() => setEditBtc(true)}>
+              {btc === null ? "…" : `₿ ${btc}`}
+            </span>
+            <span style={S.totNota}>
+              {prezzoBtc === null ? "carico prezzo…"
+                : prezzoBtc === 0 ? "controvalore non disponibile"
+                : <>≈ {eurDec((btc || 0) * prezzoBtc)} <span onClick={caricaPrezzo} style={S.refresh}>⟳</span></>}
+            </span>
+          </div>
+        )}
         {mostraScadenza && (
           <div style={{ ...S.totBox, background: "#EAF3EE" }}>
             <span style={S.totLbl}>Valore atteso 2038</span>
@@ -78,11 +127,15 @@ export default function Fondo({ scope, titolo, mostraScadenza, onEsci }) {
         <div style={S.lista}>
           {movs.map((m) => {
             const c = catById(m.categoria);
+            const extra = [
+              m.banca ? bancaNome(m.banca) : null,
+              m.tasso ? `${String(m.tasso).replace(".", ",")}%` : null,
+            ].filter(Boolean).join(" · ");
             return (
               <div key={m.id} style={S.riga}>
                 <span style={S.rEmoji}>{c.emoji}</span>
                 <div style={{ flex: 1 }}>
-                  <div style={S.rCat}>{c.nome}</div>
+                  <div style={S.rCat}>{c.nome}{extra ? <span style={S.rExtra}> · {extra}</span> : null}</div>
                   <div style={S.rData}>{dataIt(m.data)}</div>
                 </div>
                 <div style={{ textAlign: "right" }}>
@@ -97,7 +150,50 @@ export default function Fondo({ scope, titolo, mostraScadenza, onEsci }) {
       )}
 
       {form && <FormVersamento onSalva={salva} onAnnulla={() => setForm(false)} />}
+      {editLiq && <FormLiquidita valore={liquidita || 0} onSalva={aggiornaLiquidita} onAnnulla={() => setEditLiq(false)} />}
+      {editBtc && <FormBtc valore={btc || 0} prezzo={prezzoBtc} onSalva={aggiornaBtc} onAnnulla={() => setEditBtc(false)} />}
     </>
+  );
+}
+
+function FormBtc({ valore, prezzo, onSalva, onAnnulla }) {
+  const [v, setV] = useState(valore ? String(valore) : "");
+  const q = parseFloat(String(v).replace(",", ".")) || 0;
+  const conferma = () => onSalva(q < 0 ? 0 : q);
+  return (
+    <div style={S.overlay}>
+      <div style={S.dialog}>
+        <h2 style={S.dTit}>Quanti Bitcoin</h2>
+        <p style={S.dNota}>Inserisci la quantità di BTC che possiedi (es. 0,05). Il controvalore in euro è calcolato sul prezzo attuale, non salvato.</p>
+        <label style={S.lbl}>Quantità (BTC)</label>
+        <input type="number" inputMode="decimal" step="0.00000001" value={v} autoFocus
+          onChange={(e) => setV(e.target.value)} style={S.input} placeholder="0" />
+        {prezzo > 0 && <p style={S.dNota}>≈ {eurDec(q * prezzo)} al prezzo di ora</p>}
+        <button onClick={conferma} style={S.dOk}>Salva</button>
+        <button onClick={onAnnulla} style={S.dNo}>Annulla</button>
+      </div>
+    </div>
+  );
+}
+
+function FormLiquidita({ valore, onSalva, onAnnulla }) {
+  const [v, setV] = useState(valore ? String(valore) : "");
+  const conferma = () => {
+    const n = parseFloat(String(v).replace(",", "."));
+    onSalva(isNaN(n) || n < 0 ? 0 : n);
+  };
+  return (
+    <div style={S.overlay}>
+      <div style={S.dialog}>
+        <h2 style={S.dTit}>Liquidità attuale</h2>
+        <p style={S.dNota}>Quanto vale oggi questo fondo. È una fotografia che aggiorni tu: non viene calcolata dai versamenti.</p>
+        <label style={S.lbl}>Valore (€)</label>
+        <input type="number" inputMode="decimal" value={v} autoFocus
+          onChange={(e) => setV(e.target.value)} style={S.input} placeholder="0" />
+        <button onClick={conferma} style={S.dOk}>Salva</button>
+        <button onClick={onAnnulla} style={S.dNo}>Annulla</button>
+      </div>
+    </div>
   );
 }
 
@@ -106,13 +202,21 @@ function FormVersamento({ onSalva, onAnnulla }) {
   const [categoria, setCategoria] = useState("posta");
   const [importo, setImporto] = useState("");
   const [scad, setScad] = useState("");
+  const [banca, setBanca] = useState("bbva");
+  const [tasso, setTasso] = useState("");
   const cat = catById(categoria);
 
   const conferma = () => {
     const imp = parseFloat(String(importo).replace(",", "."));
     if (!imp || imp <= 0) return;
     const sc = parseFloat(String(scad).replace(",", "."));
-    onSalva({ data, categoria, importo: imp, valoreScadenza: cat.scadenza && sc > 0 ? sc : null });
+    const tx = parseFloat(String(tasso).replace(",", "."));
+    onSalva({
+      data, categoria, importo: imp,
+      valoreScadenza: cat.scadenza && sc > 0 ? sc : null,
+      banca: cat.banca ? banca : null,
+      tasso: cat.banca && tx > 0 ? tx : null,
+    });
   };
 
   return (
@@ -132,12 +236,29 @@ function FormVersamento({ onSalva, onAnnulla }) {
         </div>
 
         <label style={S.lbl}>Importo versato (€)</label>
-        <input type="number" inputMode="decimal" value={importo} onChange={(e) => setImporto(e.target.value)} style={S.input} placeholder="0" />
+        <input type="number" inputMode="decimal" value={importo}
+          onChange={(e) => setImporto(e.target.value)} style={S.input} placeholder="0" />
 
         {cat.scadenza && (
           <>
             <label style={S.lbl}>Valore a scadenza 2038 (€)</label>
-            <input type="number" inputMode="decimal" value={scad} onChange={(e) => setScad(e.target.value)} style={S.input} placeholder="quanto varrà" />
+            <input type="number" inputMode="decimal" value={scad}
+              onChange={(e) => setScad(e.target.value)} style={S.input} placeholder="quanto varrà" />
+          </>
+        )}
+
+        {cat.banca && (
+          <>
+            <label style={S.lbl}>Banca</label>
+            <div style={S.bancaRow}>
+              {BANCHE.map((b) => (
+                <button key={b.id} onClick={() => setBanca(b.id)}
+                  style={{ ...S.bancaBtn, ...(banca === b.id ? S.catOn : {}) }}>{b.nome}</button>
+              ))}
+            </div>
+            <label style={S.lbl}>Interessi (%)</label>
+            <input type="number" inputMode="decimal" step="0.01" value={tasso}
+              onChange={(e) => setTasso(e.target.value)} style={S.input} placeholder="es. 3,5" />
           </>
         )}
 
@@ -151,12 +272,24 @@ function FormVersamento({ onSalva, onAnnulla }) {
   );
 }
 
+/* Campi di input: forzo tema chiaro, altrimenti il dark mode di Android
+   inverte lo sfondo e il testo diventa illeggibile. */
+const campo = {
+  width: "100%", boxSizing: "border-box", padding: "12px 14px", fontSize: 17,
+  borderRadius: 12, border: "2px solid #E6DCC4", marginBottom: 14,
+  fontWeight: 600, color: "#23201b", background: "#fff", colorScheme: "light",
+  WebkitTextFillColor: "#23201b",
+};
+
 const S = {
   top: { display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 18 },
   back: { background: "rgba(255,255,255,0.9)", border: "none", borderRadius: 12, fontSize: 26, width: 46, height: 46, cursor: "pointer", color: "#1F4A46" },
   titolo: { color: "#fff", fontSize: 20, fontWeight: 700 },
-  totali: { display: "flex", gap: 10, marginBottom: 14 },
-  totBox: { flex: 1, background: "#fff", borderRadius: 16, padding: "14px 16px", display: "flex", flexDirection: "column", gap: 2 },
+  totali: { display: "flex", gap: 10, marginBottom: 14, flexWrap: "wrap" },
+  totBox: { flex: "1 1 150px", background: "#fff", borderRadius: 16, padding: "14px 16px", display: "flex", flexDirection: "column", gap: 2 },
+  totClic: { cursor: "pointer", background: "#FDF6E7", border: "2px solid #EFC873" },
+  totBtc: { background: "#FFF4E2", border: "2px solid #F2B84B" },
+  refresh: { cursor: "pointer", marginLeft: 4, color: "#E08A1E", fontWeight: 800 },
   totLbl: { fontSize: 11, textTransform: "uppercase", letterSpacing: ".05em", color: "#9a917f", fontWeight: 700 },
   totVal: { fontSize: 24, fontWeight: 800, color: "#1F4A46" },
   totNota: { fontSize: 10, color: "#9a917f" },
@@ -168,18 +301,22 @@ const S = {
   riga: { display: "flex", alignItems: "center", gap: 12, background: "rgba(255,255,255,0.93)", borderRadius: 14, padding: "12px 14px" },
   rEmoji: { fontSize: 24 },
   rCat: { fontWeight: 700, color: "#3B352A", fontSize: 15 },
+  rExtra: { fontWeight: 600, color: "#5C7C77", fontSize: 13 },
   rData: { fontSize: 12, color: "#9a917f" },
   rImp: { fontWeight: 800, color: "#1F4A46", fontSize: 16 },
   rScad: { fontSize: 12, color: "#2E7D52", fontWeight: 700 },
   rDel: { background: "none", border: "none", color: "#c9bfac", fontSize: 22, cursor: "pointer", padding: "0 4px" },
   overlay: { position: "fixed", inset: 0, background: "rgba(0,0,0,0.55)", display: "grid", placeItems: "center", zIndex: 20, padding: 20, overflowY: "auto" },
-  dialog: { background: "#fff", borderRadius: 24, padding: "24px 22px", maxWidth: 420, width: "100%", boxShadow: "0 20px 50px -12px rgba(0,0,0,.5)" },
+  dialog: { background: "#fff", borderRadius: 24, padding: "24px 22px", maxWidth: 420, width: "100%", boxShadow: "0 20px 50px -12px rgba(0,0,0,.5)", colorScheme: "light" },
   dTit: { margin: "0 0 16px", fontSize: 22, color: "#1F4A46", textAlign: "center" },
+  dNota: { margin: "-8px 0 16px", fontSize: 13, color: "#9a917f", textAlign: "center", lineHeight: 1.45 },
   lbl: { display: "block", fontSize: 12, color: "#9a917f", fontWeight: 700, textTransform: "uppercase", letterSpacing: ".04em", marginBottom: 6 },
   catGrid: { display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 8, marginBottom: 14 },
   catBtn: { border: "2px solid #E6DCC4", background: "#FAF7F0", borderRadius: 14, padding: "10px 4px", cursor: "pointer", display: "flex", flexDirection: "column", alignItems: "center", gap: 4, color: "#3B352A" },
   catOn: { borderColor: "#1F4A46", background: "#E4ECEA" },
-  input: { width: "100%", boxSizing: "border-box", padding: "12px 14px", fontSize: 17, borderRadius: 12, border: "2px solid #E6DCC4", marginBottom: 14, fontWeight: 600, color: "#3B352A" },
+  bancaRow: { display: "flex", gap: 8, marginBottom: 14 },
+  bancaBtn: { flex: 1, border: "2px solid #E6DCC4", background: "#FAF7F0", borderRadius: 12, padding: "12px 8px", cursor: "pointer", fontSize: 15, fontWeight: 700, color: "#3B352A" },
+  input: campo,
   dOk: { width: "100%", background: "linear-gradient(145deg,#3E7F79,#1F4A46)", color: "#fff", border: "none", borderRadius: 14, padding: "13px", fontSize: 16, fontWeight: 700, cursor: "pointer", marginBottom: 8 },
   dNo: { width: "100%", background: "none", border: "none", color: "#9a917f", padding: "8px", fontSize: 14, cursor: "pointer" },
 };

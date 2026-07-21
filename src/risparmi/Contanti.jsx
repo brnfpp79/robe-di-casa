@@ -92,11 +92,18 @@ export default function Contanti({ onEsci }) {
 function FormSoldi({ tipo, onSalva, onAnnulla }) {
   const cats = tipo === "in" ? ENTRATE : USCITE;
   const [categoria, setCategoria] = useState(cats[0].id);
-  const [cifre, setCifre] = useState("");
+  const [testo, setTesto] = useState("");   // come su una calcolatrice: es. "5,50"
 
-  const valore = cifre === "" ? 0 : parseInt(cifre, 10) / 100;   // centesimi
-  const digita = (d) => setCifre((c) => (c + d).slice(0, 6));
-  const cancella = () => setCifre((c) => c.slice(0, -1));
+  const valore = testo === "" ? 0 : parseFloat(testo.replace(",", ".")) || 0;
+
+  const digita = (d) => setTesto((t) => {
+    if (t.length >= 7) return t;                         // limite ragionevole
+    if (t.includes(",") && t.split(",")[1].length >= 2) return t;  // max 2 decimali
+    if (t === "0" && d !== ",") return d;                // niente zeri iniziali
+    return t + d;
+  });
+  const virgola = () => setTesto((t) => (t.includes(",") ? t : (t === "" ? "0," : t + ",")));
+  const cancella = () => setTesto((t) => t.slice(0, -1));
   const conferma = () => { if (valore > 0) onSalva({ data: oggi(), importo: valore, categoria, tipo }); };
 
   return (
@@ -114,16 +121,17 @@ function FormSoldi({ tipo, onSalva, onAnnulla }) {
           ))}
         </div>
 
-        <div style={S.display}>{euro(valore)}</div>
+        <div style={S.display}>{testo === "" ? "0" : testo} €</div>
 
         <div style={S.tastierino}>
           {[1,2,3,4,5,6,7,8,9].map((n) => (
             <button key={n} onClick={() => digita(String(n))} style={S.tasto}>{n}</button>
           ))}
-          <button onClick={cancella} style={{ ...S.tasto, ...S.tastoAz }}>⌫</button>
+          <button onClick={virgola} style={{ ...S.tasto, ...S.tastoVir }}>,</button>
           <button onClick={() => digita("0")} style={S.tasto}>0</button>
-          <button onClick={conferma} style={{ ...S.tasto, ...S.tastoOk }}>✓</button>
+          <button onClick={cancella} style={{ ...S.tasto, ...S.tastoAz }}>⌫</button>
         </div>
+        <button onClick={conferma} style={S.conferma}>✓ Salva</button>
 
         <button onClick={onAnnulla} style={S.dNo}>Annulla</button>
       </div>
@@ -156,6 +164,7 @@ const S = {
   tastierino: { display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 10, marginBottom: 10 },
   tasto: { height: 70, borderRadius: 14, border: "none", cursor: "pointer", fontSize: 30, fontWeight: 800, color: "#3B352A", background: "#F0EBE1", boxShadow: "0 3px 0 #DcD3C2" },
   tastoAz: { background: "#F3D9D9", color: "#C0574F" },
-  tastoOk: { background: "linear-gradient(145deg,#7ED09A,#5BBE7A)", color: "#fff" },
+  tastoVir: { background: "#EFE6D2", color: "#8A5A16" },
+  conferma: { width: "100%", background: "linear-gradient(145deg,#7ED09A,#5BBE7A)", color: "#fff", border: "none", borderRadius: 14, padding: "15px", fontSize: 20, fontWeight: 800, cursor: "pointer", marginBottom: 10 },
   dNo: { width: "100%", background: "none", border: "none", color: "#9a917f", padding: "8px", fontSize: 14, cursor: "pointer" },
 };

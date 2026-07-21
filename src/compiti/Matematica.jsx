@@ -1,7 +1,8 @@
 import { useState, useEffect, useRef } from "react";
 import { useUserProfile } from "../hooks/useUserProfile";
-import { leggiStato, aggiungiGettoni, salvaLivello, salvaLivelloMax } from "./gettoni";
+import { leggiStato, aggiungiGettoni, salvaLivello, salvaLivelloMax, salvaDiagMate } from "./gettoni";
 import Sfondo, { ui } from "./Sfondo";
+import { useCronometro } from "../hooks/useCronometro";
 
 /* =========================================================================
    MATEMATICA — esercizio AUTONOMO: carica da sé gettoni e livelli, mostra i
@@ -26,6 +27,7 @@ function nuovaDomanda(max) {
 const COLORI = { a: "#4D8FD6", b: "#E8A13C", op: "#B368C8", ris: "#5BBE7A" };
 
 export default function Matematica({ onEsci }) {
+  useCronometro("matematica");
   const { profileId, loading } = useUserProfile();
   const player = profileId || "guest";
 
@@ -33,13 +35,27 @@ export default function Matematica({ onEsci }) {
   const [corrente, setCorrente] = useState(null);
   const [livelloMax, setLivelloMax] = useState(null);
   const gettoniRef = useRef(0);
+  const diagRef = useRef({});
+  const daSalvareDiag = useRef(0);
+
+  const registraTentativo = (primoColpo) => {
+    const d = diagRef.current;
+    d.risolte = (d.risolte || 0) + 1;
+    if (primoColpo) d.primoColpo = (d.primoColpo || 0) + 1;
+    diagRef.current = { ...d };
+    if (++daSalvareDiag.current >= 5) {
+      daSalvareDiag.current = 0;
+      salvaDiagMate(player, diagRef.current).catch((e) => console.error("Diag mate:", e));
+    }
+  };
 
   useEffect(() => {
     if (loading) return;
     leggiStato(player)
-      .then(({ count, livello, livelloMax }) => {
+      .then(({ count, livello, livelloMax, diag }) => {
         gettoniRef.current = count; setGettoni(count);
         setCorrente(livello); setLivelloMax(livelloMax);
+        diagRef.current = diag || {};
       })
       .catch((e) => { console.error(e); gettoniRef.current = 0; setGettoni(0); setCorrente(2); setLivelloMax(2); });
   }, [loading, player]);
@@ -76,20 +92,21 @@ export default function Matematica({ onEsci }) {
       </div>
       <h1 style={ui.title}>Matematica</h1>
       {pronto
-        ? <Esercizio livello={corrente} livelloMax={livelloMax} onPremio={premia} onCorrente={onCorrente} onNuovoMax={onNuovoMax} />
+        ? <Esercizio livello={corrente} livelloMax={livelloMax} onPremio={premia} onCorrente={onCorrente} onNuovoMax={onNuovoMax} onTentativo={registraTentativo} />
         : <p style={{ color: "rgba(255,255,255,0.85)", textAlign: "center" }}>Un attimo…</p>}
     </Sfondo>
   );
 }
 
 /* --- Il cuore dell'esercizio (logica invariata) --- */
-function Esercizio({ livello, livelloMax, onPremio, onCorrente, onNuovoMax }) {
+function Esercizio({ livello, livelloMax, onPremio, onCorrente, onNuovoMax, onTentativo }) {
   const [dom, setDom] = useState(() => nuovaDomanda(maxFor(livello)));
   const [risp, setRisp] = useState("");
   const [stato, setStato] = useState("gioca");
   const [giusti, setGiusti] = useState(0);
   const [sbagliati, setSbagliati] = useState(0);
   const [celebra, setCelebra] = useState(null);
+  const erratiSuQuesta = useRef(0);
 
   const digita = (d) => {
     if (stato !== "gioca" || risp.length >= 3) return;
@@ -100,6 +117,8 @@ function Esercizio({ livello, livelloMax, onPremio, onCorrente, onNuovoMax }) {
   const conferma = () => {
     if (stato !== "gioca" || risp === "") return;
     if (parseInt(risp, 10) === dom.ris) {
+      onTentativo?.(erratiSuQuesta.current === 0);
+      erratiSuQuesta.current = 0;
       onPremio?.(1);
       setStato("giusto");
       const g = giusti + 1;
@@ -124,6 +143,7 @@ function Esercizio({ livello, livelloMax, onPremio, onCorrente, onNuovoMax }) {
         }
       }, 1300);
     } else {
+      erratiSuQuesta.current += 1;
       setStato("sbagliato");
       const s = sbagliati + 1;
       setTimeout(() => {
@@ -196,14 +216,14 @@ const S = {
   conta: { fontSize: 20, fontWeight: 800, color: "#B8860B" },
   livLbl: { fontSize: 11, textTransform: "uppercase", color: "#9a917f", fontWeight: 700, letterSpacing: ".05em" },
   livVal: { fontSize: 20, fontWeight: 800, color: "#8A5A16" },
-  card: { background: "#fff", borderRadius: 26, padding: "24px 20px", maxWidth: 480, margin: "0 auto", textAlign: "center", boxShadow: "0 12px 34px -14px rgba(0,0,0,.5)" },
+  card: { background: "#fff", borderRadius: 26, padding: "24px 20px", maxWidth: 360, margin: "0 auto", textAlign: "center", boxShadow: "0 12px 34px -14px rgba(0,0,0,.5)" },
   titolo: { margin: "6px 0", fontSize: 28, color: "#8A5A16" },
   sub: { color: "#6d665a", fontSize: 16, marginBottom: 18 },
-  equazione: { display: "flex", alignItems: "center", justifyContent: "center", gap: 10, fontSize: 60, fontWeight: 800, marginBottom: 6, flexWrap: "wrap" },
-  risposta: { minWidth: 88, height: 78, padding: "0 8px", border: "3px solid", borderRadius: 14, display: "inline-flex", alignItems: "center", justifyContent: "center", background: "#FAF7F0" },
+  equazione: { display: "flex", alignItems: "center", justifyContent: "center", gap: 10, fontSize: 50, fontWeight: 800, marginBottom: 6, flexWrap: "wrap" },
+  risposta: { minWidth: 72, height: 64, padding: "0 8px", border: "3px solid", borderRadius: 14, display: "inline-flex", alignItems: "center", justifyContent: "center", background: "#FAF7F0" },
   feedback: { height: 40, fontSize: 30, fontWeight: 800, margin: "6px 0 14px", display: "flex", alignItems: "center", justifyContent: "center" },
   tastierino: { display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 10 },
-  tasto: { height: 76, borderRadius: 14, border: "none", cursor: "pointer", fontSize: 32, fontWeight: 800, color: "#3B352A", background: "#F0EBE1", boxShadow: "0 3px 0 #DcD3C2" },
+  tasto: { height: 60, borderRadius: 14, border: "none", cursor: "pointer", fontSize: 26, fontWeight: 800, color: "#3B352A", background: "#F0EBE1", boxShadow: "0 3px 0 #DcD3C2" },
   tastoAz: { background: "#F3D9D9", color: "#C0574F" },
   tastoOk: { background: "linear-gradient(145deg,#7ED09A,#5BBE7A)", color: "#fff" },
   primario: { background: "linear-gradient(145deg,#E8A13C,#D98A1E)", color: "#fff", border: "none", borderRadius: 14, padding: "13px 28px", fontSize: 18, fontWeight: 700, cursor: "pointer" },
