@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { leggiMovimenti, aggiungiMovimento, eliminaMovimento, leggiLiquidita, salvaLiquidita, leggiBtc, salvaBtc, euro, eurDec, oggi, dataIt } from "./movimenti";
 import { prezzoBtcEur } from "./btc";
+import { leggiMediaSpeseMensile, calcolaAutonomia, calcolaEta } from "./pensione";
 
 /* =========================================================================
    FONDO — vista adulti di un cassetto di risparmio.
@@ -23,7 +24,7 @@ const BANCHE = [
 ];
 const bancaNome = (id) => (BANCHE.find((b) => b.id === id) || {}).nome || "";
 
-export default function Fondo({ scope, titolo, mostraScadenza, mostraBtc, onEsci }) {
+export default function Fondo({ scope, titolo, mostraScadenza, mostraBtc, dataNascita, onEsci }) {
   const [movs, setMovs] = useState(null);
   const [form, setForm] = useState(false);
   const [liquidita, setLiquidita] = useState(null);
@@ -31,6 +32,7 @@ export default function Fondo({ scope, titolo, mostraScadenza, mostraBtc, onEsci
   const [btc, setBtc] = useState(null);
   const [editBtc, setEditBtc] = useState(false);
   const [prezzoBtc, setPrezzoBtc] = useState(null);   // null = non ancora, 0 = errore
+  const [pensione, setPensione] = useState(null);      // null finché non calcolato
 
   const carica = () => {
     leggiMovimenti(scope).then(setMovs).catch((e) => { console.error(e); setMovs([]); });
@@ -45,6 +47,11 @@ export default function Fondo({ scope, titolo, mostraScadenza, mostraBtc, onEsci
     prezzoBtcEur().then(setPrezzoBtc).catch((e) => { console.error("Prezzo BTC:", e); setPrezzoBtc(0); });
   };
   useEffect(() => { carica(); /* eslint-disable-next-line */ }, [scope]);
+
+  useEffect(() => {
+    if (!dataNascita) return;
+    leggiMediaSpeseMensile().then((r) => setPensione({ loading: false, ...r })).catch((e) => { console.error("Spese:", e); setPensione({ loading: false, media: 0, mesiConDati: 0 }); });
+  }, [dataNascita]);
 
   const aggiornaLiquidita = async (v) => {
     setLiquidita(v); setEditLiq(false);
@@ -117,6 +124,18 @@ export default function Fondo({ scope, titolo, mostraScadenza, mostraBtc, onEsci
         </div>
       )}
 
+      {dataNascita && (
+        <PensioneBox
+          pensione={pensione}
+          fondiInput={{
+            liquidita: liquidita || 0,
+            versato,
+            btcEur: mostraBtc && prezzoBtc > 0 ? (btc || 0) * prezzoBtc : 0,
+            etaAttuale: calcolaEta(dataNascita),
+          }}
+        />
+      )}
+
       <button onClick={() => setForm(true)} style={S.aggiungi}>+ Aggiungi versamento</button>
 
       {movs === null ? (
@@ -171,6 +190,56 @@ function FormBtc({ valore, prezzo, onSalva, onAnnulla }) {
         {prezzo > 0 && <p style={S.dNota}>≈ {eurDec(q * prezzo)} al prezzo di ora</p>}
         <button onClick={conferma} style={S.dOk}>Salva</button>
         <button onClick={onAnnulla} style={S.dNo}>Annulla</button>
+      </div>
+    </div>
+  );
+}
+
+function PensioneBox({ pensione, fondiInput }) {
+  if (!pensione || pensione.loading === undefined) {
+    return <div style={S.pensBox}><p style={S.pensCarico}>Calcolo l'autonomia finanziaria…</p></div>;
+  }
+  if (pensione.mesiConDati === 0) {
+    return (
+      <div style={S.pensBox}>
+        <p style={S.pensCarico}>Ancora nessuna spesa registrata: non riesco a stimare una media mensile.</p>
+      </div>
+    );
+  }
+
+  const r = calcolaAutonomia({ mediaSpese: pensione.media, ...fondiInput });
+  const etaTonda = Math.floor(r.etaUscita);
+  const meseFraz = Math.round((r.etaUscita - etaTonda) * 12);
+
+  return (
+    <div style={S.pensBox}>
+      <div style={S.pensHead}>
+        <span style={S.pensTitolo}>🎯 Quando puoi smettere di lavorare?</span>
+        <span style={S.pensBadge}>gioco, non un piano</span>
+      </div>
+
+      <p style={S.pensRiga}>
+        Spese di famiglia: media <b>{euro(pensione.media)}</b>/mese
+        {pensione.mesiConDati < 3 && <span style={S.pensNotaInline}> (solo {pensione.mesiConDati} {pensione.mesiConDati === 1 ? "mese" : "mesi"} di dati — poco affidabile)</span>}
+        , divise in due con Vale → la tua quota è <b>{euro(r.quotaSpese)}</b>
+      </p>
+      <p style={S.pensRiga}>
+        + 300 € margine personale (università, moto, varie) = spesa mensile da coprire <b>{euro(r.speseConMargine)}</b>
+      </p>
+      <p style={S.pensRiga}>
+        Fondi liquidabili: liquidità {euro(fondiInput.liquidita)} + versato {euro(fondiInput.versato)}
+        {fondiInput.btcEur > 0 && <> + BTC netto tasse {euro(fondiInput.btcEur)}</>} = <b>{euro(r.fondiTotali)}</b>
+      </p>
+      <p style={S.pensRiga}>
+        Con questi fondi potresti coprire <b>{r.mesiAutonomia.toFixed(1)} mesi</b> ({r.anniAutonomia.toFixed(1)} anni) di spese.
+      </p>
+
+      <div style={S.pensEsito}>
+        {etaTonda >= 70 ? (
+          <>I tuoi fondi attuali non anticipano la pensione a 70 anni: al ritmo di oggi ci arriveresti comunque.</>
+        ) : (
+          <>Puoi smettere di lavorare a circa <b>{etaTonda} anni e {meseFraz} mesi</b> — mancano <b>{r.mesiMancanti} mesi</b> da oggi.</>
+        )}
       </div>
     </div>
   );
@@ -319,4 +388,13 @@ const S = {
   input: campo,
   dOk: { width: "100%", background: "linear-gradient(145deg,#3E7F79,#1F4A46)", color: "#fff", border: "none", borderRadius: 14, padding: "13px", fontSize: 16, fontWeight: 700, cursor: "pointer", marginBottom: 8 },
   dNo: { width: "100%", background: "none", border: "none", color: "#9a917f", padding: "8px", fontSize: 14, cursor: "pointer" },
+
+  pensBox: { background: "linear-gradient(145deg,#FDF6E7,#FBEACB)", border: "2px solid #EFC873", borderRadius: 18, padding: "16px 18px", marginBottom: 16 },
+  pensCarico: { margin: 0, color: "#8A6A4A", fontSize: 14, textAlign: "center" },
+  pensHead: { display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: 6, marginBottom: 10 },
+  pensTitolo: { fontSize: 16, fontWeight: 800, color: "#8A5A16" },
+  pensBadge: { fontSize: 10, fontWeight: 700, textTransform: "uppercase", letterSpacing: ".03em", color: "#B08A4E", background: "rgba(255,255,255,0.7)", borderRadius: 8, padding: "3px 8px" },
+  pensRiga: { margin: "0 0 6px", fontSize: 13.5, color: "#5c4a2c", lineHeight: 1.5 },
+  pensNotaInline: { color: "#B0704A", fontWeight: 600 },
+  pensEsito: { marginTop: 10, paddingTop: 10, borderTop: "1px dashed #E4C97F", fontSize: 15, color: "#7A4A12", fontWeight: 600, lineHeight: 1.5 },
 };

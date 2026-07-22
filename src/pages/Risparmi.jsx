@@ -76,6 +76,7 @@ export default function Risparmi() {
 
   // --- Fil / Vale: il proprio fondo ---
   if (profileId === "fil" || profileId === "vale") {
+    const nascita = profileId === "fil" ? "1979-11-21" : "1981-11-23";
     return (
       <Guscio>
         <Fondo
@@ -83,6 +84,7 @@ export default function Risparmi() {
           titolo={profileId === "fil" ? "I miei risparmi" : "Risparmi di Vale"}
           mostraScadenza={false}
           mostraBtc={profileId === "fil"}
+          dataNascita={nascita}
           onEsci={home}
         />
       </Guscio>
