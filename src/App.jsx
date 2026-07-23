@@ -19,6 +19,7 @@ import Risparmi from "./pages/Risparmi"
 import Attivita from "./pages/Attivita"
 import { seedNutri } from "./seed/seedFirestore";
 import Nutrizione from "./pages/Nutrizione";
+import { migraProfili } from "./seed/migraProfili"; 
 
 function Layout() {
   const [utente, setUtente] = useState(undefined)
