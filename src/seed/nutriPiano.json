@@ -1,0 +1,2016 @@
+{
+ "colazione": {
+  "nome": "Colazione",
+  "targetKcal": 300,
+  "targetProteine": 30,
+  "templates": [
+   {
+    "id": "yogurt_cereali",
+    "label": "Yogurt + cereali",
+    "slots": [
+     {
+      "ruolo": "proteico",
+      "gruppi": [
+       {
+        "scelte": [
+         {
+          "componenti": [
+           {
+            "alimentoId": "yogurt_greco_0",
+            "g": 200
+           }
+          ]
+         },
+         {
+          "componenti": [
+           {
+            "alimentoId": "skyr",
+            "g": 200
+           }
+          ]
+         },
+         {
+          "componenti": [
+           {
+            "alimentoId": "ricotta_high_protein",
+            "g": 250
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "ruolo": "carbo",
+      "gruppi": [
+       {
+        "scelte": [
+         {
+          "componenti": [
+           {
+            "alimentoId": "cereali_soffiati",
+            "g": 30
+           }
+          ]
+         },
+         {
+          "componenti": [
+           {
+            "alimentoId": "biscotti_secchi",
+            "g": 30
+           }
+          ]
+         },
+         {
+          "componenti": [
+           {
+            "alimentoId": "fette_biscottate",
+            "g": 35
+           }
+          ]
+         },
+         {
+          "componenti": [
+           {
+            "alimentoId": "frutta_fresca",
+            "g": 150
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "ruolo": "grassi",
+      "gruppi": [
+       {
+        "scelte": [
+         {
+          "componenti": [
+           {
+            "alimentoId": "burro_d_arachidi",
+            "g": 15
+           }
+          ],
+          "label": "arachidi / frutta secca / semi / cioccolato 15 g"
+         }
+        ]
+       }
+      ],
+      "opzionale": true
+     },
+     {
+      "ruolo": "boost",
+      "gruppi": [
+       {
+        "scelte": [
+         {
+          "componenti": [
+           {
+            "alimentoId": "proteine_isolate",
+            "g": 0
+           }
+          ],
+          "label": "0 g"
+         },
+         {
+          "componenti": [
+           {
+            "alimentoId": "proteine_isolate",
+            "g": 15
+           }
+          ],
+          "label": "15 g"
+         },
+         {
+          "componenti": [
+           {
+            "alimentoId": "proteine_isolate",
+            "g": 30
+           }
+          ],
+          "label": "30 g"
+         }
+        ]
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "id": "latte_cereali",
+    "label": "Latte HP + cereali",
+    "slots": [
+     {
+      "ruolo": "proteico",
+      "gruppi": [
+       {
+        "scelte": [
+         {
+          "componenti": [
+           {
+            "alimentoId": "latte_high_protein",
+            "g": 250
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "ruolo": "carbo",
+      "gruppi": [
+       {
+        "scelte": [
+         {
+          "componenti": [
+           {
+            "alimentoId": "cereali_soffiati",
+            "g": 25
+           }
+          ]
+         },
+         {
+          "componenti": [
+           {
+            "alimentoId": "biscotti_secchi",
+            "g": 25
+           }
+          ]
+         },
+         {
+          "componenti": [
+           {
+            "alimentoId": "fette_biscottate",
+            "g": 30
+           }
+          ]
+         },
+         {
+          "componenti": [
+           {
+            "alimentoId": "frutta_fresca",
+            "g": 100
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "ruolo": "grassi",
+      "gruppi": [
+       {
+        "scelte": [
+         {
+          "componenti": [
+           {
+            "alimentoId": "burro_d_arachidi",
+            "g": 15
+           }
+          ],
+          "label": "arachidi / frutta secca / semi / cioccolato 15 g"
+         }
+        ]
+       }
+      ],
+      "opzionale": true
+     },
+     {
+      "ruolo": "boost",
+      "gruppi": [
+       {
+        "scelte": [
+         {
+          "componenti": [
+           {
+            "alimentoId": "proteine_isolate",
+            "g": 0
+           }
+          ],
+          "label": "0 g"
+         },
+         {
+          "componenti": [
+           {
+            "alimentoId": "proteine_isolate",
+            "g": 15
+           }
+          ],
+          "label": "15 g"
+         },
+         {
+          "componenti": [
+           {
+            "alimentoId": "proteine_isolate",
+            "g": 30
+           }
+          ],
+          "label": "30 g"
+         }
+        ]
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "id": "dessert_kefir",
+    "label": "Dessert / kefir",
+    "slots": [
+     {
+      "ruolo": "proteico",
+      "gruppi": [
+       {
+        "scelte": [
+         {
+          "componenti": [
+           {
+            "alimentoId": "dessert_proteico",
+            "g": 200
+           }
+          ]
+         },
+         {
+          "componenti": [
+           {
+            "alimentoId": "kefir_bianco",
+            "g": 300
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "ruolo": "carbo",
+      "gruppi": [
+       {
+        "scelte": [
+         {
+          "componenti": [
+           {
+            "alimentoId": "frutta_fresca",
+            "g": 50
+           }
+          ]
+         },
+         {
+          "componenti": [
+           {
+            "alimentoId": "biscotti_secchi",
+            "g": 15
+           }
+          ]
+         },
+         {
+          "componenti": [
+           {
+            "alimentoId": "fette_biscottate",
+            "g": 20
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "ruolo": "grassi",
+      "gruppi": [
+       {
+        "scelte": [
+         {
+          "componenti": [
+           {
+            "alimentoId": "burro_d_arachidi",
+            "g": 15
+           }
+          ],
+          "label": "arachidi / frutta secca / semi / cioccolato 15 g"
+         }
+        ]
+       }
+      ],
+      "opzionale": true
+     },
+     {
+      "ruolo": "boost",
+      "gruppi": [
+       {
+        "scelte": [
+         {
+          "componenti": [
+           {
+            "alimentoId": "proteine_isolate",
+            "g": 0
+           }
+          ],
+          "label": "0 g"
+         },
+         {
+          "componenti": [
+           {
+            "alimentoId": "proteine_isolate",
+            "g": 15
+           }
+          ],
+          "label": "15 g"
+         },
+         {
+          "componenti": [
+           {
+            "alimentoId": "proteine_isolate",
+            "g": 30
+           }
+          ],
+          "label": "30 g"
+         }
+        ]
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "id": "uova_pane",
+    "label": "Pane + uova",
+    "slots": [
+     {
+      "ruolo": "carbo",
+      "gruppi": [
+       {
+        "scelte": [
+         {
+          "componenti": [
+           {
+            "alimentoId": "pane_integrale",
+            "g": 60
+           }
+          ]
+         },
+         {
+          "componenti": [
+           {
+            "alimentoId": "fette_biscottate",
+            "g": 30
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "ruolo": "proteico",
+      "gruppi": [
+       {
+        "scelte": [
+         {
+          "componenti": [
+           {
+            "alimentoId": "uova",
+            "g": 100
+           },
+           {
+            "alimentoId": "albume",
+            "g": 100
+           }
+          ],
+          "label": "2 uova + 100 g albume"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "ruolo": "boost",
+      "gruppi": [
+       {
+        "scelte": [
+         {
+          "componenti": [
+           {
+            "alimentoId": "proteine_isolate",
+            "g": 0
+           }
+          ],
+          "label": "0 g"
+         },
+         {
+          "componenti": [
+           {
+            "alimentoId": "proteine_isolate",
+            "g": 15
+           }
+          ],
+          "label": "15 g"
+         },
+         {
+          "componenti": [
+           {
+            "alimentoId": "proteine_isolate",
+            "g": 30
+           }
+          ],
+          "label": "30 g"
+         }
+        ]
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "id": "salmone",
+    "label": "Pane + salmone",
+    "slots": [
+     {
+      "ruolo": "carbo",
+      "gruppi": [
+       {
+        "scelte": [
+         {
+          "componenti": [
+           {
+            "alimentoId": "pane_integrale",
+            "g": 70
+           }
+          ]
+         },
+         {
+          "componenti": [
+           {
+            "alimentoId": "fette_biscottate",
+            "g": 35
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "ruolo": "proteico",
+      "gruppi": [
+       {
+        "scelte": [
+         {
+          "componenti": [
+           {
+            "alimentoId": "salmone_affumicato",
+            "g": 100
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "ruolo": "boost",
+      "gruppi": [
+       {
+        "scelte": [
+         {
+          "componenti": [
+           {
+            "alimentoId": "proteine_isolate",
+            "g": 0
+           }
+          ],
+          "label": "0 g"
+         },
+         {
+          "componenti": [
+           {
+            "alimentoId": "proteine_isolate",
+            "g": 15
+           }
+          ],
+          "label": "15 g"
+         },
+         {
+          "componenti": [
+           {
+            "alimentoId": "proteine_isolate",
+            "g": 30
+           }
+          ],
+          "label": "30 g"
+         }
+        ]
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "id": "affettato",
+    "label": "Pane + affettato",
+    "slots": [
+     {
+      "ruolo": "carbo",
+      "gruppi": [
+       {
+        "scelte": [
+         {
+          "componenti": [
+           {
+            "alimentoId": "pane_integrale",
+            "g": 60
+           }
+          ]
+         },
+         {
+          "componenti": [
+           {
+            "alimentoId": "fette_biscottate",
+            "g": 30
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "ruolo": "proteico",
+      "gruppi": [
+       {
+        "scelte": [
+         {
+          "componenti": [
+           {
+            "alimentoId": "affettato_magro",
+            "g": 120
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "ruolo": "grassi",
+      "gruppi": [
+       {
+        "scelte": [
+         {
+          "componenti": [
+           {
+            "alimentoId": "burro_d_arachidi",
+            "g": 10
+           }
+          ]
+         }
+        ]
+       }
+      ],
+      "opzionale": true
+     },
+     {
+      "ruolo": "boost",
+      "gruppi": [
+       {
+        "scelte": [
+         {
+          "componenti": [
+           {
+            "alimentoId": "proteine_isolate",
+            "g": 0
+           }
+          ],
+          "label": "0 g"
+         },
+         {
+          "componenti": [
+           {
+            "alimentoId": "proteine_isolate",
+            "g": 15
+           }
+          ],
+          "label": "15 g"
+         },
+         {
+          "componenti": [
+           {
+            "alimentoId": "proteine_isolate",
+            "g": 30
+           }
+          ],
+          "label": "30 g"
+         }
+        ]
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "id": "ricotta_pane",
+    "label": "Pane + ricotta",
+    "slots": [
+     {
+      "ruolo": "carbo",
+      "gruppi": [
+       {
+        "scelte": [
+         {
+          "componenti": [
+           {
+            "alimentoId": "pane_integrale",
+            "g": 50
+           }
+          ]
+         },
+         {
+          "componenti": [
+           {
+            "alimentoId": "fette_biscottate",
+            "g": 25
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "ruolo": "proteico",
+      "gruppi": [
+       {
+        "scelte": [
+         {
+          "componenti": [
+           {
+            "alimentoId": "ricotta_high_protein",
+            "g": 200
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "ruolo": "grassi",
+      "gruppi": [
+       {
+        "scelte": [
+         {
+          "componenti": [
+           {
+            "alimentoId": "frutta_secca",
+            "g": 15
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "ruolo": "boost",
+      "gruppi": [
+       {
+        "scelte": [
+         {
+          "componenti": [
+           {
+            "alimentoId": "proteine_isolate",
+            "g": 0
+           }
+          ],
+          "label": "0 g"
+         },
+         {
+          "componenti": [
+           {
+            "alimentoId": "proteine_isolate",
+            "g": 15
+           }
+          ],
+          "label": "15 g"
+         },
+         {
+          "componenti": [
+           {
+            "alimentoId": "proteine_isolate",
+            "g": 30
+           }
+          ],
+          "label": "30 g"
+         }
+        ]
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "id": "porridge",
+    "label": "Porridge",
+    "slots": [
+     {
+      "ruolo": "proteico",
+      "gruppi": [
+       {
+        "scelte": [
+         {
+          "componenti": [
+           {
+            "alimentoId": "yogurt_greco_0",
+            "g": 200
+           },
+           {
+            "alimentoId": "proteine_isolate",
+            "g": 15
+           }
+          ],
+          "label": "yogurt + proteine"
+         },
+         {
+          "componenti": [
+           {
+            "alimentoId": "latte_high_protein",
+            "g": 150
+           },
+           {
+            "alimentoId": "proteine_isolate",
+            "g": 15
+           }
+          ],
+          "label": "latte + proteine"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "ruolo": "carbo",
+      "gruppi": [
+       {
+        "scelte": [
+         {
+          "componenti": [
+           {
+            "alimentoId": "fiocchi_di_avena",
+            "g": 30
+           }
+          ]
+         },
+         {
+          "componenti": [
+           {
+            "alimentoId": "crema_di_riso",
+            "g": 30
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "ruolo": "grassi",
+      "gruppi": [
+       {
+        "scelte": [
+         {
+          "componenti": [
+           {
+            "alimentoId": "burro_d_arachidi",
+            "g": 15
+           }
+          ],
+          "label": "arachidi / frutta secca / semi / cioccolato 15 g"
+         }
+        ]
+       }
+      ],
+      "opzionale": true
+     },
+     {
+      "ruolo": "boost",
+      "gruppi": [
+       {
+        "scelte": [
+         {
+          "componenti": [
+           {
+            "alimentoId": "proteine_isolate",
+            "g": 0
+           }
+          ],
+          "label": "0 g"
+         },
+         {
+          "componenti": [
+           {
+            "alimentoId": "proteine_isolate",
+            "g": 15
+           }
+          ],
+          "label": "15 g"
+         },
+         {
+          "componenti": [
+           {
+            "alimentoId": "proteine_isolate",
+            "g": 30
+           }
+          ],
+          "label": "30 g"
+         }
+        ]
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "id": "pancakes",
+    "label": "Pancakes",
+    "slots": [
+     {
+      "ruolo": "carbo",
+      "gruppi": [
+       {
+        "scelte": [
+         {
+          "componenti": [
+           {
+            "alimentoId": "farina_di_avena",
+            "g": 20
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "ruolo": "proteico",
+      "gruppi": [
+       {
+        "scelte": [
+         {
+          "componenti": [
+           {
+            "alimentoId": "uova",
+            "g": 50
+           },
+           {
+            "alimentoId": "albume",
+            "g": 150
+           }
+          ],
+          "label": "1 uovo + 150 g albume"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "ruolo": "topping",
+      "gruppi": [
+       {
+        "scelte": [
+         {
+          "componenti": [
+           {
+            "alimentoId": "marmellata_light",
+            "g": 50
+           },
+           {
+            "alimentoId": "burro_d_arachidi",
+            "g": 10
+           }
+          ],
+          "label": "marmellata + arachidi"
+         },
+         {
+          "componenti": [
+           {
+            "alimentoId": "cioccolato_fondente",
+            "g": 20
+           }
+          ]
+         }
+        ]
+       }
+      ],
+      "opzionale": true
+     },
+     {
+      "ruolo": "boost",
+      "gruppi": [
+       {
+        "scelte": [
+         {
+          "componenti": [
+           {
+            "alimentoId": "proteine_isolate",
+            "g": 0
+           }
+          ],
+          "label": "0 g"
+         },
+         {
+          "componenti": [
+           {
+            "alimentoId": "proteine_isolate",
+            "g": 15
+           }
+          ],
+          "label": "15 g"
+         },
+         {
+          "componenti": [
+           {
+            "alimentoId": "proteine_isolate",
+            "g": 30
+           }
+          ],
+          "label": "30 g"
+         }
+        ]
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "id": "shake",
+    "label": "Shake",
+    "slots": [
+     {
+      "ruolo": "proteico",
+      "gruppi": [
+       {
+        "scelte": [
+         {
+          "componenti": [
+           {
+            "alimentoId": "latte_parzialmente_scremato",
+            "g": 200
+           },
+           {
+            "alimentoId": "proteine_isolate",
+            "g": 20
+           }
+          ],
+          "label": "latte + proteine"
+         },
+         {
+          "componenti": [
+           {
+            "alimentoId": "latte_vegetale",
+            "g": 200
+           },
+           {
+            "alimentoId": "proteine_isolate",
+            "g": 20
+           }
+          ],
+          "label": "latte veg + proteine"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "ruolo": "carbo",
+      "gruppi": [
+       {
+        "scelte": [
+         {
+          "componenti": [
+           {
+            "alimentoId": "frutta_fresca",
+            "g": 100
+           }
+          ]
+         },
+         {
+          "componenti": [
+           {
+            "alimentoId": "banana",
+            "g": 50
+           }
+          ]
+         },
+         {
+          "componenti": [
+           {
+            "alimentoId": "fiocchi_di_avena",
+            "g": 20
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "ruolo": "grassi",
+      "gruppi": [
+       {
+        "scelte": [
+         {
+          "componenti": [
+           {
+            "alimentoId": "burro_d_arachidi",
+            "g": 15
+           }
+          ],
+          "label": "arachidi / frutta secca / semi / cioccolato 15 g"
+         }
+        ]
+       }
+      ],
+      "opzionale": true
+     },
+     {
+      "ruolo": "boost",
+      "gruppi": [
+       {
+        "scelte": [
+         {
+          "componenti": [
+           {
+            "alimentoId": "proteine_isolate",
+            "g": 0
+           }
+          ],
+          "label": "0 g"
+         },
+         {
+          "componenti": [
+           {
+            "alimentoId": "proteine_isolate",
+            "g": 15
+           }
+          ],
+          "label": "15 g"
+         },
+         {
+          "componenti": [
+           {
+            "alimentoId": "proteine_isolate",
+            "g": 30
+           }
+          ],
+          "label": "30 g"
+         }
+        ]
+       }
+      ]
+     }
+    ]
+   }
+  ]
+ },
+ "pranzo": {
+  "nome": "Pranzo",
+  "targetKcal": 700,
+  "targetProteine": 55,
+  "templates": [
+   {
+    "id": "standard",
+    "label": "Carbo + proteine + grassi + verdura",
+    "slots": [
+     {
+      "ruolo": "carbo",
+      "gruppi": [
+       {
+        "titolo": "Pasta / riso / cereali",
+        "scelte": [
+         {
+          "componenti": [
+           {
+            "alimentoId": "pasta_integrale",
+            "g": 60
+           }
+          ]
+         },
+         {
+          "componenti": [
+           {
+            "alimentoId": "riso",
+            "g": 60
+           }
+          ]
+         },
+         {
+          "componenti": [
+           {
+            "alimentoId": "riso_venere",
+            "g": 60
+           }
+          ]
+         },
+         {
+          "componenti": [
+           {
+            "alimentoId": "pasta_bogetto",
+            "g": 60
+           }
+          ]
+         },
+         {
+          "componenti": [
+           {
+            "alimentoId": "pasta_protein",
+            "g": 60
+           }
+          ]
+         }
+        ]
+       },
+       {
+        "titolo": "Patate / gnocchi",
+        "scelte": [
+         {
+          "componenti": [
+           {
+            "alimentoId": "patate",
+            "g": 280
+           }
+          ]
+         },
+         {
+          "componenti": [
+           {
+            "alimentoId": "gnocchi_di_patate",
+            "g": 140
+           }
+          ]
+         }
+        ]
+       },
+       {
+        "titolo": "Pane / gallette",
+        "scelte": [
+         {
+          "componenti": [
+           {
+            "alimentoId": "pane_integrale",
+            "g": 100
+           }
+          ]
+         },
+         {
+          "componenti": [
+           {
+            "alimentoId": "pane_mio",
+            "g": 90
+           }
+          ]
+         },
+         {
+          "componenti": [
+           {
+            "alimentoId": "gallette",
+            "g": 50
+           }
+          ]
+         },
+         {
+          "componenti": [
+           {
+            "alimentoId": "fette_biscottate",
+            "g": 50
+           }
+          ]
+         },
+         {
+          "componenti": [
+           {
+            "alimentoId": "fette_wasa",
+            "g": 65
+           }
+          ]
+         }
+        ]
+       },
+       {
+        "titolo": "Piadina",
+        "scelte": [
+         {
+          "componenti": [
+           {
+            "alimentoId": "piadina",
+            "g": 72
+           }
+          ],
+          "label": "piadina ~215 kcal"
+         }
+        ]
+       },
+       {
+        "titolo": "Polenta / mais",
+        "scelte": [
+         {
+          "componenti": [
+           {
+            "alimentoId": "farina_di_polenta",
+            "g": 60
+           }
+          ]
+         },
+         {
+          "componenti": [
+           {
+            "alimentoId": "mais_precotto",
+            "g": 285
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "ruolo": "proteine",
+      "gruppi": [
+       {
+        "scelte": [
+         {
+          "componenti": [
+           {
+            "alimentoId": "carne_bianca_magra",
+            "g": 150
+           }
+          ]
+         },
+         {
+          "componenti": [
+           {
+            "alimentoId": "carne_rossa_magra",
+            "g": 150
+           }
+          ]
+         },
+         {
+          "componenti": [
+           {
+            "alimentoId": "tonno_al_naturale",
+            "g": 150
+           }
+          ]
+         },
+         {
+          "componenti": [
+           {
+            "alimentoId": "salmone_selvaggio",
+            "g": 150
+           }
+          ]
+         },
+         {
+          "componenti": [
+           {
+            "alimentoId": "pesce_bianco_magro",
+            "g": 180
+           }
+          ]
+         },
+         {
+          "componenti": [
+           {
+            "alimentoId": "mozzarella_high_protein",
+            "g": 150
+           }
+          ]
+         },
+         {
+          "componenti": [
+           {
+            "alimentoId": "fiocchi_di_latte",
+            "g": 200
+           }
+          ]
+         },
+         {
+          "componenti": [
+           {
+            "alimentoId": "ricotta_proteica",
+            "g": 250
+           }
+          ]
+         },
+         {
+          "componenti": [
+           {
+            "alimentoId": "crostacei_e_molluschi",
+            "g": 200
+           }
+          ]
+         },
+         {
+          "componenti": [
+           {
+            "alimentoId": "uova",
+            "g": 100
+           },
+           {
+            "alimentoId": "albume",
+            "g": 100
+           }
+          ],
+          "label": "2 uova + 100 g albume"
+         },
+         {
+          "componenti": [
+           {
+            "alimentoId": "uova",
+            "g": 50
+           },
+           {
+            "alimentoId": "albume",
+            "g": 200
+           }
+          ],
+          "label": "1 uovo + 200 g albume"
+         },
+         {
+          "componenti": [
+           {
+            "alimentoId": "albume",
+            "g": 300
+           }
+          ]
+         },
+         {
+          "componenti": [
+           {
+            "alimentoId": "seitan",
+            "g": 150
+           }
+          ]
+         },
+         {
+          "componenti": [
+           {
+            "alimentoId": "tempeh",
+            "g": 150
+           }
+          ]
+         },
+         {
+          "componenti": [
+           {
+            "alimentoId": "hempfu",
+            "g": 150
+           }
+          ]
+         },
+         {
+          "componenti": [
+           {
+            "alimentoId": "muscolo_di_grano",
+            "g": 150
+           }
+          ]
+         },
+         {
+          "componenti": [
+           {
+            "alimentoId": "burgers_vegetali",
+            "g": 150
+           }
+          ],
+          "label": "burgers vegetali (dimezza i grassi)"
+         },
+         {
+          "componenti": [
+           {
+            "alimentoId": "soia_disidratata",
+            "g": 50
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "ruolo": "grassi",
+      "gruppi": [
+       {
+        "scelte": [
+         {
+          "componenti": [
+           {
+            "alimentoId": "olio",
+            "g": 10
+           }
+          ]
+         },
+         {
+          "componenti": [
+           {
+            "alimentoId": "avocado",
+            "g": 40
+           }
+          ]
+         },
+         {
+          "componenti": [
+           {
+            "alimentoId": "olive_taggiasche",
+            "g": 60
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "ruolo": "verdura",
+      "libera": {
+       "min": 150,
+       "max": 250,
+       "unita": "g",
+       "categoria": "verdura"
+      },
+      "nota": "150-250 g a crudo, qualsiasi verdura"
+     }
+    ]
+   },
+   {
+    "id": "piatto_unico_legumi",
+    "label": "Piatto unico legumi",
+    "slots": [
+     {
+      "ruolo": "carbo_proteico",
+      "gruppi": [
+       {
+        "titolo": "Legumi",
+        "scelte": [
+         {
+          "componenti": [
+           {
+            "alimentoId": "pasta_di_legumi",
+            "g": 110
+           }
+          ]
+         },
+         {
+          "componenti": [
+           {
+            "alimentoId": "lenticchie_decorticate",
+            "g": 110
+           }
+          ],
+          "label": "legumi secchi 110 g"
+         }
+        ]
+       }
+      ],
+      "nota": "proteine ridotte, per esigenze caloriche"
+     },
+     {
+      "ruolo": "grassi",
+      "gruppi": [
+       {
+        "scelte": [
+         {
+          "componenti": [
+           {
+            "alimentoId": "olio",
+            "g": 10
+           }
+          ]
+         },
+         {
+          "componenti": [
+           {
+            "alimentoId": "avocado",
+            "g": 40
+           }
+          ]
+         },
+         {
+          "componenti": [
+           {
+            "alimentoId": "olive_taggiasche",
+            "g": 60
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "ruolo": "verdura",
+      "libera": {
+       "min": 150,
+       "max": 250,
+       "unita": "g",
+       "categoria": "verdura"
+      },
+      "nota": "150-250 g a crudo, qualsiasi verdura"
+     }
+    ]
+   }
+  ]
+ },
+ "cena": {
+  "nome": "Cena",
+  "targetKcal": 700,
+  "targetProteine": 55,
+  "templates": [
+   {
+    "id": "standard",
+    "label": "Carbo + proteine + grassi + verdura",
+    "slots": [
+     {
+      "ruolo": "carbo",
+      "gruppi": [
+       {
+        "titolo": "Pasta / riso / cereali",
+        "scelte": [
+         {
+          "componenti": [
+           {
+            "alimentoId": "pasta_integrale",
+            "g": 60
+           }
+          ]
+         },
+         {
+          "componenti": [
+           {
+            "alimentoId": "riso",
+            "g": 60
+           }
+          ]
+         },
+         {
+          "componenti": [
+           {
+            "alimentoId": "riso_venere",
+            "g": 60
+           }
+          ]
+         },
+         {
+          "componenti": [
+           {
+            "alimentoId": "pasta_bogetto",
+            "g": 60
+           }
+          ]
+         },
+         {
+          "componenti": [
+           {
+            "alimentoId": "pasta_protein",
+            "g": 60
+           }
+          ]
+         }
+        ]
+       },
+       {
+        "titolo": "Patate / gnocchi",
+        "scelte": [
+         {
+          "componenti": [
+           {
+            "alimentoId": "patate",
+            "g": 280
+           }
+          ]
+         },
+         {
+          "componenti": [
+           {
+            "alimentoId": "gnocchi_di_patate",
+            "g": 140
+           }
+          ]
+         }
+        ]
+       },
+       {
+        "titolo": "Pane / gallette",
+        "scelte": [
+         {
+          "componenti": [
+           {
+            "alimentoId": "pane_integrale",
+            "g": 100
+           }
+          ]
+         },
+         {
+          "componenti": [
+           {
+            "alimentoId": "pane_mio",
+            "g": 90
+           }
+          ]
+         },
+         {
+          "componenti": [
+           {
+            "alimentoId": "gallette",
+            "g": 50
+           }
+          ]
+         },
+         {
+          "componenti": [
+           {
+            "alimentoId": "fette_biscottate",
+            "g": 50
+           }
+          ]
+         },
+         {
+          "componenti": [
+           {
+            "alimentoId": "fette_wasa",
+            "g": 65
+           }
+          ]
+         }
+        ]
+       },
+       {
+        "titolo": "Piadina",
+        "scelte": [
+         {
+          "componenti": [
+           {
+            "alimentoId": "piadina",
+            "g": 72
+           }
+          ],
+          "label": "piadina ~215 kcal"
+         }
+        ]
+       },
+       {
+        "titolo": "Polenta / mais",
+        "scelte": [
+         {
+          "componenti": [
+           {
+            "alimentoId": "farina_di_polenta",
+            "g": 60
+           }
+          ]
+         },
+         {
+          "componenti": [
+           {
+            "alimentoId": "mais_precotto",
+            "g": 285
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "ruolo": "proteine",
+      "gruppi": [
+       {
+        "scelte": [
+         {
+          "componenti": [
+           {
+            "alimentoId": "carne_bianca_magra",
+            "g": 150
+           }
+          ]
+         },
+         {
+          "componenti": [
+           {
+            "alimentoId": "carne_rossa_magra",
+            "g": 150
+           }
+          ]
+         },
+         {
+          "componenti": [
+           {
+            "alimentoId": "tonno_al_naturale",
+            "g": 150
+           }
+          ]
+         },
+         {
+          "componenti": [
+           {
+            "alimentoId": "salmone_selvaggio",
+            "g": 150
+           }
+          ]
+         },
+         {
+          "componenti": [
+           {
+            "alimentoId": "pesce_bianco_magro",
+            "g": 180
+           }
+          ]
+         },
+         {
+          "componenti": [
+           {
+            "alimentoId": "mozzarella_high_protein",
+            "g": 150
+           }
+          ]
+         },
+         {
+          "componenti": [
+           {
+            "alimentoId": "fiocchi_di_latte",
+            "g": 200
+           }
+          ]
+         },
+         {
+          "componenti": [
+           {
+            "alimentoId": "ricotta_proteica",
+            "g": 250
+           }
+          ]
+         },
+         {
+          "componenti": [
+           {
+            "alimentoId": "crostacei_e_molluschi",
+            "g": 200
+           }
+          ]
+         },
+         {
+          "componenti": [
+           {
+            "alimentoId": "uova",
+            "g": 100
+           },
+           {
+            "alimentoId": "albume",
+            "g": 100
+           }
+          ],
+          "label": "2 uova + 100 g albume"
+         },
+         {
+          "componenti": [
+           {
+            "alimentoId": "uova",
+            "g": 50
+           },
+           {
+            "alimentoId": "albume",
+            "g": 200
+           }
+          ],
+          "label": "1 uovo + 200 g albume"
+         },
+         {
+          "componenti": [
+           {
+            "alimentoId": "albume",
+            "g": 300
+           }
+          ]
+         },
+         {
+          "componenti": [
+           {
+            "alimentoId": "seitan",
+            "g": 150
+           }
+          ]
+         },
+         {
+          "componenti": [
+           {
+            "alimentoId": "tempeh",
+            "g": 150
+           }
+          ]
+         },
+         {
+          "componenti": [
+           {
+            "alimentoId": "hempfu",
+            "g": 150
+           }
+          ]
+         },
+         {
+          "componenti": [
+           {
+            "alimentoId": "muscolo_di_grano",
+            "g": 150
+           }
+          ]
+         },
+         {
+          "componenti": [
+           {
+            "alimentoId": "burgers_vegetali",
+            "g": 150
+           }
+          ],
+          "label": "burgers vegetali (dimezza i grassi)"
+         },
+         {
+          "componenti": [
+           {
+            "alimentoId": "soia_disidratata",
+            "g": 50
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "ruolo": "grassi",
+      "gruppi": [
+       {
+        "scelte": [
+         {
+          "componenti": [
+           {
+            "alimentoId": "olio",
+            "g": 10
+           }
+          ]
+         },
+         {
+          "componenti": [
+           {
+            "alimentoId": "avocado",
+            "g": 40
+           }
+          ]
+         },
+         {
+          "componenti": [
+           {
+            "alimentoId": "olive_taggiasche",
+            "g": 60
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "ruolo": "verdura",
+      "libera": {
+       "min": 150,
+       "max": 250,
+       "unita": "g",
+       "categoria": "verdura"
+      },
+      "nota": "150-250 g a crudo, qualsiasi verdura"
+     }
+    ]
+   },
+   {
+    "id": "piatto_unico_legumi",
+    "label": "Piatto unico legumi",
+    "slots": [
+     {
+      "ruolo": "carbo_proteico",
+      "gruppi": [
+       {
+        "titolo": "Legumi",
+        "scelte": [
+         {
+          "componenti": [
+           {
+            "alimentoId": "pasta_di_legumi",
+            "g": 110
+           }
+          ]
+         },
+         {
+          "componenti": [
+           {
+            "alimentoId": "lenticchie_decorticate",
+            "g": 110
+           }
+          ],
+          "label": "legumi secchi 110 g"
+         }
+        ]
+       }
+      ],
+      "nota": "proteine ridotte, per esigenze caloriche"
+     },
+     {
+      "ruolo": "grassi",
+      "gruppi": [
+       {
+        "scelte": [
+         {
+          "componenti": [
+           {
+            "alimentoId": "olio",
+            "g": 10
+           }
+          ]
+         },
+         {
+          "componenti": [
+           {
+            "alimentoId": "avocado",
+            "g": 40
+           }
+          ]
+         },
+         {
+          "componenti": [
+           {
+            "alimentoId": "olive_taggiasche",
+            "g": 60
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "ruolo": "verdura",
+      "libera": {
+       "min": 150,
+       "max": 250,
+       "unita": "g",
+       "categoria": "verdura"
+      },
+      "nota": "150-250 g a crudo, qualsiasi verdura"
+     }
+    ]
+   }
+  ]
+ }
+}

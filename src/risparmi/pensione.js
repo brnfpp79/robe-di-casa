@@ -26,7 +26,7 @@ export async function leggiMediaSpeseMensile() {
   };
 }
 
-export function calcolaAutonomia({ mediaSpese, liquidita, versato, btcEur, etaAttuale, etaPensione = 70 }) {
+export function calcolaAutonomia({ mediaSpese, liquidita, versato, btcEur, etaAttuale, etaPensione = 67 }) {
   const btcNetto = (btcEur || 0) * (1 - TASSE_BTC);
   const fondiTotali = (liquidita || 0) + (versato || 0) + btcNetto;
 

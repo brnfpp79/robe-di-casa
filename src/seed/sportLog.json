@@ -1,0 +1,2257 @@
+[
+ {
+  "data": "2025-07-02",
+  "disciplina": "Camminata",
+  "durataMin": 92.3,
+  "fcMedia": 78,
+  "fcMax": 100,
+  "teAerobico": 0.5
+ },
+ {
+  "data": "2025-07-02",
+  "disciplina": "Camminata",
+  "durataMin": 12.6,
+  "fcMedia": 78,
+  "fcMax": 85,
+  "teAerobico": 0.1
+ },
+ {
+  "data": "2025-07-03",
+  "disciplina": "Camminata",
+  "durataMin": 32.6,
+  "fcMedia": 93,
+  "fcMax": 112,
+  "teAerobico": 0.4,
+  "zona": "Z2"
+ },
+ {
+  "data": "2025-07-03",
+  "disciplina": "Corsa",
+  "distanza": 3.87,
+  "unita": "km",
+  "durataMin": 33.1,
+  "passoMedio": "8:32",
+  "fcMedia": 129,
+  "fcMax": 147,
+  "teAerobico": 2.6,
+  "zona": "Z3"
+ },
+ {
+  "data": "2025-07-03",
+  "disciplina": "Camminata",
+  "durataMin": 4,
+  "fcMedia": 87,
+  "fcMax": 95,
+  "teAerobico": 0.1
+ },
+ {
+  "data": "2025-07-04",
+  "disciplina": "Nuoto",
+  "distanza": 411,
+  "unita": "m",
+  "durataMin": 11.6,
+  "passoMedio": "2:49",
+  "fcMedia": 108,
+  "fcMax": 153,
+  "teAerobico": 1.1,
+  "zona": "Z3"
+ },
+ {
+  "data": "2025-07-05",
+  "disciplina": "Corsa",
+  "distanza": 5.17,
+  "unita": "km",
+  "durataMin": 42.2,
+  "passoMedio": "8:09",
+  "fcMedia": 133,
+  "fcMax": 152,
+  "teAerobico": 3.1,
+  "zona": "Z3"
+ },
+ {
+  "data": "2025-07-05",
+  "disciplina": "Canoa",
+  "durataMin": 11.3,
+  "fcMedia": 111,
+  "fcMax": 139,
+  "teAerobico": 1,
+  "zona": "Z2"
+ },
+ {
+  "data": "2025-07-05",
+  "disciplina": "Nuoto",
+  "distanza": 183,
+  "unita": "m",
+  "durataMin": 6.7,
+  "passoMedio": "3:39",
+  "fcMedia": 81,
+  "fcMax": 98,
+  "teAerobico": 0.1
+ },
+ {
+  "data": "2025-07-05",
+  "disciplina": "Passi 20k+",
+  "passi": 25549
+ },
+ {
+  "data": "2025-07-07",
+  "disciplina": "Boxe",
+  "durataMin": 53.5,
+  "fcMedia": 122,
+  "fcMax": 158,
+  "teAerobico": 2.5,
+  "zona": "Z2"
+ },
+ {
+  "data": "2025-07-10",
+  "disciplina": "Camminata",
+  "durataMin": 105.6,
+  "fcMedia": 78,
+  "fcMax": 94,
+  "teAerobico": 1.3
+ },
+ {
+  "data": "2025-07-11",
+  "disciplina": "Camminata",
+  "durataMin": 83.8,
+  "fcMedia": 76,
+  "fcMax": 92,
+  "teAerobico": 0.7
+ },
+ {
+  "data": "2025-07-12",
+  "disciplina": "Boxe",
+  "durataMin": 26.9,
+  "fcMedia": 142,
+  "fcMax": 175,
+  "teAerobico": 3.1,
+  "zona": "Z3"
+ },
+ {
+  "data": "2025-07-13",
+  "disciplina": "Camminata",
+  "durataMin": 51.6,
+  "fcMedia": 67,
+  "fcMax": 87,
+  "teAerobico": 0.3
+ },
+ {
+  "data": "2025-07-14",
+  "disciplina": "Camminata",
+  "durataMin": 79.3,
+  "fcMedia": 85,
+  "fcMax": 138,
+  "teAerobico": 2,
+  "zona": "Z2"
+ },
+ {
+  "data": "2025-07-15",
+  "disciplina": "Camminata",
+  "durataMin": 61.2,
+  "fcMedia": 73,
+  "fcMax": 88,
+  "teAerobico": 0.2
+ },
+ {
+  "data": "2025-07-16",
+  "disciplina": "Boxe",
+  "durataMin": 77.8,
+  "fcMedia": 145,
+  "fcMax": 192,
+  "teAerobico": 5,
+  "zona": "Z5"
+ },
+ {
+  "data": "2025-07-18",
+  "disciplina": "Camminata",
+  "durataMin": 100.1,
+  "fcMedia": 76,
+  "fcMax": 95,
+  "teAerobico": 0.2
+ },
+ {
+  "data": "2025-07-21",
+  "disciplina": "Boxe",
+  "durataMin": 95.3,
+  "fcMedia": 143,
+  "fcMax": 188,
+  "teAerobico": 5,
+  "zona": "Z3"
+ },
+ {
+  "data": "2025-07-21",
+  "disciplina": "Camminata",
+  "durataMin": 53.3,
+  "fcMedia": 82,
+  "fcMax": 107,
+  "teAerobico": 0.6
+ },
+ {
+  "data": "2025-07-24",
+  "disciplina": "Camminata",
+  "durataMin": 89.6,
+  "fcMedia": 74,
+  "fcMax": 87,
+  "teAerobico": 1
+ },
+ {
+  "data": "2025-07-24",
+  "disciplina": "Camminata",
+  "durataMin": 26.2,
+  "fcMedia": 87,
+  "fcMax": 100,
+  "teAerobico": 0.5
+ },
+ {
+  "data": "2025-07-25",
+  "disciplina": "Camminata",
+  "durataMin": 41.1,
+  "fcMedia": 77,
+  "fcMax": 97,
+  "teAerobico": 0.5
+ },
+ {
+  "data": "2025-07-27",
+  "disciplina": "Camminata",
+  "durataMin": 39.1,
+  "fcMedia": 72,
+  "fcMax": 84,
+  "teAerobico": 0.4
+ },
+ {
+  "data": "2025-07-28",
+  "disciplina": "Boxe",
+  "durataMin": 88.2,
+  "fcMedia": 153,
+  "fcMax": 194,
+  "teAerobico": 5,
+  "zona": "Z5"
+ },
+ {
+  "data": "2025-07-30",
+  "disciplina": "Boxe",
+  "durataMin": 83.3,
+  "fcMedia": 128,
+  "fcMax": 173,
+  "teAerobico": 3.4,
+  "zona": "Z3"
+ },
+ {
+  "data": "2025-07-31",
+  "disciplina": "Camminata",
+  "durataMin": 46.3,
+  "fcMedia": 81,
+  "fcMax": 100,
+  "teAerobico": 0.6
+ },
+ {
+  "data": "2025-07-31",
+  "disciplina": "Camminata",
+  "durataMin": 43.7,
+  "fcMedia": 75,
+  "fcMax": 88,
+  "teAerobico": 0.3
+ },
+ {
+  "data": "2025-08-01",
+  "disciplina": "Camminata",
+  "durataMin": 27.9,
+  "fcMedia": 95,
+  "fcMax": 129,
+  "teAerobico": 0.6,
+  "zona": "Z2"
+ },
+ {
+  "data": "2025-08-01",
+  "disciplina": "Camminata",
+  "durataMin": 28.8,
+  "fcMedia": 92,
+  "fcMax": 113,
+  "teAerobico": 0.3,
+  "zona": "Z2"
+ },
+ {
+  "data": "2025-08-02",
+  "disciplina": "Camminata",
+  "durataMin": 31.6,
+  "fcMedia": 93,
+  "fcMax": 109,
+  "teAerobico": 0.4
+ },
+ {
+  "data": "2025-08-03",
+  "disciplina": "Camminata",
+  "durataMin": 134.7,
+  "fcMedia": 70,
+  "fcMax": 102,
+  "teAerobico": 1.1
+ },
+ {
+  "data": "2025-08-04",
+  "disciplina": "Boxe",
+  "durataMin": 101,
+  "fcMedia": 127,
+  "fcMax": 177,
+  "teAerobico": 3.2,
+  "zona": "Z3"
+ },
+ {
+  "data": "2025-08-05",
+  "disciplina": "Camminata",
+  "durataMin": 70.1,
+  "fcMedia": 75,
+  "fcMax": 108,
+  "teAerobico": 0.7
+ },
+ {
+  "data": "2025-08-07",
+  "disciplina": "Camminata",
+  "durataMin": 48.2,
+  "fcMedia": 70,
+  "fcMax": 84,
+  "teAerobico": 0.3
+ },
+ {
+  "data": "2025-08-08",
+  "disciplina": "Passi 20k+",
+  "passi": 30784
+ },
+ {
+  "data": "2025-08-09",
+  "disciplina": "Camminata",
+  "durataMin": 76.9,
+  "fcMedia": 65,
+  "fcMax": 102,
+  "teAerobico": 0.3
+ },
+ {
+  "data": "2025-08-09",
+  "disciplina": "Passi 20k+",
+  "passi": 34167
+ },
+ {
+  "data": "2025-08-10",
+  "disciplina": "Passi 20k+",
+  "passi": 22534
+ },
+ {
+  "data": "2025-08-11",
+  "disciplina": "Corsa",
+  "distanza": 5.01,
+  "unita": "km",
+  "durataMin": 27.9,
+  "passoMedio": "5:34",
+  "fcMedia": 165,
+  "fcMax": 181,
+  "teAerobico": 3.8,
+  "zona": "Z5"
+ },
+ {
+  "data": "2025-08-15",
+  "disciplina": "Corsa",
+  "distanza": 5.09,
+  "unita": "km",
+  "durataMin": 31.1,
+  "passoMedio": "6:06",
+  "fcMedia": 152,
+  "fcMax": 175,
+  "teAerobico": 3.6,
+  "zona": "Z4"
+ },
+ {
+  "data": "2025-08-15",
+  "disciplina": "Camminata",
+  "durataMin": 36.4,
+  "fcMedia": 73,
+  "fcMax": 101,
+  "teAerobico": 0.2
+ },
+ {
+  "data": "2025-08-15",
+  "disciplina": "Passi 20k+",
+  "passi": 20132
+ },
+ {
+  "data": "2025-08-16",
+  "disciplina": "Corsa",
+  "distanza": 3.75,
+  "unita": "km",
+  "durataMin": 33.1,
+  "passoMedio": "8:49",
+  "fcMedia": 125,
+  "fcMax": 153,
+  "teAerobico": 2.3,
+  "zona": "Z2"
+ },
+ {
+  "data": "2025-08-23",
+  "disciplina": "Nuoto",
+  "distanza": 150,
+  "unita": "m",
+  "durataMin": 8,
+  "passoMedio": "5:19",
+  "fcMedia": 119,
+  "fcMax": 135,
+  "teAerobico": 1,
+  "zona": "Z2"
+ },
+ {
+  "data": "2025-08-23",
+  "disciplina": "Nuoto",
+  "distanza": 160,
+  "unita": "m",
+  "durataMin": 8.8,
+  "passoMedio": "5:29",
+  "fcMedia": 104,
+  "fcMax": 124,
+  "teAerobico": 0.5,
+  "zona": "Z2"
+ },
+ {
+  "data": "2025-08-23",
+  "disciplina": "Nuoto",
+  "distanza": 206,
+  "unita": "m",
+  "durataMin": 11.9,
+  "passoMedio": "5:47",
+  "fcMedia": 126,
+  "fcMax": 136,
+  "teAerobico": 2,
+  "zona": "Z2"
+ },
+ {
+  "data": "2025-08-23",
+  "disciplina": "Nuoto",
+  "distanza": 160,
+  "unita": "m",
+  "durataMin": 9.8,
+  "passoMedio": "6:07",
+  "fcMedia": 112,
+  "fcMax": 149,
+  "teAerobico": 1.4,
+  "zona": "Z3"
+ },
+ {
+  "data": "2025-08-23",
+  "disciplina": "Nuoto",
+  "distanza": 137,
+  "unita": "m",
+  "durataMin": 3.7,
+  "passoMedio": "2:41",
+  "fcMedia": 118,
+  "fcMax": 132,
+  "teAerobico": 0.6,
+  "zona": "Z2"
+ },
+ {
+  "data": "2025-08-24",
+  "disciplina": "Camminata",
+  "durataMin": 10,
+  "fcMedia": 84,
+  "fcMax": 93,
+  "teAerobico": 0.2
+ },
+ {
+  "data": "2025-08-25",
+  "disciplina": "Camminata",
+  "durataMin": 76.9,
+  "fcMedia": 95,
+  "fcMax": 126,
+  "teAerobico": 0.8,
+  "zona": "Z2"
+ },
+ {
+  "data": "2025-08-25",
+  "disciplina": "Nuoto",
+  "distanza": 225,
+  "unita": "m",
+  "durataMin": 8,
+  "passoMedio": "3:33",
+  "fcMedia": 125,
+  "fcMax": 141,
+  "teAerobico": 1.5,
+  "zona": "Z2"
+ },
+ {
+  "data": "2025-08-25",
+  "disciplina": "Nuoto",
+  "distanza": 350,
+  "unita": "m",
+  "durataMin": 22.4,
+  "passoMedio": "6:23",
+  "fcMedia": 105,
+  "fcMax": 168,
+  "teAerobico": 2.1,
+  "zona": "Z2"
+ },
+ {
+  "data": "2025-08-26",
+  "disciplina": "Camminata",
+  "durataMin": 126.1,
+  "fcMedia": 122,
+  "fcMax": 167,
+  "teAerobico": 3.3,
+  "zona": "Z2"
+ },
+ {
+  "data": "2025-08-26",
+  "disciplina": "Nuoto",
+  "distanza": 550,
+  "unita": "m",
+  "durataMin": 14.7,
+  "passoMedio": "2:40",
+  "fcMedia": 97,
+  "fcMax": 120,
+  "teAerobico": 0.5,
+  "zona": "Z2"
+ },
+ {
+  "data": "2025-08-28",
+  "disciplina": "Camminata",
+  "durataMin": 165.1,
+  "fcMedia": 77,
+  "fcMax": 105,
+  "teAerobico": 2.3
+ },
+ {
+  "data": "2025-08-28",
+  "disciplina": "Passi 20k+",
+  "passi": 22762
+ },
+ {
+  "data": "2025-08-30",
+  "disciplina": "Camminata",
+  "durataMin": 291.7,
+  "fcMedia": 87,
+  "fcMax": 120,
+  "teAerobico": 1,
+  "zona": "Z2"
+ },
+ {
+  "data": "2025-08-30",
+  "disciplina": "Passi 20k+",
+  "passi": 32740
+ },
+ {
+  "data": "2025-08-31",
+  "disciplina": "Camminata",
+  "durataMin": 379.9,
+  "fcMedia": 81,
+  "fcMax": 126,
+  "teAerobico": 0.8,
+  "zona": "Z2"
+ },
+ {
+  "data": "2025-08-31",
+  "disciplina": "Passi 20k+",
+  "passi": 36842
+ },
+ {
+  "data": "2025-09-01",
+  "disciplina": "Boxe",
+  "durataMin": 98.6,
+  "fcMedia": 149,
+  "fcMax": 185,
+  "teAerobico": 5,
+  "zona": "Z3"
+ },
+ {
+  "data": "2025-09-01",
+  "disciplina": "Camminata",
+  "durataMin": 35.5,
+  "fcMedia": 85,
+  "fcMax": 94,
+  "teAerobico": 0.9
+ },
+ {
+  "data": "2025-09-03",
+  "disciplina": "Camminata",
+  "durataMin": 79.4,
+  "fcMedia": 69,
+  "fcMax": 83,
+  "teAerobico": 0.9
+ },
+ {
+  "data": "2025-09-03",
+  "disciplina": "Camminata",
+  "durataMin": 36.8,
+  "fcMedia": 75,
+  "fcMax": 85,
+  "teAerobico": 0.5
+ },
+ {
+  "data": "2025-09-04",
+  "disciplina": "Boxe",
+  "durataMin": 96.4,
+  "fcMedia": 128,
+  "fcMax": 180,
+  "teAerobico": 3.2,
+  "zona": "Z2"
+ },
+ {
+  "data": "2025-09-05",
+  "disciplina": "Camminata",
+  "durataMin": 110.7,
+  "fcMedia": 76,
+  "fcMax": 93,
+  "teAerobico": 0.9
+ },
+ {
+  "data": "2025-09-08",
+  "disciplina": "Boxe",
+  "durataMin": 11.5,
+  "fcMedia": 105,
+  "fcMax": 123,
+  "teAerobico": 0.4,
+  "zona": "Z2"
+ },
+ {
+  "data": "2025-09-09",
+  "disciplina": "Camminata",
+  "durataMin": 83.1,
+  "fcMedia": 63,
+  "fcMax": 84,
+  "teAerobico": 0.1
+ },
+ {
+  "data": "2025-09-11",
+  "disciplina": "Boxe",
+  "durataMin": 83.3,
+  "fcMedia": 127,
+  "fcMax": 172,
+  "teAerobico": 3.3,
+  "zona": "Z2"
+ },
+ {
+  "data": "2025-09-11",
+  "disciplina": "Camminata",
+  "durataMin": 72.4,
+  "fcMedia": 77,
+  "fcMax": 94,
+  "teAerobico": 1.1
+ },
+ {
+  "data": "2025-09-14",
+  "disciplina": "Camminata",
+  "durataMin": 70.2,
+  "fcMedia": 80,
+  "fcMax": 101,
+  "teAerobico": 0.4
+ },
+ {
+  "data": "2025-09-15",
+  "disciplina": "Boxe",
+  "durataMin": 88.7,
+  "fcMedia": 143,
+  "fcMax": 187,
+  "teAerobico": 4.6,
+  "zona": "Z3"
+ },
+ {
+  "data": "2025-09-16",
+  "disciplina": "Camminata",
+  "durataMin": 24.2,
+  "fcMedia": 76,
+  "fcMax": 87,
+  "teAerobico": 0.5
+ },
+ {
+  "data": "2025-09-17",
+  "disciplina": "Boxe",
+  "durataMin": 83.2,
+  "fcMedia": 141,
+  "fcMax": 177,
+  "teAerobico": 3.9,
+  "zona": "Z4"
+ },
+ {
+  "data": "2025-09-20",
+  "disciplina": "Camminata",
+  "durataMin": 462.6,
+  "fcMedia": 76,
+  "fcMax": 103,
+  "teAerobico": 0.8
+ },
+ {
+  "data": "2025-09-20",
+  "disciplina": "Passi 20k+",
+  "passi": 48384,
+  "note": "Cammino di Santiago"
+ },
+ {
+  "data": "2025-09-21",
+  "disciplina": "Camminata",
+  "durataMin": 526.4,
+  "fcMedia": 79,
+  "fcMax": 119,
+  "teAerobico": 1,
+  "zona": "Z2"
+ },
+ {
+  "data": "2025-09-21",
+  "disciplina": "Passi 20k+",
+  "passi": 53092,
+  "note": "Cammino di Santiago"
+ },
+ {
+  "data": "2025-09-22",
+  "disciplina": "Camminata",
+  "durataMin": 435.6,
+  "fcMedia": 81,
+  "fcMax": 111,
+  "teAerobico": 1.1
+ },
+ {
+  "data": "2025-09-22",
+  "disciplina": "Passi 20k+",
+  "passi": 38755,
+  "note": "Cammino di Santiago"
+ },
+ {
+  "data": "2025-09-23",
+  "disciplina": "Camminata",
+  "durataMin": 427.5,
+  "fcMedia": 79,
+  "fcMax": 105,
+  "teAerobico": 0.9
+ },
+ {
+  "data": "2025-09-23",
+  "disciplina": "Passi 20k+",
+  "passi": 42890,
+  "note": "Cammino di Santiago"
+ },
+ {
+  "data": "2025-09-24",
+  "disciplina": "Camminata",
+  "durataMin": 592.6,
+  "fcMedia": 92,
+  "fcMax": 144,
+  "teAerobico": 2.2,
+  "zona": "Z2"
+ },
+ {
+  "data": "2025-09-24",
+  "disciplina": "Passi 20k+",
+  "passi": 60832,
+  "note": "Cammino di Santiago"
+ },
+ {
+  "data": "2025-09-25",
+  "disciplina": "Camminata",
+  "durataMin": 434.3,
+  "fcMedia": 85,
+  "fcMax": 151,
+  "teAerobico": 2.2,
+  "zona": "Z2"
+ },
+ {
+  "data": "2025-09-25",
+  "disciplina": "Passi 20k+",
+  "passi": 46929,
+  "note": "Cammino di Santiago"
+ },
+ {
+  "data": "2025-09-26",
+  "disciplina": "Camminata",
+  "durataMin": 594.9,
+  "fcMedia": 93,
+  "fcMax": 130,
+  "teAerobico": 2.7,
+  "zona": "Z2"
+ },
+ {
+  "data": "2025-09-26",
+  "disciplina": "Passi 20k+",
+  "passi": 61373,
+  "note": "Cammino di Santiago"
+ },
+ {
+  "data": "2025-09-27",
+  "disciplina": "Camminata",
+  "durataMin": 459.3,
+  "fcMedia": 85,
+  "fcMax": 131,
+  "teAerobico": 2,
+  "zona": "Z2"
+ },
+ {
+  "data": "2025-09-27",
+  "disciplina": "Passi 20k+",
+  "passi": 48197,
+  "note": "Cammino di Santiago"
+ },
+ {
+  "data": "2025-09-28",
+  "disciplina": "Camminata",
+  "durataMin": 464,
+  "fcMedia": 84,
+  "fcMax": 116,
+  "teAerobico": 2.1,
+  "zona": "Z2"
+ },
+ {
+  "data": "2025-09-28",
+  "disciplina": "Passi 20k+",
+  "passi": 50556,
+  "note": "Cammino di Santiago"
+ },
+ {
+  "data": "2025-09-29",
+  "disciplina": "Camminata",
+  "durataMin": 299.2,
+  "fcMedia": 78,
+  "fcMax": 106,
+  "teAerobico": 1.5
+ },
+ {
+  "data": "2025-09-29",
+  "disciplina": "Passi 20k+",
+  "passi": 43286,
+  "note": "Cammino di Santiago"
+ },
+ {
+  "data": "2025-10-02",
+  "disciplina": "Boxe",
+  "durataMin": 118.5,
+  "fcMedia": 128,
+  "fcMax": 169,
+  "teAerobico": 3.4,
+  "zona": "Z3"
+ },
+ {
+  "data": "2025-10-03",
+  "disciplina": "Camminata",
+  "durataMin": 37.3,
+  "fcMedia": 116,
+  "fcMax": 129,
+  "teAerobico": 1.8,
+  "zona": "Z2"
+ },
+ {
+  "data": "2025-10-06",
+  "disciplina": "Boxe",
+  "durataMin": 106.1,
+  "fcMedia": 149,
+  "fcMax": 182,
+  "teAerobico": 4.5,
+  "zona": "Z4"
+ },
+ {
+  "data": "2025-10-06",
+  "disciplina": "Passi 20k+",
+  "passi": 21152
+ },
+ {
+  "data": "2025-10-08",
+  "disciplina": "Camminata",
+  "durataMin": 32.7,
+  "fcMedia": 76,
+  "fcMax": 89,
+  "teAerobico": 0.5
+ },
+ {
+  "data": "2025-10-08",
+  "disciplina": "Camminata",
+  "durataMin": 19.3,
+  "fcMedia": 90,
+  "fcMax": 105,
+  "teAerobico": 0.6
+ },
+ {
+  "data": "2025-10-08",
+  "disciplina": "Passi 20k+",
+  "passi": 23153
+ },
+ {
+  "data": "2025-10-09",
+  "disciplina": "Boxe",
+  "durataMin": 93.2,
+  "fcMedia": 130,
+  "fcMax": 181,
+  "teAerobico": 3.2,
+  "zona": "Z3"
+ },
+ {
+  "data": "2025-10-11",
+  "disciplina": "Camminata",
+  "durataMin": 96.1,
+  "fcMedia": 75,
+  "fcMax": 102,
+  "teAerobico": 0.3
+ },
+ {
+  "data": "2025-10-13",
+  "disciplina": "Boxe",
+  "durataMin": 92.8,
+  "fcMedia": 148,
+  "fcMax": 185,
+  "teAerobico": 4.8,
+  "zona": "Z4"
+ },
+ {
+  "data": "2025-10-15",
+  "disciplina": "Camminata",
+  "durataMin": 29.5,
+  "fcMedia": 81,
+  "fcMax": 96,
+  "teAerobico": 0.5
+ },
+ {
+  "data": "2025-10-15",
+  "disciplina": "Camminata",
+  "durataMin": 28.5,
+  "fcMedia": 67,
+  "fcMax": 82,
+  "teAerobico": 0.5
+ },
+ {
+  "data": "2025-10-16",
+  "disciplina": "Boxe",
+  "durataMin": 93.8,
+  "fcMedia": 129,
+  "fcMax": 174,
+  "teAerobico": 3.5,
+  "zona": "Z3"
+ },
+ {
+  "data": "2025-10-24",
+  "disciplina": "Boxe",
+  "durataMin": 32.5,
+  "fcMedia": 124,
+  "fcMax": 159,
+  "teAerobico": 3.1,
+  "zona": "Z3"
+ },
+ {
+  "data": "2025-10-28",
+  "disciplina": "Boxe",
+  "durataMin": 14.9,
+  "fcMedia": 127,
+  "fcMax": 223,
+  "teAerobico": 2.1,
+  "zona": "Z2"
+ },
+ {
+  "data": "2025-10-29",
+  "disciplina": "Boxe",
+  "durataMin": 168.9,
+  "fcMedia": 140,
+  "fcMax": 180,
+  "teAerobico": 4.5,
+  "zona": "Z4"
+ },
+ {
+  "data": "2025-11-03",
+  "disciplina": "Boxe",
+  "durataMin": 124,
+  "fcMedia": 131,
+  "fcMax": 174,
+  "teAerobico": 3.3,
+  "zona": "Z2"
+ },
+ {
+  "data": "2025-11-03",
+  "disciplina": "Passi 20k+",
+  "passi": 22636
+ },
+ {
+  "data": "2025-11-07",
+  "disciplina": "Boxe",
+  "durataMin": 86.5,
+  "fcMedia": 125,
+  "fcMax": 177,
+  "teAerobico": 3.1,
+  "zona": "Z2"
+ },
+ {
+  "data": "2025-11-10",
+  "disciplina": "Boxe",
+  "durataMin": 126.4,
+  "fcMedia": 137,
+  "fcMax": 185,
+  "teAerobico": 4,
+  "zona": "Z4"
+ },
+ {
+  "data": "2025-11-13",
+  "disciplina": "Boxe",
+  "durataMin": 90.2,
+  "fcMedia": 127,
+  "fcMax": 157,
+  "teAerobico": 2.3,
+  "zona": "Z3"
+ },
+ {
+  "data": "2025-11-17",
+  "disciplina": "Boxe",
+  "durataMin": 13.9,
+  "fcMedia": 107,
+  "fcMax": 142,
+  "teAerobico": 3.3,
+  "zona": "Z2"
+ },
+ {
+  "data": "2025-11-20",
+  "disciplina": "Boxe",
+  "durataMin": 107.1,
+  "fcMedia": 124,
+  "fcMax": 185,
+  "teAerobico": 3.1,
+  "zona": "Z2"
+ },
+ {
+  "data": "2025-11-22",
+  "disciplina": "Passi 20k+",
+  "passi": 28291
+ },
+ {
+  "data": "2025-11-26",
+  "disciplina": "Boxe",
+  "durataMin": 80.2,
+  "fcMedia": 137,
+  "fcMax": 179,
+  "teAerobico": 3.9,
+  "zona": "Z4"
+ },
+ {
+  "data": "2025-12-01",
+  "disciplina": "Boxe",
+  "durataMin": 93.8,
+  "fcMedia": 141,
+  "fcMax": 187,
+  "teAerobico": 4.4,
+  "zona": "Z4"
+ },
+ {
+  "data": "2025-12-04",
+  "disciplina": "Boxe",
+  "durataMin": 94.9,
+  "fcMedia": 137,
+  "fcMax": 169,
+  "teAerobico": 3.5,
+  "zona": "Z3"
+ },
+ {
+  "data": "2025-12-09",
+  "disciplina": "Boxe",
+  "durataMin": 27.2,
+  "fcMedia": 111,
+  "fcMax": 159,
+  "teAerobico": 1.6,
+  "zona": "Z2"
+ },
+ {
+  "data": "2025-12-10",
+  "disciplina": "Boxe",
+  "durataMin": 53.1,
+  "fcMedia": 131,
+  "fcMax": 161,
+  "teAerobico": 2.7,
+  "zona": "Z3"
+ },
+ {
+  "data": "2025-12-12",
+  "disciplina": "Boxe",
+  "durataMin": 71.8,
+  "fcMedia": 152,
+  "fcMax": 181,
+  "teAerobico": 4.6,
+  "zona": "Z4"
+ },
+ {
+  "data": "2025-12-12",
+  "disciplina": "Passi 20k+",
+  "passi": 20614
+ },
+ {
+  "data": "2025-12-22",
+  "disciplina": "Boxe",
+  "durataMin": 84.5,
+  "fcMedia": 141,
+  "fcMax": 178,
+  "teAerobico": 3.9,
+  "zona": "Z3"
+ },
+ {
+  "data": "2025-12-29",
+  "disciplina": "Boxe",
+  "durataMin": 93.7,
+  "fcMedia": 139,
+  "fcMax": 178,
+  "teAerobico": 3.9,
+  "zona": "Z3"
+ },
+ {
+  "data": "2026-01-02",
+  "disciplina": "Boxe",
+  "durataMin": 86,
+  "fcMedia": 131,
+  "fcMax": 184,
+  "teAerobico": 3.3,
+  "zona": "Z3"
+ },
+ {
+  "data": "2026-01-05",
+  "disciplina": "Boxe",
+  "durataMin": 75.7,
+  "fcMedia": 106,
+  "fcMax": 166,
+  "teAerobico": 2.3,
+  "zona": "Z2"
+ },
+ {
+  "data": "2026-01-07",
+  "disciplina": "Boxe",
+  "durataMin": 82.9,
+  "fcMedia": 129,
+  "fcMax": 171,
+  "teAerobico": 3.3,
+  "zona": "Z2"
+ },
+ {
+  "data": "2026-01-12",
+  "disciplina": "Boxe",
+  "durataMin": 91.3,
+  "fcMedia": 134,
+  "fcMax": 175,
+  "teAerobico": 3.3,
+  "zona": "Z3"
+ },
+ {
+  "data": "2026-01-14",
+  "disciplina": "Boxe",
+  "durataMin": 34.2,
+  "fcMedia": 152,
+  "fcMax": 193,
+  "teAerobico": 3.5,
+  "zona": "Z4"
+ },
+ {
+  "data": "2026-01-26",
+  "disciplina": "Boxe",
+  "durataMin": 57.9,
+  "fcMedia": 116,
+  "fcMax": 156,
+  "teAerobico": 2.1,
+  "zona": "Z2"
+ },
+ {
+  "data": "2026-01-28",
+  "disciplina": "Boxe",
+  "durataMin": 55.4,
+  "fcMedia": 145,
+  "fcMax": 183,
+  "teAerobico": 3.8,
+  "zona": "Z4"
+ },
+ {
+  "data": "2026-01-30",
+  "disciplina": "Boxe",
+  "durataMin": 92.9,
+  "fcMedia": 141,
+  "fcMax": 171,
+  "teAerobico": 3.8,
+  "zona": "Z3"
+ },
+ {
+  "data": "2026-01-31",
+  "disciplina": "Camminata",
+  "durataMin": 76.3,
+  "fcMedia": 52,
+  "fcMax": 87
+ },
+ {
+  "data": "2026-02-02",
+  "disciplina": "Boxe",
+  "durataMin": 117.1,
+  "fcMedia": 143,
+  "fcMax": 175,
+  "teAerobico": 4.5,
+  "zona": "Z4"
+ },
+ {
+  "data": "2026-02-04",
+  "disciplina": "Boxe",
+  "durataMin": 82.5,
+  "fcMedia": 140,
+  "fcMax": 188,
+  "teAerobico": 3.6,
+  "zona": "Z3"
+ },
+ {
+  "data": "2026-02-05",
+  "disciplina": "Camminata",
+  "durataMin": 96,
+  "fcMedia": 63,
+  "fcMax": 92,
+  "teAerobico": 0.3
+ },
+ {
+  "data": "2026-02-06",
+  "disciplina": "Boxe",
+  "durataMin": 44.2,
+  "fcMedia": 95,
+  "fcMax": 153,
+  "teAerobico": 1.3,
+  "zona": "Z2"
+ },
+ {
+  "data": "2026-02-06",
+  "disciplina": "Camminata",
+  "durataMin": 75.3,
+  "fcMedia": 53,
+  "fcMax": 90,
+  "teAerobico": 0.1
+ },
+ {
+  "data": "2026-02-07",
+  "disciplina": "Camminata",
+  "durataMin": 343.2,
+  "fcMedia": 95,
+  "fcMax": 132,
+  "teAerobico": 0.9,
+  "zona": "Z2"
+ },
+ {
+  "data": "2026-02-07",
+  "disciplina": "Passi 20k+",
+  "passi": 38070
+ },
+ {
+  "data": "2026-02-09",
+  "disciplina": "Boxe",
+  "durataMin": 110.5,
+  "fcMedia": 135,
+  "fcMax": 172,
+  "teAerobico": 3.4,
+  "zona": "Z3"
+ },
+ {
+  "data": "2026-02-11",
+  "disciplina": "Boxe",
+  "durataMin": 81.8,
+  "fcMedia": 137,
+  "fcMax": 184,
+  "teAerobico": 3.6,
+  "zona": "Z3"
+ },
+ {
+  "data": "2026-02-13",
+  "disciplina": "Boxe",
+  "durataMin": 50.6,
+  "fcMedia": 95,
+  "fcMax": 152,
+  "teAerobico": 0.8,
+  "zona": "Z2"
+ },
+ {
+  "data": "2026-02-13",
+  "disciplina": "Camminata",
+  "durataMin": 56.2,
+  "fcMedia": 69,
+  "fcMax": 97,
+  "teAerobico": 0.2
+ },
+ {
+  "data": "2026-02-15",
+  "disciplina": "Camminata",
+  "durataMin": 121,
+  "fcMedia": 73,
+  "fcMax": 107,
+  "teAerobico": 0.2
+ },
+ {
+  "data": "2026-02-16",
+  "disciplina": "Boxe",
+  "durataMin": 91.1,
+  "fcMedia": 137,
+  "fcMax": 189,
+  "teAerobico": 3.6,
+  "zona": "Z3"
+ },
+ {
+  "data": "2026-02-18",
+  "disciplina": "Boxe",
+  "durataMin": 94.1,
+  "fcMedia": 128,
+  "fcMax": 175,
+  "teAerobico": 3.1,
+  "zona": "Z3"
+ },
+ {
+  "data": "2026-02-20",
+  "disciplina": "Boxe",
+  "durataMin": 50.3,
+  "fcMedia": 104,
+  "fcMax": 161,
+  "teAerobico": 1.2,
+  "zona": "Z2"
+ },
+ {
+  "data": "2026-02-21",
+  "disciplina": "Camminata",
+  "durataMin": 185.1,
+  "fcMedia": 77,
+  "fcMax": 99,
+  "teAerobico": 0.1
+ },
+ {
+  "data": "2026-02-21",
+  "disciplina": "Passi 20k+",
+  "passi": 26246
+ },
+ {
+  "data": "2026-02-23",
+  "disciplina": "Boxe",
+  "durataMin": 94.8,
+  "fcMedia": 141,
+  "fcMax": 183,
+  "teAerobico": 3.6,
+  "zona": "Z3"
+ },
+ {
+  "data": "2026-02-25",
+  "disciplina": "Boxe",
+  "durataMin": 97.2,
+  "fcMedia": 136,
+  "fcMax": 179,
+  "teAerobico": 3.5,
+  "zona": "Z3"
+ },
+ {
+  "data": "2026-02-27",
+  "disciplina": "Recupero",
+  "durataMin": 5.6,
+  "fcMedia": 57,
+  "fcMax": 67
+ },
+ {
+  "data": "2026-02-28",
+  "disciplina": "Camminata",
+  "durataMin": 85.1,
+  "fcMedia": 76,
+  "fcMax": 95,
+  "teAerobico": 1.2
+ },
+ {
+  "data": "2026-03-02",
+  "disciplina": "Boxe",
+  "durataMin": 89.7,
+  "fcMedia": 142,
+  "fcMax": 203,
+  "teAerobico": 3.7,
+  "zona": "Z4"
+ },
+ {
+  "data": "2026-03-04",
+  "disciplina": "Boxe",
+  "durataMin": 92.6,
+  "fcMedia": 136,
+  "fcMax": 172,
+  "teAerobico": 3.6,
+  "zona": "Z3"
+ },
+ {
+  "data": "2026-03-09",
+  "disciplina": "Camminata",
+  "durataMin": 61.8,
+  "fcMedia": 67,
+  "fcMax": 91,
+  "teAerobico": 0.3
+ },
+ {
+  "data": "2026-03-11",
+  "disciplina": "Boxe",
+  "durataMin": 87.4,
+  "fcMedia": 136,
+  "fcMax": 176,
+  "teAerobico": 3.3,
+  "zona": "Z3"
+ },
+ {
+  "data": "2026-03-13",
+  "disciplina": "Corsa",
+  "distanza": 10.01,
+  "unita": "km",
+  "durataMin": 77.8,
+  "passoMedio": "7:46",
+  "fcMedia": 118,
+  "fcMax": 145,
+  "teAerobico": 2.9,
+  "zona": "Z2"
+ },
+ {
+  "data": "2026-03-15",
+  "disciplina": "Camminata",
+  "durataMin": 45.3,
+  "fcMedia": 86,
+  "fcMax": 109,
+  "teAerobico": 0.3
+ },
+ {
+  "data": "2026-03-15",
+  "disciplina": "Corsa",
+  "distanza": 7.03,
+  "unita": "km",
+  "durataMin": 61.2,
+  "passoMedio": "8:42",
+  "fcMedia": 105,
+  "fcMax": 124,
+  "teAerobico": 2.2,
+  "zona": "Z2"
+ },
+ {
+  "data": "2026-03-16",
+  "disciplina": "Boxe",
+  "durataMin": 114.6,
+  "fcMedia": 147,
+  "fcMax": 177,
+  "teAerobico": 4.5,
+  "zona": "Z4"
+ },
+ {
+  "data": "2026-03-17",
+  "disciplina": "Camminata",
+  "durataMin": 30.1,
+  "fcMedia": 63,
+  "fcMax": 83,
+  "teAerobico": 0.1
+ },
+ {
+  "data": "2026-03-18",
+  "disciplina": "Boxe",
+  "durataMin": 75.1,
+  "fcMedia": 127,
+  "fcMax": 167,
+  "teAerobico": 2.9,
+  "zona": "Z2"
+ },
+ {
+  "data": "2026-03-19",
+  "disciplina": "Camminata",
+  "durataMin": 53.1,
+  "fcMedia": 58,
+  "fcMax": 94,
+  "teAerobico": 0.1
+ },
+ {
+  "data": "2026-03-21",
+  "disciplina": "Camminata",
+  "durataMin": 201,
+  "fcMedia": 95,
+  "fcMax": 169,
+  "teAerobico": 2.2,
+  "zona": "Z2"
+ },
+ {
+  "data": "2026-03-21",
+  "disciplina": "Passi 20k+",
+  "passi": 24848
+ },
+ {
+  "data": "2026-03-22",
+  "disciplina": "Camminata",
+  "durataMin": 185.6,
+  "fcMedia": 97,
+  "fcMax": 126,
+  "teAerobico": 1.3,
+  "zona": "Z2"
+ },
+ {
+  "data": "2026-03-22",
+  "disciplina": "Passi 20k+",
+  "passi": 23243
+ },
+ {
+  "data": "2026-03-23",
+  "disciplina": "Boxe",
+  "durataMin": 81,
+  "fcMedia": 133,
+  "fcMax": 175,
+  "teAerobico": 3.3,
+  "zona": "Z2"
+ },
+ {
+  "data": "2026-03-25",
+  "disciplina": "Boxe",
+  "durataMin": 60.3,
+  "fcMedia": 146,
+  "fcMax": 182,
+  "teAerobico": 3.9,
+  "zona": "Z4"
+ },
+ {
+  "data": "2026-03-28",
+  "disciplina": "Corsa",
+  "distanza": 10.03,
+  "unita": "km",
+  "durataMin": 61.3,
+  "passoMedio": "6:06",
+  "fcMedia": 144,
+  "fcMax": 170,
+  "teAerobico": 3.6,
+  "zona": "Z4"
+ },
+ {
+  "data": "2026-03-28",
+  "disciplina": "Camminata",
+  "durataMin": 31.3,
+  "fcMedia": 62,
+  "fcMax": 85,
+  "teAerobico": 0.1
+ },
+ {
+  "data": "2026-03-28",
+  "disciplina": "Passi 20k+",
+  "passi": 25591
+ },
+ {
+  "data": "2026-03-29",
+  "disciplina": "Camminata",
+  "durataMin": 76,
+  "fcMedia": 66,
+  "fcMax": 91,
+  "teAerobico": 0.2
+ },
+ {
+  "data": "2026-03-30",
+  "disciplina": "Boxe",
+  "durataMin": 107,
+  "fcMedia": 131,
+  "fcMax": 170,
+  "teAerobico": 3.3,
+  "zona": "Z3"
+ },
+ {
+  "data": "2026-03-31",
+  "disciplina": "Camminata",
+  "durataMin": 37.5,
+  "fcMedia": 58,
+  "fcMax": 82,
+  "teAerobico": 0.1
+ },
+ {
+  "data": "2026-04-01",
+  "disciplina": "Corsa",
+  "distanza": 12.52,
+  "unita": "km",
+  "durataMin": 88.9,
+  "passoMedio": "7:05",
+  "fcMedia": 136,
+  "fcMax": 151,
+  "teAerobico": 3.4,
+  "zona": "Z3"
+ },
+ {
+  "data": "2026-04-01",
+  "disciplina": "Passi 20k+",
+  "passi": 27809
+ },
+ {
+  "data": "2026-04-02",
+  "disciplina": "Camminata",
+  "durataMin": 82.4,
+  "fcMedia": 85,
+  "fcMax": 104,
+  "teAerobico": 0.2
+ },
+ {
+  "data": "2026-04-03",
+  "disciplina": "Camminata",
+  "durataMin": 77.6,
+  "fcMedia": 68,
+  "fcMax": 93,
+  "teAerobico": 0.2
+ },
+ {
+  "data": "2026-04-04",
+  "disciplina": "Camminata",
+  "durataMin": 60.9,
+  "fcMedia": 75,
+  "fcMax": 97,
+  "teAerobico": 0.1
+ },
+ {
+  "data": "2026-04-05",
+  "disciplina": "Passi 20k+",
+  "passi": 20006
+ },
+ {
+  "data": "2026-04-06",
+  "disciplina": "Camminata",
+  "durataMin": 81.3,
+  "fcMedia": 75,
+  "fcMax": 93,
+  "teAerobico": 0.2
+ },
+ {
+  "data": "2026-04-07",
+  "disciplina": "Camminata",
+  "durataMin": 39.3,
+  "fcMedia": 75,
+  "fcMax": 97,
+  "teAerobico": 0.4
+ },
+ {
+  "data": "2026-04-08",
+  "disciplina": "Boxe",
+  "durataMin": 66.3,
+  "fcMedia": 144,
+  "fcMax": 182,
+  "teAerobico": 3.7,
+  "zona": "Z4"
+ },
+ {
+  "data": "2026-04-09",
+  "disciplina": "Camminata",
+  "durataMin": 37.7,
+  "fcMedia": 77,
+  "fcMax": 93,
+  "teAerobico": 0.3
+ },
+ {
+  "data": "2026-04-10",
+  "disciplina": "Corsa",
+  "distanza": 10.01,
+  "unita": "km",
+  "durataMin": 69.3,
+  "passoMedio": "6:55",
+  "fcMedia": 126,
+  "fcMax": 153,
+  "teAerobico": 3,
+  "zona": "Z2"
+ },
+ {
+  "data": "2026-04-10",
+  "disciplina": "Passi 20k+",
+  "passi": 22661
+ },
+ {
+  "data": "2026-04-11",
+  "disciplina": "Camminata",
+  "durataMin": 30.2,
+  "fcMedia": 68,
+  "fcMax": 95,
+  "teAerobico": 0.2
+ },
+ {
+  "data": "2026-04-12",
+  "disciplina": "Passi 20k+",
+  "passi": 21656
+ },
+ {
+  "data": "2026-04-13",
+  "disciplina": "Corsa",
+  "distanza": 10.01,
+  "unita": "km",
+  "durataMin": 61.8,
+  "passoMedio": "6:10",
+  "fcMedia": 146,
+  "fcMax": 163,
+  "teAerobico": 3.8,
+  "zona": "Z3"
+ },
+ {
+  "data": "2026-04-13",
+  "disciplina": "Passi 20k+",
+  "passi": 20987
+ },
+ {
+  "data": "2026-04-14",
+  "disciplina": "Camminata",
+  "durataMin": 62.9,
+  "fcMedia": 55,
+  "fcMax": 80,
+  "teAerobico": 0.3
+ },
+ {
+  "data": "2026-04-15",
+  "disciplina": "Boxe",
+  "durataMin": 62.7,
+  "fcMedia": 120,
+  "fcMax": 153,
+  "teAerobico": 2.4,
+  "zona": "Z2"
+ },
+ {
+  "data": "2026-04-15",
+  "disciplina": "Corda",
+  "durataMin": 23.1,
+  "fcMedia": 123,
+  "fcMax": 202,
+  "teAerobico": 2.2,
+  "zona": "Z2"
+ },
+ {
+  "data": "2026-04-15",
+  "disciplina": "Forza",
+  "durataMin": 1,
+  "fcMedia": 109,
+  "fcMax": 124,
+  "teAerobico": 0.1,
+  "zona": "Z2"
+ },
+ {
+  "data": "2026-04-15",
+  "disciplina": "Camminata",
+  "durataMin": 61.3,
+  "fcMedia": 75,
+  "fcMax": 97,
+  "teAerobico": 0.6
+ },
+ {
+  "data": "2026-04-15",
+  "disciplina": "Forza",
+  "durataMin": 1.3,
+  "fcMedia": 74,
+  "fcMax": 95
+ },
+ {
+  "data": "2026-04-15",
+  "disciplina": "Forza",
+  "durataMin": 1.1,
+  "fcMedia": 85,
+  "fcMax": 108
+ },
+ {
+  "data": "2026-04-16",
+  "disciplina": "Camminata",
+  "durataMin": 45.2,
+  "fcMedia": 71,
+  "fcMax": 98,
+  "teAerobico": 0.2
+ },
+ {
+  "data": "2026-04-16",
+  "disciplina": "Camminata",
+  "durataMin": 52.1,
+  "fcMedia": 71,
+  "fcMax": 92,
+  "teAerobico": 0.2
+ },
+ {
+  "data": "2026-04-16",
+  "disciplina": "Forza",
+  "durataMin": 1,
+  "fcMedia": 62,
+  "fcMax": 72
+ },
+ {
+  "data": "2026-04-17",
+  "disciplina": "Forza",
+  "durataMin": 0.4,
+  "fcMedia": 115,
+  "fcMax": 120,
+  "zona": "Z2"
+ },
+ {
+  "data": "2026-04-17",
+  "disciplina": "Camminata",
+  "durataMin": 57.6,
+  "fcMedia": 81,
+  "fcMax": 129,
+  "teAerobico": 0.6,
+  "zona": "Z2"
+ },
+ {
+  "data": "2026-04-19",
+  "disciplina": "Forza",
+  "durataMin": 0.5,
+  "fcMedia": 71,
+  "fcMax": 80
+ },
+ {
+  "data": "2026-04-19",
+  "disciplina": "Camminata",
+  "durataMin": 91.1,
+  "fcMedia": 65,
+  "fcMax": 133,
+  "teAerobico": 0.4,
+  "zona": "Z2"
+ },
+ {
+  "data": "2026-04-19",
+  "disciplina": "Forza",
+  "durataMin": 0.7,
+  "fcMedia": 85,
+  "fcMax": 92
+ },
+ {
+  "data": "2026-04-19",
+  "disciplina": "Forza",
+  "durataMin": 0.7,
+  "fcMedia": 86,
+  "fcMax": 96
+ },
+ {
+  "data": "2026-04-19",
+  "disciplina": "Camminata",
+  "durataMin": 26.2,
+  "fcMedia": 74,
+  "fcMax": 99,
+  "teAerobico": 0.2
+ },
+ {
+  "data": "2026-04-20",
+  "disciplina": "Corsa",
+  "distanza": 13.01,
+  "unita": "km",
+  "durataMin": 92.2,
+  "passoMedio": "7:05",
+  "fcMedia": 124,
+  "fcMax": 148,
+  "teAerobico": 3.1,
+  "zona": "Z3"
+ },
+ {
+  "data": "2026-04-20",
+  "disciplina": "Camminata",
+  "durataMin": 72.2,
+  "fcMedia": 75,
+  "fcMax": 92,
+  "teAerobico": 0.4
+ },
+ {
+  "data": "2026-04-20",
+  "disciplina": "Passi 20k+",
+  "passi": 30200,
+  "note": "Cammino di Francesco"
+ },
+ {
+  "data": "2026-04-22",
+  "disciplina": "Camminata",
+  "durataMin": 33.9,
+  "fcMedia": 68,
+  "fcMax": 100,
+  "teAerobico": 0.1
+ },
+ {
+  "data": "2026-04-24",
+  "disciplina": "Camminata",
+  "durataMin": 69.2,
+  "fcMedia": 62,
+  "fcMax": 85,
+  "teAerobico": 0.4
+ },
+ {
+  "data": "2026-04-24",
+  "disciplina": "Camminata",
+  "durataMin": 83.6,
+  "fcMedia": 76,
+  "fcMax": 92,
+  "teAerobico": 0.6
+ },
+ {
+  "data": "2026-04-25",
+  "disciplina": "Camminata",
+  "durataMin": 292.9,
+  "fcMedia": 102,
+  "fcMax": 138,
+  "teAerobico": 2,
+  "zona": "Z2"
+ },
+ {
+  "data": "2026-04-25",
+  "disciplina": "Passi 20k+",
+  "passi": 30878,
+  "note": "Cammino di Francesco"
+ },
+ {
+  "data": "2026-04-26",
+  "disciplina": "Camminata",
+  "durataMin": 481.3,
+  "fcMedia": 92,
+  "fcMax": 145,
+  "teAerobico": 1.2,
+  "zona": "Z2"
+ },
+ {
+  "data": "2026-04-26",
+  "disciplina": "Passi 20k+",
+  "passi": 39729,
+  "note": "Cammino di Francesco"
+ },
+ {
+  "data": "2026-04-27",
+  "disciplina": "Camminata",
+  "durataMin": 49.7,
+  "fcMedia": 68,
+  "fcMax": 96,
+  "teAerobico": 0.2
+ },
+ {
+  "data": "2026-04-27",
+  "disciplina": "Camminata",
+  "durataMin": 369.9,
+  "fcMedia": 87,
+  "fcMax": 129,
+  "teAerobico": 0.9,
+  "zona": "Z2"
+ },
+ {
+  "data": "2026-04-27",
+  "disciplina": "Passi 20k+",
+  "passi": 39771,
+  "note": "Cammino di Francesco"
+ },
+ {
+  "data": "2026-04-28",
+  "disciplina": "Camminata",
+  "durataMin": 413.9,
+  "fcMedia": 85,
+  "fcMax": 151,
+  "teAerobico": 1.5,
+  "zona": "Z2"
+ },
+ {
+  "data": "2026-04-28",
+  "disciplina": "Passi 20k+",
+  "passi": 40833,
+  "note": "Cammino di Francesco"
+ },
+ {
+  "data": "2026-04-29",
+  "disciplina": "Camminata",
+  "durataMin": 472.8,
+  "fcMedia": 84,
+  "fcMax": 132,
+  "teAerobico": 1,
+  "zona": "Z2"
+ },
+ {
+  "data": "2026-04-29",
+  "disciplina": "Passi 20k+",
+  "passi": 46251,
+  "note": "Cammino di Francesco"
+ },
+ {
+  "data": "2026-04-30",
+  "disciplina": "Camminata",
+  "durataMin": 454.2,
+  "fcMedia": 85,
+  "fcMax": 117,
+  "teAerobico": 0.8,
+  "zona": "Z2"
+ },
+ {
+  "data": "2026-04-30",
+  "disciplina": "Passi 20k+",
+  "passi": 55828,
+  "note": "Cammino di Francesco"
+ },
+ {
+  "data": "2026-05-01",
+  "disciplina": "Camminata",
+  "durataMin": 508.6,
+  "fcMedia": 87,
+  "fcMax": 123,
+  "teAerobico": 0.8,
+  "zona": "Z2"
+ },
+ {
+  "data": "2026-05-01",
+  "disciplina": "Passi 20k+",
+  "passi": 46843,
+  "note": "Cammino di Francesco"
+ },
+ {
+  "data": "2026-05-02",
+  "disciplina": "Camminata",
+  "durataMin": 292.2,
+  "fcMedia": 91,
+  "fcMax": 133,
+  "teAerobico": 2,
+  "zona": "Z2"
+ },
+ {
+  "data": "2026-05-02",
+  "disciplina": "Passi 20k+",
+  "passi": 30049,
+  "note": "Cammino di Francesco"
+ },
+ {
+  "data": "2026-05-03",
+  "disciplina": "Passi 20k+",
+  "passi": 20311,
+  "note": "Cammino di Francesco"
+ },
+ {
+  "data": "2026-05-05",
+  "disciplina": "Boxe",
+  "durataMin": 85.8,
+  "fcMedia": 139,
+  "fcMax": 174,
+  "teAerobico": 3.7,
+  "zona": "Z3"
+ },
+ {
+  "data": "2026-05-05",
+  "disciplina": "Corda",
+  "durataMin": 11.2,
+  "fcMedia": 123,
+  "fcMax": 158,
+  "teAerobico": 1.5,
+  "zona": "Z2"
+ },
+ {
+  "data": "2026-05-08",
+  "disciplina": "Corsa",
+  "distanza": 14.01,
+  "unita": "km",
+  "durataMin": 109.9,
+  "passoMedio": "7:50",
+  "fcMedia": 132,
+  "fcMax": 151,
+  "teAerobico": 3.2,
+  "zona": "Z3"
+ },
+ {
+  "data": "2026-05-08",
+  "disciplina": "Passi 20k+",
+  "passi": 29911
+ },
+ {
+  "data": "2026-05-13",
+  "disciplina": "Boxe",
+  "durataMin": 57.4,
+  "fcMedia": 129,
+  "fcMax": 164,
+  "teAerobico": 3.1,
+  "zona": "Z3"
+ },
+ {
+  "data": "2026-05-13",
+  "disciplina": "Boxe",
+  "durataMin": 3.9,
+  "fcMedia": 129,
+  "fcMax": 156,
+  "teAerobico": 0.8,
+  "zona": "Z2"
+ },
+ {
+  "data": "2026-05-13",
+  "disciplina": "Corda",
+  "durataMin": 19.2,
+  "fcMedia": 134,
+  "fcMax": 160,
+  "teAerobico": 2.5,
+  "zona": "Z3"
+ },
+ {
+  "data": "2026-05-18",
+  "disciplina": "Corda",
+  "durataMin": 21.1,
+  "fcMedia": 140,
+  "fcMax": 171,
+  "teAerobico": 2.9,
+  "zona": "Z3"
+ },
+ {
+  "data": "2026-05-18",
+  "disciplina": "Boxe",
+  "durataMin": 59.1,
+  "fcMedia": 128,
+  "fcMax": 165,
+  "teAerobico": 3,
+  "zona": "Z3"
+ },
+ {
+  "data": "2026-05-20",
+  "disciplina": "Boxe",
+  "durataMin": 58.4,
+  "fcMedia": 137,
+  "fcMax": 166,
+  "teAerobico": 3.4,
+  "zona": "Z3"
+ },
+ {
+  "data": "2026-05-20",
+  "disciplina": "Corda",
+  "durataMin": 20.1,
+  "fcMedia": 135,
+  "fcMax": 163,
+  "teAerobico": 2.6,
+  "zona": "Z3"
+ },
+ {
+  "data": "2026-05-25",
+  "disciplina": "Boxe",
+  "durataMin": 11.7,
+  "fcMedia": 150,
+  "fcMax": 163,
+  "teAerobico": 2.5,
+  "zona": "Z4"
+ },
+ {
+  "data": "2026-05-25",
+  "disciplina": "Corsa",
+  "distanza": 2.74,
+  "unita": "km",
+  "durataMin": 23.1,
+  "passoMedio": "8:25",
+  "fcMedia": 149,
+  "fcMax": 164,
+  "teAerobico": 3.2,
+  "zona": "Z4"
+ },
+ {
+  "data": "2026-05-25",
+  "disciplina": "Forza",
+  "durataMin": 23.8,
+  "fcMedia": 145,
+  "fcMax": 163,
+  "teAerobico": 3,
+  "zona": "Z3"
+ },
+ {
+  "data": "2026-05-25",
+  "disciplina": "Corda",
+  "durataMin": 19,
+  "fcMedia": 149,
+  "fcMax": 197,
+  "teAerobico": 3.1,
+  "zona": "Z4"
+ },
+ {
+  "data": "2026-05-27",
+  "disciplina": "Boxe",
+  "durataMin": 56.8,
+  "fcMedia": 127,
+  "fcMax": 171,
+  "teAerobico": 2.9,
+  "zona": "Z2"
+ },
+ {
+  "data": "2026-05-27",
+  "disciplina": "Corda",
+  "durataMin": 23.1,
+  "fcMedia": 134,
+  "fcMax": 180,
+  "teAerobico": 2.5,
+  "zona": "Z3"
+ },
+ {
+  "data": "2026-06-01",
+  "disciplina": "Boxe",
+  "durataMin": 74.3,
+  "fcMedia": 134,
+  "fcMax": 173,
+  "teAerobico": 3.4,
+  "zona": "Z3"
+ },
+ {
+  "data": "2026-06-01",
+  "disciplina": "Corda",
+  "durataMin": 22.9,
+  "fcMedia": 137,
+  "fcMax": 181,
+  "teAerobico": 2.6,
+  "zona": "Z3"
+ },
+ {
+  "data": "2026-06-15",
+  "disciplina": "Boxe",
+  "durataMin": 75.9,
+  "fcMedia": 120,
+  "fcMax": 147,
+  "teAerobico": 2.4,
+  "zona": "Z2"
+ },
+ {
+  "data": "2026-06-15",
+  "disciplina": "Corda",
+  "durataMin": 23,
+  "fcMedia": 135,
+  "fcMax": 181,
+  "teAerobico": 2.8,
+  "zona": "Z3"
+ },
+ {
+  "data": "2026-06-22",
+  "disciplina": "Nuoto",
+  "distanza": 455,
+  "unita": "m",
+  "durataMin": 11.6,
+  "passoMedio": "2:33",
+  "fcMedia": 107,
+  "fcMax": 128,
+  "teAerobico": 0.7,
+  "zona": "Z2",
+  "note": "Prima uscita acque libere - crawl respiro dx"
+ },
+ {
+  "data": "2026-06-22",
+  "disciplina": "Nuoto",
+  "distanza": 530,
+  "unita": "m",
+  "durataMin": 15,
+  "passoMedio": "2:54",
+  "fcMedia": 111,
+  "fcMax": 128,
+  "teAerobico": 1.2,
+  "zona": "Z2",
+  "note": "acque libere (mare)"
+ },
+ {
+  "data": "2026-06-23",
+  "disciplina": "Corsa",
+  "distanza": 6.33,
+  "unita": "km",
+  "durataMin": 45,
+  "passoMedio": "7:06",
+  "fcMedia": 149,
+  "fcMax": 168,
+  "teAerobico": 3.3,
+  "zona": "Z4",
+  "note": "35 gradi"
+ },
+ {
+  "data": "2026-06-24",
+  "disciplina": "Corda",
+  "durataMin": 19,
+  "fcMedia": 137,
+  "fcMax": 181,
+  "teAerobico": 2.6,
+  "zona": "Z3"
+ },
+ {
+  "data": "2026-06-24",
+  "disciplina": "Boxe",
+  "durataMin": 90,
+  "fcMedia": 120,
+  "fcMax": 147,
+  "teAerobico": 2.4,
+  "zona": "Z2"
+ },
+ {
+  "data": "2026-06-29",
+  "disciplina": "Corda",
+  "durataMin": 19,
+  "fcMedia": 137,
+  "fcMax": 181,
+  "teAerobico": 2.6,
+  "zona": "Z3"
+ },
+ {
+  "data": "2026-06-29",
+  "disciplina": "Boxe",
+  "durataMin": 80,
+  "fcMedia": 120,
+  "fcMax": 147,
+  "teAerobico": 2.4,
+  "zona": "Z2"
+ },
+ {
+  "data": "2026-07-05",
+  "disciplina": "Nuoto",
+  "distanza": 362,
+  "unita": "m",
+  "durataMin": 15,
+  "fcMedia": 107,
+  "fcMax": 128,
+  "teAerobico": 0.7,
+  "zona": "Z2",
+  "note": "acque libere (mare)"
+ }
+]

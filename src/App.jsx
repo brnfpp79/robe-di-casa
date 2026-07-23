@@ -17,7 +17,8 @@ import Giochi from "./pages/Giochi"
 import Compiti from "./pages/Compiti"
 import Risparmi from "./pages/Risparmi"
 import Attivita from "./pages/Attivita"
-
+import { seedNutri } from "./seed/seedFirestore";
+import Nutrizione from "./pages/Nutrizione";
 
 function Layout() {
   const [utente, setUtente] = useState(undefined)
@@ -54,6 +55,7 @@ useEffect(() => {
 
   return (
   <div style={{ minHeight: "100dvh" }}>
+
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/dashboard" element={<Dashboard />} />
@@ -68,6 +70,7 @@ useEffect(() => {
       <Route path="/giochi" element={<Giochi />} />
       <Route path="/compiti" element={<Compiti />} />
       <Route path="/attivita" element={<Attivita />} />
+      <Route path="/nutrizione" element={<Nutrizione />} />
     </Routes>
   </div>
 )
@@ -75,6 +78,7 @@ useEffect(() => {
 
 function App() {
   return (
+    
     <BrowserRouter>
       <Layout />
     </BrowserRouter>

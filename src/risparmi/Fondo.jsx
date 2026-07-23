@@ -235,8 +235,8 @@ function PensioneBox({ pensione, fondiInput }) {
       </p>
 
       <div style={S.pensEsito}>
-        {etaTonda >= 70 ? (
-          <>I tuoi fondi attuali non anticipano la pensione a 70 anni: al ritmo di oggi ci arriveresti comunque.</>
+        {etaTonda >= 67 ? (
+          <>I tuoi fondi attuali non anticipano la pensione a 67 anni: al ritmo di oggi ci arriveresti comunque.</>
         ) : (
           <>Puoi smettere di lavorare a circa <b>{etaTonda} anni e {meseFraz} mesi</b> — mancano <b>{r.mesiMancanti} mesi</b> da oggi.</>
         )}
